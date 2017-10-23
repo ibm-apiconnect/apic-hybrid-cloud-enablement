@@ -66,6 +66,10 @@ entries:
       url: /lab1_overview.html
       output: web, pdf
 
+    - title: Managing Gateway with API Designer
+      url: /lab1_managing_gateway.html
+      output: web, pdf
+
   - title: Lab 2 - REST API Proxy
     output: web, pdf
     folderitems:

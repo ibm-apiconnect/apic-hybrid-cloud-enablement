@@ -3,11 +3,11 @@ title: Create a Microservice Application
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab1
-permalink: /lab1_overview.html
+permalink: /lab1_managing_gateway.html
 applies_to: [developer]
 ---
 
-## Objective
+## Update the API Assembly to use DataPower as an enforcement gateway
 
 In this lab, you will get a chance to use the APIC Developer Toolkit and its intuitive web-based interface to create a new microservice application which provides access to product inventory via a RESTful API.
 
@@ -20,4 +20,4 @@ In the following lab, you will learn:
 
 ## Continue
 
-Proceed to [Managing Gateway through API Designer](lab1_managing_gateway.html).
+Proceed to [Create a Project Directory](lab1_create_project_dir.html).
