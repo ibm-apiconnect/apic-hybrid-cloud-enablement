@@ -9,8 +9,6 @@ permalink: /index.html
 
 Within, you will explore a series of hands-on labs designed to give you a high-level understanding of the IBM API Connect solution.
 
-The labs will explore a fictional company called **ThinkIBM**, which sells rare historical IBM machinery. **ThinkIBM** wants to provide easier access to their inventory database through a collection of APIs.
-
 Throughout the labs, you will take on the role of four key persona's:
 
 <span class="label label-developer">API Developer</span>
@@ -50,6 +48,6 @@ The environment that you will be working in today utilizes IBM's Bluemix Cloud t
 
 While the main components of the environment are cloud-based, the labs are designed to also make use of the API Connect Developer Toolkit - an application which runs locally on each developer's workstation that provides API design and deploy functionality. 
 
-If you are participating in a scheduled Proof of Technology on an IBM-provided system, the prerequisite components have already been installed for you, so please proceed to the [Bluemix Account Setup](acct_setup_overview.html) section.
+The prerequisite components have already been installed for you, so please proceed to the [Bluemix Account Setup](acct_setup_overview.html) section.
 
 However, if you are exploring these labs on from your own workstation, you will need to install the Developer Toolkit and it's required components by following the [Environment Setup](env_setup_overview.html) instructions.
