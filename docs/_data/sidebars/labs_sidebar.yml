@@ -60,15 +60,20 @@ entries:
 
   - title: Lab 1 - API Gateway & Assembly
     output: web, pdf
+    folderitems:
 
   - title: Lab 2 - REST API Proxy
     output: web, pdf
+    folderitems:
 
    - title: Lab 3 - SOAP API Proxy
-    output: web, pdf 
+    output: web, pdf
+    folderitems:
 
   - title: Lab 4 - Node & Loopback Services
-    output: web, pdf 
+    output: web, pdf
+    folderitems:
 
   - title: Lab 5 - Node & Loopback Services
     output: web, pdf
+    folderitems:
