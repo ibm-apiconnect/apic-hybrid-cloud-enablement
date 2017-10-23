@@ -63,37 +63,77 @@ entries:
     folderitems:
 
     - title: Overview
-    url: /lab1_overview.html
-    output: web, pdf
+      url: /lab1_overview.html
+      output: web, pdf
 
   - title: Lab 2 - REST API Proxy
     output: web, pdf
     folderitems:
 
     - title: Overview
-    url: /lab2_overview.html
-    output: web, pdf
+      url: /lab2_overview.html
+      output: web, pdf
 
-   - title: Lab 3 - SOAP API Proxy
+  - title: Lab 3 - SOAP API Proxy
     output: web, pdf
     folderitems:
 
     - title: Overview
-    url: /lab3_overview.html
-    output: web, pdf
+      url: /lab3_overview.html
+      output: web, pdf
 
   - title: Lab 4 - Node & Loopback Services
     output: web, pdf
     folderitems:
 
     - title: Overview
-    url: /lab4_overview.html
-    output: web, pdf
+      url: /lab4_overview.html
+      output: web, pdf
 
   - title: Lab 5 - Node & Loopback Services
     output: web, pdf
     folderitems:
 
     - title: Overview
-    url: /lab5_overview.html
+      url: /lab5_overview.html
+      output: web, pdf
+
+  - title: Lab 6 - Publishing Loopback Services
     output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab6_overview.html
+      output: web, pdf
+
+  - title: Lab 7 - Secure Gateway
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab7_overview.html
+      output: web, pdf
+
+  - title: Lab 8 - Analytics
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab8_overview.html
+      output: web, pdf
+
+  - title: Lab 9 - oAuth & JWT
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab9_overview.html
+      output: web, pdf
+
+  - title: Lab 10 - Syndication
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab10_overview.html
+      output: web, pdf
