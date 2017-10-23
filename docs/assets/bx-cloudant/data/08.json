@@ -1,0 +1,9 @@
+{
+  "name": "Electric Card Collator",
+  "description": "The IBM 77 electric punched card collator performed many card filing and pulling operations. As a filing machine, the Type 77 fed and compared simultaneously two groups of punched cards: records already in file and records to be filed. These two groups were merged in correct numerical or alphabetical sequence. When operated for the purpose of pulling cards, the Type 77 made it possible for one group of cards to pull corresponding cards from another group. Introduced in 1937, the IBM 77 collator rented for $80 a month. It was capable of handling 240 cards a minute, and was 40.5 inches long and 51 inches high. IBM withdrew the Type 77 from marketing on November 27, 1957.",
+  "img": "images/items/electric-card-punch.jpg",
+  "img_alt": "IBM 77 Electric Punched Card Collator",
+  "price": 3899.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

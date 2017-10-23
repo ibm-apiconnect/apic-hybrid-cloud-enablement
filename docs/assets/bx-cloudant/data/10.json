@@ -1,0 +1,9 @@
+{
+  "name": "Model 01 Typewriter",
+  "description": "In 1933 IBM acquired the tools, patents and production facilities of Electromatic Typewriters, Inc., of Rochester, N.Y. In the year following the acquisition, IBM invested more than $1 million to redesign the Electromatic Typewriter, improve the company's research facilities and establish service centers. In 1935, the Model 01 IBM Electric Typewriter, seen here, was introduced. Wide customer acceptance soon made it the first successful electric typewriter in the United States.",
+  "img": "images/items/01-typewriter.jpg",
+  "img_alt": "Model 01 Electric Typewriter",
+  "price": 899.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Selectric Typewriter",
+  "description": "Unveiled in 1961, the revolutionary Selectric typewriter eliminated the need for conventional type bars and movable carriages by using an innovative typing element on a head-and-rocker assembly, which, in turn, was mounted on a small carrier to move from left to right while typing.",
+  "img": "images/items/selectric.jpg",
+  "img_alt": "Selectric Typewriter",
+  "price": 2199.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

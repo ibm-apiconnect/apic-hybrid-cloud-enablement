@@ -1,0 +1,19 @@
+img {
+  max-width: 100%;
+  border: 1px solid #000000
+}
+
+img[src$='common/important.png'],
+img[src$='common/info.png'],
+img[src$='common/troubleshooting.png'],
+img[src$='common/api-connect.png'],
+img[src$='ibmlogo-white.png'],
+img[src$='ibm-logo-sm.png'] {
+  border: 0;
+}
+
+img[src$='common/api-connect.png'] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

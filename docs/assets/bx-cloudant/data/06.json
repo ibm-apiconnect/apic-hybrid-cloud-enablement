@@ -1,0 +1,9 @@
+{
+  "name": "Proof Machine",
+  "description": "Debuting in July 1949, the IBM 803 Proof Machine was used to sort, list, prove and endorse checks, sales tickets, vouchers and other business documents in a single operation. Containing 32 sorting receptacles, the 803 had a number of compartment adding tapes. A control tape recorded all transactions in the original sequence, with sub and final totals of distributions. The ten-key electrified adding machine keyboard simplified the 803's operation. The machine also had signal lights to indicate the near depletion of the tape supply and other operating conditions. The 803 Proof Machine was withdrawn in December 1981 after more 30 years in the product catalogue.",
+  "img": "images/items/803-proof.jpg",
+  "img_alt": "803 Proof Machine",
+  "price": 399.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

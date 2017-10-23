@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: thinkibm-mysql
+  labels:
+    app: thinkibm
+spec:
+  selector:
+    app: thinkibm
+    tier: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      nodePort: 30306
+  type: NodePort
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: thinkibm-mysql
+  labels:
+    app: thinkibm
+spec:
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: thinkibm
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: password.txt
+        - name: MYSQL_DATABASE
+          value: think
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-init
+          mountPath: /docker-entrypoint-initdb.d
+          readOnly: true
+        - name: mysql-local-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-init
+        secret:
+          secretName: db-script
+      - name: mysql-local-storage
+        emptyDir: {}

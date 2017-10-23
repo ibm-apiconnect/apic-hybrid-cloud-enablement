@@ -1,0 +1,9 @@
+{
+  "name": "Computing Scale",
+  "description": "In 1885 Julius Pitrat of Gallipolis, Ohio, patented the first computing scale. Six years later, Edward Canby and Orange Ozias of Dayton, Ohio, purchased Pitrat's patents and incorporated The Computing Scale Company as the world's first computing scale vendor. And four years after that, The Computing Scale Company introduced the first automatic computing scale, shown here. In 1911, the Computing Scale Company merged with the International Time Recording Company and Tabulating Machine Company to form the Computing-Tabulating-Recording Company, a business that was renamed IBM in 1924.",
+  "img": "images/items/computing-scale.jpg",
+  "img_alt": "Computing Scale",
+  "price": 699.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

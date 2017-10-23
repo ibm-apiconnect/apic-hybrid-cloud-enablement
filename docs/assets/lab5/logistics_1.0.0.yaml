@@ -1,0 +1,131 @@
+swagger: '2.0'
+info:
+  x-ibm-name: logistics
+  title: logistics
+  version: 2.0.0
+schemes:
+  - https
+basePath: /logistics
+consumes:
+  - application/json
+produces:
+  - application/json
+securityDefinitions:
+  clientID:
+    description: ''
+    in: header
+    name: X-IBM-Client-Id
+    type: apiKey
+security:
+  - clientID: []
+x-ibm-configuration:
+  testable: true
+  enforced: true
+  cors:
+    enabled: true
+  gateway: datapower-gateway
+  catalogs:
+    apic-dev:
+      properties:
+        runtime-url: $(TARGET_URL)
+  properties:
+    shipping_svc_url:
+      value: 'https://thinkibm-services.mybluemix.net/shipping/calculate'
+      description: Location of the shipping calculator service
+      encoded: false
+paths:
+  /shipping:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/shipping'
+      summary: Calculate shipping costs to a destination zip code
+      operationId: shipping.calc
+      parameters:
+        - name: zip
+          type: string
+          required: true
+          in: query
+          description: Destination zip code.
+  /stores:
+    get:
+      responses:
+        '200':
+          description: 200 OK
+          schema:
+            $ref: '#/definitions/store_location'
+      tags:
+        - stores
+      summary: Locate store near zip code
+      operationId: get.stores
+      parameters:
+        - name: zip
+          type: string
+          required: true
+          in: query
+definitions:
+  rates:
+    properties:
+      next_day:
+        type: string
+        example: '20.00'
+      two_day:
+        type: string
+        example: '17.00'
+      ground:
+        type: string
+        example: '8.00'
+    required:
+      - two_day
+      - next_day
+      - ground
+  shipping:
+    properties:
+      xyz:
+        $ref: '#/definitions/rates'
+      cek:
+        $ref: '#/definitions/rates'
+    required:
+      - xyz
+      - cek
+  store_location:
+    properties:
+      google_maps_link:
+        type: string
+        example: 'https://www.google.com/maps?q=34.1030032,-118.4104684'
+    required:
+      - google_maps_link
+  cek_shipping_rsp:
+    properties:
+      company:
+        type: string
+      rates:
+        type: object
+        properties:
+          next_day:
+            type: string
+          two_day:
+            type: string
+          ground:
+            type: string
+    required:
+      - company
+      - rates
+  xyz_shipping_rsp:
+    properties:
+      company:
+        type: string
+      rates:
+        type: object
+        properties:
+          next_day:
+            type: string
+          two_day:
+            type: string
+          ground:
+            type: string
+    required:
+      - company
+      - rates

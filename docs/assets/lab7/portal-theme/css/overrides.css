@@ -1,0 +1,584 @@
+/* header */
+/* If you change the background color of this you will need to change the fade value (beneath this) as well */
+body, .apimInnerContainer {
+  background-color: #fff;
+  color: #000;
+}
+body#tinymce {
+    background: none;
+}
+
+p.fade:after{
+ background: linear-gradient(to right,rgba(255, 255, 255, 0),#fff 70%);
+ }
+
+body.page-home #columns.no-menu-bar {
+  background-color: #fff;
+}
+
+#page > header {
+  background-color: #ffffff;
+}
+
+#menu-bar {
+  background-color: #ffffff;
+  border-bottom: 10px solid #006699;
+}
+a.active {
+  color: #1D8FEB !important;
+}
+
+.front a,
+.front a:hover,
+.front a:visited,
+.front a:focus,
+.front a:link,
+.front a:active {
+  color: #005580;
+}
+
+header a,
+header a:hover,
+header a:focus,
+header a:visited,
+header a:link,
+header a:active,
+.front header a,
+.front header a:hover,
+.front header a:focus,
+.front header a:visited,
+.front header a:link,
+.front header a:active {
+  color:#404141;
+}
+#menu-bar a,
+#menu-bar a:hover,
+#menu-bar a:visited,
+#menu-bar a:focus,
+#menu-bar a:active,
+.nav .block-menu ul li a,
+.front #menu-bar a,
+.front #menu-bar a:hover,
+.front #menu-bar a:focus,
+.front #menu-bar a:link,
+.front #menu-bar a:visited,
+.front #menu-bar a:active {
+  color: #404141;
+}
+h1.node-title a {
+  color: #005580;
+}
+#menu-bar a:active,
+.front #menu-bar a:active {
+  color: #1d8feb !important;
+}
+.dropitmenu ul.dropit-submenu a {
+  color: #7a868e;
+}
+.dropitmenu ul.dropit-submenu a:hover {
+  background: #248fc1;
+  color: #fff;
+}
+
+.block-region-content.block-main {
+  padding: 0 10px 10px 10px;
+}
+
+#page > footer, #page > footer .block-title {
+  border-top: 10px solid #006699;
+  background-color: #dee0e2;
+}
+
+#page > footer a {
+  color: #454A4C;
+}
+
+#block-search-form.block.block-search.menu-wrapper.menu-bar-wrapper {
+  padding-top: 0;
+}
+
+#block-search-form.block.block-search.menu-wrapper.menu-bar-wrapper {
+  width: 250px;
+  padding-left: 25px;
+}
+#block-search-form .form-item-search-block-form label {
+  height: 35px;
+  line-height: 35px;
+  text-indent: 15px;
+  overflow: hidden;
+  display: block;
+  background-color: #FFFFFF;
+  width: 215px;
+  clip: rect(1px,1px,1px,1px);
+  z-index: 1;
+}
+#block-search-form .form-item-search-block-form input {
+  font-size: 16px;
+  line-height: 21px;
+  font-weight: 400;
+  text-transform: none;
+  position: relative;
+  padding: 6px;
+  z-index: 3;
+  background-color: #FFFFFF;
+  width: 215px;
+  border-radius: 0;
+  border: 1px solid #404141 !important;
+}
+#search-block-form input.form-submit {
+  position: absolute;
+  z-index: 4;
+  right: 0;
+  top: 0;
+  width: 35px;
+  height: 35px;
+  border: 1px solid #006699;
+  border-width: 0 0 0 1px;
+  border-left-color: #006699;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  overflow: hidden;
+  text-indent: -5000px;
+  color: #FFF;
+  background-color: #006699;
+  background-image: url(../images/search-button.png);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+#search-block-form input.form-submit:hover, 
+#search-block-form input.form-submit:focus {
+  background-position: 0 50%;
+  background-color: #004F8B;
+}
+#block-system-main-menu.menu-bar-wrapper {
+  padding-left: 30px;
+}
+
+.banner_block .banner_button {
+  padding-top: 0;
+}
+
+/* link color */
+#skip-link a,
+ul.tabs li a,
+ul.tabs li a:visited {
+  color: #005580;
+  font-weight: bold;
+}
+a,
+a:visited,
+.portal .portalApi .testAPILink a,
+.portal .portalApi .testAPILink a:visited,
+a:hover,
+a:focus,
+a:active,
+.portal .portalApi .testAPILink a:hover,
+.portal .portalApi .testAPILink a:focus,
+.portal .portalApi .testAPILink a:active,
+h3.apimSummaryTitle,
+.breadcrumb a:hover,
+.breadcrumb a:focus,
+.breadcrumb a:active,
+#page > footer a:hover,
+#page > footer a:focus,
+#page > footer a:active,
+.apiPlanSummary .planSubscribe a,
+.apiPlanSummary .planSubscribe a:link,
+.apiPlanSummary .planSubscribe a:visited,
+.apimPlansApis .ui-accordion-header .testAPILink a,
+.apimPlansApis .ui-accordion-header .testAPILink a:link,
+.apimPlansApis .ui-accordion-header .testAPILink a:visited,
+.apiPlanSummary .planSubscribe a:hover,
+.apiPlanSummary .planSubscribe a:focus,
+.apiPlanSummary .planSubscribe a:active,
+.apimPlansApis .ui-accordion-header .testAPILink a:hover,
+.apimPlansApis .ui-accordion-header .testAPILink a:focus,
+.apimPlansApis .ui-accordion-header .testAPILink a:active {
+  color: #005580;
+}
+a.active {
+  color: #005580 !important;
+}
+
+/* button color */
+button,
+input[type="submit"],
+input.form-submit,
+.form-actions a,
+.form-actions a:visited,
+.button, a.button, a.button:visited,
+.banner_block .banner_button a,
+.portal .migratePlanContainer .migrateButton a,
+.numberedList a,
+.supportList a {
+  background-color: #006699;
+  color: #fffeff;
+}
+
+.singleOrg {
+  color: #dbdee2;
+}
+
+
+
+/* Fix margins for Slick Carousels */
+#content .panel-display .slick.slick--slider {
+ margin-left: 20px;
+ margin-right: 20px;
+}
+
+body.page-home .block-region-content.block-main {
+ padding: 0;
+}
+
+.front h2.block-title {
+ text-align: center;
+ border-bottom: 0;
+ font-size: 30px;
+ font-weight: 300;
+}
+
+.front #main-content-header {
+ display: none;
+}
+
+.admin-menu .admin-menu-position-fixed {
+ position: fixed;
+ top: 0;
+ z-index: 999;
+ width: 100%;
+}
+
+#admin-menu,
+#admin-menu .dropdown {
+ z-index: 999 !important;
+}
+
+body.admin-menu.adminimal-menu:before {
+ height: 112px;
+}
+
+@media only screen and (min-width: 1025px) {
+ body.admin-menu.adminimal-menu:before {
+   height: 29px;
+ }
+}
+
+.panel-pane.pane-panels-mini.pane-popular-apis .pane-title {
+ padding-top: 30px;
+ margin-bottom: 0;
+}
+
+.panel-pane.pane-panels-mini.pane-popular-apis {
+ padding: 20px 0;
+}
+
+.panel-pane.pane-panels-mini.pane-popular-apis .block-inner {
+ margin: 0;
+}
+
+img.site-logo {
+ height: 65px;
+}
+
+header#header {
+ position: fixed;
+ top: 0;
+ left: 0;
+ z-index: 400;
+ width: 100%;
+}
+
+.role-administrator header#header,
+.role-content_author header#header,
+.role-forum_moderator header#header {
+ top: 28px;
+}
+
+@media screen and (max-width: 1024px) {
+ .role-administrator header#header,
+ .role-content_author header#header,
+ .role-forum_moderator header#header {
+   top: 47px;
+ }
+}
+
+.slicknav_menu {
+ position: fixed;
+ width: 100%;
+ z-index: 999 !important;
+}
+
+#columns {
+ margin-top: 84px;
+}
+
+/* tablet landscape */
+@media screen and (min-width:769px) and (max-width:1024px) {
+ h1#site-name {
+   font-size: 2.8em;
+ }
+
+ #menu-bar .menu-wrapper li a,
+ #menu-bar .menu-wrapper .menu li a {
+   padding: 0 1.2em;
+   font-size: .94em;
+ }
+
+ #menu-bar .menu-wrapper li,
+ #menu-bar .menu-wrapper .menu li {
+   margin-right: 4px;
+ }
+
+ #columns {
+   margin-top: 71px;
+ }
+
+ .role-administrator #columns,
+ .role-content_author #columns,
+ .role-forum_moderator #columns {
+   margin-top: 140px;
+ }
+}
+/* tablet portrait */
+@media screen and (min-width:481px) and (max-width:768px) {
+ body {
+   padding: 0;
+ }
+
+ h1#site-name {
+   font-size: 2em;
+ }
+
+ #menu-bar .menu-wrapper li a,
+ #menu-bar .menu-wrapper .menu li a {
+   padding: 0 1em;
+   font-size: .9em;
+ }
+
+ #menu-bar .menu-wrapper li,
+ #menu-bar .menu-wrapper .menu li {
+   margin-right: 2px;
+ }
+
+ #columns {
+   margin-top: 100px;
+ }
+
+ .role-administrator #columns,
+ .role-content_author #columns,
+ .role-forum_moderator #columns {
+   margin-top: 100px;
+ }
+}
+/* smartphone landscape */
+@media screen and (min-width:321px) and (max-width:480px) {
+ body {
+   padding: 0;
+ }
+
+ body.admin-menu {
+   margin-top: 0 !important;
+ }
+
+ #admin-menu {
+   display: none;
+ }
+
+ #branding,
+ .region-header {
+   float: none;
+   margin: 0 0 10px;
+   width: 100%;
+   clear: both;
+   text-align: center;
+   max-width: 100%;
+ }
+
+ .region-header .block {
+   clear: both;
+   float: none;
+   margin: 5px auto;
+   max-width: 80%;
+ }
+
+ .region-header .block .block-inner {
+   margin: auto;
+ }
+
+ h1#site-name {
+   font-size: 1.5em;
+ }
+
+ h2#site-slogan {
+   font-size: 0.9em;
+ }
+
+ .region-top-menu {
+   height: auto;
+ }
+
+ .js #menu-bar nav {
+   display: none;
+ }
+
+ .menu-toggle {
+   display: block;
+   float: left;
+   font-size: 1.2em;
+   margin: 0 10px 0 0;
+   padding: 0;
+   text-transform: lowercase;
+ }
+
+ .menu-toggle a {
+   padding: 7px 10px 10px;
+   display: block;
+ }
+
+ #menu-bar .menu-wrapper {
+   float: none !important;
+ }
+
+ #menu-bar .menu-wrapper li a,
+ #menu-bar .menu-wrapper .menu li a {
+   display: block;
+   padding: 0 0.5em;
+   -moz-border-radius: 0 !important;
+   -webkit-border-radius: 0 !important;
+   border-radius: 0 !important;
+ }
+
+ #menu-bar .menu-wrapper li,
+ #menu-bar .menu-wrapper .menu li {
+   display: block;
+   float: none;
+   margin-right: 0;
+ }
+
+ #menu-bar .menu-wrapper ul.menu li {
+   margin: 0;
+   padding: 0;
+ }
+
+ ul.sf-menu {
+   width: 100%;
+ }
+
+ .sf-menu.sf-style-default ul {
+   width: 100% !important;
+ }
+
+ #columns {
+   margin-top: 167px;
+ }
+}
+/* smartphone portrait */
+@media screen and (max-width:320px) {
+ body {
+   padding: 0;
+ }
+
+ body.admin-menu {
+   margin-top: 0 !important;
+ }
+
+ #admin-menu {
+   display: none;
+ }
+
+ #branding,
+ .region-header {
+   float: none;
+   margin: 0 0 10px;
+   width: 100%;
+   clear: both;
+   text-align: center;
+   max-width: 100%;
+ }
+
+ .region-header .block {
+   clear: both;
+   float: none;
+   margin: 5px auto;
+   max-width: 80%;
+ }
+
+ .region-header .block .block-inner {
+   margin: auto;
+ }
+
+ h1#site-name {
+   font-size: 1.5em;
+ }
+
+ h2#site-slogan {
+   font-size: 0.9em;
+ }
+
+ .region-top-menu {
+   height: auto;
+ }
+
+ .js #menu-bar nav {
+   display: none;
+ }
+
+ .menu-toggle {
+   display: block;
+   float: left;
+   font-size: 1.2em;
+   margin: 0 10px 0 0;
+   padding: 0;
+   text-transform: lowercase;
+ }
+
+ .menu-toggle a {
+   padding: 7px 10px 10px;
+   display: block;
+ }
+
+ #menu-bar .menu-wrapper {
+   float: none !important;
+ }
+
+ #menu-bar .menu-wrapper li a,
+ #menu-bar .menu-wrapper .menu li a {
+   display: block;
+   padding: 0 0.5em;
+   -moz-border-radius: 0 !important;
+   -webkit-border-radius: 0 !important;
+   border-radius: 0 !important;
+ }
+
+ #menu-bar .menu-wrapper li,
+ #menu-bar .menu-wrapper .menu li {
+   display: block;
+   float: none;
+   margin-right: 0;
+ }
+
+ #menu-bar .menu-wrapper ul.menu li {
+   margin: 0;
+   padding: 0;
+ }
+
+ ul.sf-menu {
+   width: 100%;
+ }
+
+ .sf-menu.sf-style-default ul {
+   width: 100% !important;
+ }
+
+ #columns {
+   margin-top: 197px;
+ }
+
+ .role-administrator #columns,
+ .role-content_author #columns,
+ .role-forum_moderator #columns {
+   margin-top: 132px;
+ }
+}

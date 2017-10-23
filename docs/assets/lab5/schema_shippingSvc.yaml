@@ -1,0 +1,28 @@
+$schema: 'http://json-schema.org/draft-04/schema#'
+id: 'http://jsonschema.net'
+type: object
+properties:
+  company:
+    id: 'http://jsonschema.net/company'
+    type: string
+    name: company
+  rates:
+    id: 'http://jsonschema.net/rates'
+    type: object
+    properties:
+      next_day:
+        id: 'http://jsonschema.net/rates/next_day'
+        type: string
+        name: next_day
+      two_day:
+        id: 'http://jsonschema.net/rates/two_day'
+        type: string
+        name: two_day
+      ground:
+        id: 'http://jsonschema.net/rates/ground'
+        type: string
+        name: ground
+    name: rates
+required:
+  - company
+  - rates

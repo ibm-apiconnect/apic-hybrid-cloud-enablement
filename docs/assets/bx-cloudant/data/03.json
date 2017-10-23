@@ -1,0 +1,9 @@
+{
+  "name": "Collator",
+  "description": "The 85 collator performed many card filing and selection operations. It simultaneously could feed two sets of cards, merging the matched cards and selecting unmatched cards. In addition, the machine could check the sequence of the primary file of cards. It fed up to 120 cards per minute in each feed. IBM withdrew the 85 collator from marketing on September 7, 1978.",
+  "img": "images/items/collator.jpg",
+  "img_alt": "Collator",
+  "price": 2799.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

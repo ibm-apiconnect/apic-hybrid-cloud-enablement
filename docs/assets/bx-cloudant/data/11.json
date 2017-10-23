@@ -1,0 +1,9 @@
+{
+  "name": "Gang Summary Punch",
+  "description": "The IBM 523 gang summary punch made its debut on February 17, 1949. When attached to an IBM 400-series accounting machine, the 523 punched summary cards for various totals at the rate of 100 cards a minute. Gang punching and summary punching operations could be performed simultaneously. The last model of the 523 was withdrawn from marketing on December 1, 1975.",
+  "img": "images/items/summary-punch.jpg",
+  "img_alt": "Summary Punch",
+  "price": 1899.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}

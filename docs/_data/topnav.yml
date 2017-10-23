@@ -1,0 +1,15 @@
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+
+#Topnav dropdowns
+topnav_dropdowns:
+- title: Topnav dropdowns
+  folders:
+    - title: Resources
+      folderitems:
+        - title: Blog
+          external_url: https://developer.ibm.com/apiconnect/blog/
+        - title: Forum
+          external_url: https://developer.ibm.com/answers/smartspace/apiconnect/
+        - title: Documentation
+          external_url: https://developer.ibm.com/apiconnect/doc/

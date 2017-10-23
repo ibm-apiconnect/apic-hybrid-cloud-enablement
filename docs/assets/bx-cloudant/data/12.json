@@ -1,0 +1,9 @@
+{
+  "name": "Model A Typewriter",
+  "description": "In 1948 IBM introduced the IBM Model A Standard Electric Typewriter. This machine gave typists a new feeling of comfort and control as the carriage return, back space, tabulator and shift were operated with a fingertip touch. The Model A's multiple-copy control ensured legible carbon copies and stencils.",
+  "img": "images/items/a-typewriter.jpg",
+  "img_alt": "Model A Standard Electric Typewriter",
+  "price": 1199.99,
+  "rating": 0,
+  "loopback__model__name": "item"
+}
