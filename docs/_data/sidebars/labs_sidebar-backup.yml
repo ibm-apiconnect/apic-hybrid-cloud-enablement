@@ -1,0 +1,231 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+entries:
+- title: sidebar
+  product: Labs
+  folders:
+
+  - title:
+    output: pdf
+    type: frontmatter
+    folderitems:
+    - title:
+      url: /titlepage
+      output: pdf
+      type: frontmatter
+    - title:
+      url: /tocpage
+      output: pdf
+      type: frontmatter
+
+  - title: Environment Setup
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /env_setup_overview.html
+      output: web, pdf
+
+    - title: Install Node.js
+      url: /env_setup_install_node.html
+      output: web, pdf
+
+    - title: Install Docker
+      url: /env_setup_install_docker.html
+      output: web, pdf
+
+    - title: Install the APIC Toolkit
+      url: /env_setup_install_apic_toolkit.html
+      output: web, pdf
+
+  - title: Bluemix Account Setup
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /acct_setup_overview.html
+      output: web, pdf
+
+    - title: Create Your Bluemix Account
+      url: /acct_setup_bmx_acct.html
+      output: web, pdf
+
+    - title: Enable the API Connect Service on your Bluemix Account
+      url: /acct_setup_enable_apic.html
+      output: web, pdf
+
+    - title: Create your Developer Portal Instance for your API Connect Catalog
+      url: /acct_setup_portal.html
+      output: web, pdf
+
+  - title: Lab 1 - Create a Microservice Application
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab1_overview.html
+      output: web, pdf
+
+    - title: Create a Project Directory
+      url: /lab1_create_project_dir.html
+      output: web, pdf
+
+    - title: Create the Inventory App
+      url: /lab1_create_app.html
+      output: web, pdf
+
+    - title: Create a Data Source Connector
+      url: /lab1_items_db.html
+      output: web, pdf
+
+    - title: Create a Model for the Inventory Items
+      url: /lab1_items_model.html
+      output: web, pdf
+
+    - title: Verify the Microservice API
+      url: /lab1_verify_api.html
+      output: web, pdf
+
+  - title: Lab 2 - Run and Test your API in the Cloud
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab2_overview.html
+      output: web, pdf
+
+    - title: Publish App to Bluemix
+      url: /lab2_publish_app.html
+      output: web, pdf
+
+    - title: Create a Portal Account
+      url: /lab2_portal_account.html
+      output: web, pdf
+
+    - title: Register a Test App
+      url: /lab2_register_app.html
+      output: web, pdf
+
+    - title: Test the API
+      url: /lab2_test_api.html
+      output: web, pdf
+
+  - title: Lab 3 - Add OAuth Security to your API
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab3_overview.html
+      output: web, pdf
+
+    - title: Adding a New OAuth 2.0 Provider API
+      url: /lab3_oauth_api.html
+      output: web, pdf
+
+    - title: Create a New Version of the Inventory API
+      url: /lab3_version_api.html
+      output: web, pdf
+
+    - title: Securing the Inventory API
+      url: /lab3_api_security.html
+      output: web, pdf
+
+  - title: Lab 4 - Use Lifecycle Controls to Version your API
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab4_overview.html
+      output: web, pdf
+
+    - title: Create a New API Product
+      url: /lab4_new_product.html
+      output: web, pdf
+
+    - title: Replace the Old Product
+      url: /lab4_replace_product.html
+      output: web, pdf
+
+    - title: Test the OAuth Configuration
+      url: /lab4_test_oauth.html
+      output: web, pdf
+
+  - title: Lab 5 - Advanced API Assembly
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab5_overview.html
+      output: web, pdf
+
+    - title: Create a New API Project
+      url: /lab5_create_new_project.html
+      output: web, pdf
+
+    - title: Create the Financing API (REST to SOAP)
+      url: /lab5_financing_definition.html
+      output: web, pdf
+
+    - title: Map the API to a Service WSDL
+      url: /lab5_financing_assembly.html
+      output: web, pdf
+
+    - title: Import Logistics API
+      url: /lab5_import_logistics.html
+      output: web, pdf
+
+    - title: Create an Orchestration Assembly
+      url: /lab5_logistics_orchestration.html
+      output: web, pdf
+
+    - title: Using GatewayScript in an Assembly
+      url: /lab5_logistics_gws.html
+      output: web, pdf
+
+  - title: Lab 6 - Working with API Products
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab6_overview.html
+      output: web, pdf
+
+    - title: Creating an API Product
+      url: /lab6_create_product.html
+      output: web, pdf
+
+    - title: Publishing the API Product
+      url: /lab6_publish_product.html
+      output: web, pdf
+
+  - title: Lab 7 - Consumer Experience
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab7_overview.html
+      output: web, pdf
+
+    - title: Subscribe to the Accessories Product
+      url: /lab7_subscribe.html
+      output: web, pdf
+
+    - title: Test APIs from the Developer Portal
+      url: /lab7_test.html
+      output: web, pdf
+
+    - title: Try the ThinkIBM Consumer Web Application
+      url: /lab7_consumer.html
+      output: web, pdf
+
+  - title: Lab 8 - Analytics in API Connect
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab8_overview.html
+      output: web, pdf
+
+    - title: Browse the Analytics Data in API Connect
+      url: /lab8_analytics.html
+      output: web, pdf
