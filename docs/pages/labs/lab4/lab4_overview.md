@@ -1,10 +1,10 @@
 ---
-title: Use Lifecycle Controls to Version your API
+title: Node & Loopback Services
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab4
 permalink: /lab4_overview.html
-applies_to: [product-manager,administrator,consumer]
+applies_to: [developer]
 ---
 
 ## Objective
