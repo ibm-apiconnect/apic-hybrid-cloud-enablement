@@ -1,5 +1,5 @@
 ---
-title: Run and Test your API in the Cloud
+title: Creating REST API Proxy
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab2
@@ -9,15 +9,21 @@ applies_to: [developer,administrator,consumer]
 
 ## Objective
 
-At this point, you have created a Node.js microservice application called **inventory** that is configured with an `item` data model backed by a MySQL data source.
+At this point, we are familiar with creating working inside the API Designer.  Now we will create two REST APIs using instructions from the API Connect Knowledge Center Tutorials.  
 
-In this lab you will publish your **inventory** application source code to Bluemix where it will run in the cloud, managed and protected by your API Connect instance.
+In this lab, you will start with a new empty folder on your filesystem.  Please complete the following tutorials below.  You just need to get to the point of creating the API andnot publishing it.  We will get to that process soon enough. 
 
-You will learn:
+## Assignment
 
-+ How to publish a Node.js microservice application to Bluemix using the API Connect Toolkit
-+ How to access the Developer Portal to test your application's API
+Complete the following tutorials:
+
++ [Branches Tutorial: Creating an invoke REST API Definition](https://www.ibm.com/support/knowledgecenter/en/SSMNED_5.0.0/com.ibm.apic.toolkit.doc/tutorial_apionprem_apiproxy.html) .
++ [Loans Tutorial: Implementing a simple assembly for REST API](https://www.ibm.com/support/knowledgecenter/en/SSMNED_5.0.0/com.ibm.apic.toolkit.doc/tutorial_apionprem_assemblyresource.html)
+
+## Finished State
+
+On finishing this Lab, you should have two .yaml files in your folder. 
 
 ## Continue
 
-Proceed to [Publish App to Bluemix](lab2_publish_app.html).
+Proceed to [SOAP API Proxy](lab3_overview.html).

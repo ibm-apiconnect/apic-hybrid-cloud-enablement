@@ -1,5 +1,5 @@
 ---
-title: Add OAuth Security to your API
+title: Creating SOAP API Proxy
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab3
@@ -9,14 +9,24 @@ applies_to: [developer]
 
 ## Objective
 
-In this lab, you will secure the Inventory API to protect the resources exposed by **ThinkIBM**. Consumers of your API will be required to obtain and provide a valid OAuth token before they can invoke the Inventory API.
+Great job working with the API Designer and REST APIs.  Now let's work with SOAP APIs.  Did you know though that you can mimic the same activities from the API Designer in the API Manager in Bluemix?  Well, we are about to find out as we create two SOAP APIs using the API Connect Knowledge Center Tutorials.  
 
-You will learn:
+## Assignment
 
-+ How to create an OAuth 2.0 Provider, specifically using the Resource Owner Password grant type.
-+ How to clone a new version of an API.
-+ How to secure the new version of your API using an OAuth 2.0 Provider.
+First, let's log into Bluemix and access the API Manager from the listed services in your Dashboard. Navigate to the Drafts Menu from the Menu icon on the upper left of the screen. The interface should resemble the API Designer UI. 
+
+Complete the following tutorials:
+
+* [System API: Tutorial for creating a SOAP API](https://www.ibm.com/support/knowledgecenter/en/SSMNED_5.0.0/com.ibm.apic.apionprem.doc/tutorial_apionprem_creating_SOAP_API.html)
+
+*  [Interaction API: Creating a REST API definition that invokes an existing SOAP service](https://www.ibm.com/support/knowledgecenter/en/SSFS6T/com.ibm.apic.apionprem.doc/tutorial_apionprem_expose_SOAP.html
+)
+
+#Finished State
+
+Upon completion, you should have two APIs completed in your Drafts folder.  Let's leave them there for now.  We will come back to these at a later time.
+
 
 ## Continue
 
-Proceed to [Adding a New OAuth 2.0 Provider API](lab3_oauth_api.html).
+Proceed to [Node & Loopback Services](lab4_overview.html).

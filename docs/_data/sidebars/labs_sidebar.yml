@@ -58,7 +58,7 @@ entries:
       url: /acct_setup_portal.html
       output: web, pdf
 
-  - title: Lab 1 - Architecture & Topology Patterns
+  - title: Lab 1 - API Gateway & Assembly
     output: web, pdf
     folderitems:
 
@@ -70,7 +70,7 @@ entries:
       url: /lab1_managing_gateway.html
       output: web, pdf
 
-  - title: Lab 2 - API Gateway & Assembly
+  - title: Lab 2 - REST API Proxy
     output: web, pdf
     folderitems:
 
@@ -78,11 +78,7 @@ entries:
       url: /lab2_overview.html
       output: web, pdf
 
-    - title: Managing Gateway with API Designer
-      url: /lab2_managing_gateway.html
-      output: web, pdf
-
-  - title: Lab 3 - REST API Proxy
+  - title: Lab 3 - SOAP API Proxy
     output: web, pdf
     folderitems:
 
@@ -90,7 +86,7 @@ entries:
       url: /lab3_overview.html
       output: web, pdf
 
-  - title: Lab 4 - SOAP API Proxy
+  - title: Lab 4 - Node & Loopback Services
     output: web, pdf
     folderitems:
 
