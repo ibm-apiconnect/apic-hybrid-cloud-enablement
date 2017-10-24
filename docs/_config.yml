@@ -3,10 +3,10 @@ repository: https://github.ibm.com/apiconnect-ww-team/apiconnect-v5-hybrid-cloud
 output: web
 # this property is useful for conditional filtering of content that is separate from the PDF.
 
-topnav_title: IBM API Connect v5 Hybrid Cloud Enablement
+topnav_title: API Connect v5 Hybrid Cloud Enablement
 # this appears on the top navigation bar next to the home button
 
-site_title: IBM API Connect v5 Hybrid Cloud Enablement
+site_title: API Connect v5 Hybrid Cloud Enablement
 # this appears in the html browser tab for the site title (seen mostly by search engines, not users)
 
 company_name: IBM
