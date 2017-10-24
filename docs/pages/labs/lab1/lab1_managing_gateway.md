@@ -1,5 +1,5 @@
 ---
-title: Create a Microservice Application
+title: Managing API Gateway with API Designer
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab1

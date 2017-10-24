@@ -1,5 +1,5 @@
 ---
-title: Create a Microservice Application
+title: API Gateway & Assembly
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab1
@@ -9,15 +9,13 @@ applies_to: [developer]
 
 ## Objective
 
-In this lab, you will get a chance to use the APIC Developer Toolkit and its intuitive web-based interface to create a new microservice application which provides access to product inventory via a RESTful API.
+In this lab, you will need ensure you know how to properly use the API Designer and API Gateway.  
 
 In the following lab, you will learn:
 
-+ How to create a simple microservice application
-+ How to create a Representational State Transfer (REST) API definition using IBM Connect API Designer
-+ How to use the Loopback Datasource Connectors
-+ How to test a REST API
++ How to start and stop the API Gateway in the API Designer
++ How to switch between Projects in the API Designer
 
 ## Continue
 
-Proceed to [Managing Gateway through API Designer](lab1_managing_gateway.html).
+Proceed to [Managing Gateway with API Designer](lab1_managing_gateway.html).
