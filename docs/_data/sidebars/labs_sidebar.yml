@@ -58,7 +58,7 @@ entries:
       url: /acct_setup_portal.html
       output: web, pdf
 
-  - title: Lab 1 - API Gateway & Assembly
+  - title: Lab 1 - Architecture & Topology Patterns
     output: web, pdf
     folderitems:
 
@@ -70,7 +70,7 @@ entries:
       url: /lab1_managing_gateway.html
       output: web, pdf
 
-  - title: Lab 2 - REST API Proxy
+  - title: Lab 2 - API Gateway & Assembly
     output: web, pdf
     folderitems:
 
@@ -78,7 +78,11 @@ entries:
       url: /lab2_overview.html
       output: web, pdf
 
-  - title: Lab 3 - SOAP API Proxy
+    - title: Managing Gateway with API Designer
+      url: /lab2_managing_gateway.html
+      output: web, pdf
+
+  - title: Lab 3 - REST API Proxy
     output: web, pdf
     folderitems:
 
@@ -86,7 +90,7 @@ entries:
       url: /lab3_overview.html
       output: web, pdf
 
-  - title: Lab 4 - Node & Loopback Services
+  - title: Lab 4 - SOAP API Proxy
     output: web, pdf
     folderitems:
 
@@ -102,7 +106,7 @@ entries:
       url: /lab5_overview.html
       output: web, pdf
 
-  - title: Lab 6 - Publishing Loopback Services
+  - title: Lab 6 - Node & Loopback Services
     output: web, pdf
     folderitems:
 
@@ -110,7 +114,7 @@ entries:
       url: /lab6_overview.html
       output: web, pdf
 
-  - title: Lab 7 - Secure Gateway
+  - title: Lab 7 - Publishing Loopback Services
     output: web, pdf
     folderitems:
 
@@ -118,7 +122,7 @@ entries:
       url: /lab7_overview.html
       output: web, pdf
 
-  - title: Lab 8 - Analytics
+  - title: Lab 8 - Secure Gateway
     output: web, pdf
     folderitems:
 
@@ -126,7 +130,7 @@ entries:
       url: /lab8_overview.html
       output: web, pdf
 
-  - title: Lab 9 - oAuth & JWT
+  - title: Lab 9 - Analytics
     output: web, pdf
     folderitems:
 
@@ -134,10 +138,18 @@ entries:
       url: /lab9_overview.html
       output: web, pdf
 
-  - title: Lab 10 - Syndication
+  - title: Lab 10 - oAuth & JWT
     output: web, pdf
     folderitems:
 
     - title: Overview
       url: /lab10_overview.html
+      output: web, pdf
+
+  - title: Lab 11 - Syndication
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab11_overview.html
       output: web, pdf
