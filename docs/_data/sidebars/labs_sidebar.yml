@@ -94,3 +94,22 @@ entries:
       url: /lab4_overview.html
       output: web, pdf
 
+    - title: Create a Project Directory
+      url: /lab4_create_project_dir.html
+      output: web, pdf
+
+    - title: Create the Inventory App
+      url: /lab4_create_app.html
+      output: web, pdf
+
+    - title: Create a Data Source Connector
+      url: /lab4_items_db.html
+      output: web, pdf
+
+    - title: Create a Model for the Inventory Items
+      url: /lab4_items_model.html
+      output: web, pdf
+
+    - title: Verify the Microservice API
+      url: /lab4_verify_api.html
+      output: web, pdf

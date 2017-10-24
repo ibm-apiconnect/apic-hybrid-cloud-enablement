@@ -22,7 +22,7 @@ Complete the following tutorials:
 *  [Interaction API: Creating a REST API definition that invokes an existing SOAP service](https://www.ibm.com/support/knowledgecenter/en/SSFS6T/com.ibm.apic.apionprem.doc/tutorial_apionprem_expose_SOAP.html
 )
 
-#Finished State
+##Finished State
 
 Upon completion, you should have two APIs completed in your Drafts folder.  Let's leave them there for now.  We will come back to these at a later time.
 

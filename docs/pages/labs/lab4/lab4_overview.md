@@ -9,17 +9,16 @@ applies_to: [developer]
 
 ## Objective
 
-In the previous lab, you created a new version of the **inventory** API which is secured with an OAuth 2.0 provider. At this stage, however, the changes are still in draft mode.
+In this lab, you will get a chance to use the APIC Developer Toolkit and its intuitive web-based interface to create a new microservice application which provides access to product inventory via a RESTful API.
 
-In order for the changes to take effect, you must publish the APIs to the developer portal. Recall though that the `inventory 1.0.0` version is already running and has active subscribers.
+In the following lab, you will learn:
 
-In this lab, you will explore the API Lifecycle controls offered by IBM API Connect and use them to replace the existing version of an API Product with a new version.
++ How to create a simple loopback microservice application
++ How to create a Representational State Transfer (REST) API definition using IBM Connect API Designer
++ How to use the Loopback Datasource Connectors
++ How to add additional Models for Interaction Capabilities
 
-You will learn:
-
-+ How to create a new API Product
-+ How to use lifecycle controls to replace an existing version of an API Product
 
 ## Continue
 
-Proceed to [Create a New API Product](lab4_new_product.html).
+Proceed to [Create a Project Directory](lab4_create_project_dir.html).
