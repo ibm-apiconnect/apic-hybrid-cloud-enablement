@@ -113,3 +113,43 @@ entries:
     - title: Verify the Microservice API
       url: /lab4_verify_api.html
       output: web, pdf
+
+  - title: Lab 5 - Publishing Loopback Services
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab5_overview.html
+      output: web, pdf
+
+  - title: Lab 6 - Secure Gateway
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab6_overview.html
+      output: web, pdf
+
+  - title: Lab 7 - oAuth & JWT
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab7_overview.html
+      output: web, pdf
+
+  - title: Lab 8 - Syndication
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab8_overview.html
+      output: web, pdf
+
+  - title: Lab 9 - Developer Portal
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /lab9_overview.html
+      output: web, pdf

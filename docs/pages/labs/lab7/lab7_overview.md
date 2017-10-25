@@ -1,5 +1,5 @@
 ---
-title: Consumer Experience
+title: Lab 7 - Securing APIs with oAuth & JWT
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab7
@@ -9,14 +9,15 @@ applies_to: [consumer]
 
 ## Objective
 
-In this lab, you will explore the consumer experience for APIs that have been exposed to your Sandbox catalog. Using the Developer Portal, you will log in and subscribe to the latest **Think Accessories** API Product and test the APIs from the portal, before testing it in a live Web Application.
+In this lab, you will get more experience with using oAuth and JWT to secure API traffic.  
 
-You will learn:
+## Assignment
 
-+ How to subscribe to a plan in order to consume an API.
-+ How to test an API from the developer portal.
-+ How to consume an API from a sample test application.
+Please follow the two guides for more information on both.  They both include a guide and video explanation.
+
++ [Securing APIs using OAuth in API Connect – Video Tutorial](https://developer.ibm.com/apiconnect/2017/04/11/securing-apis-using-oauth-in-apiconnect/){:target="_blank"}
++ [Securing APIs using JSON Web Tokens (JWT) in API Connect – Video Tutorial](https://developer.ibm.com/apiconnect/2016/08/16/securing-apis-using-json-web-tokens-jwt-in-api-connect-video-tutorial/){:target="_blank"}
+
 
 ## Continue
 
-Proceed to [Subscribe to the Accessories Product](lab7_subscribe.html).
