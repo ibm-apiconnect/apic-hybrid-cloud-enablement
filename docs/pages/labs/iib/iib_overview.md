@@ -13,7 +13,6 @@ In this lab, you will get some experience working with IIB.  Although there are 
 
  
 
-
 ## Assignment
 
 Please follow the two guides below to complete the lab.  The first will go over creating a sample IIB Flow and the second will walk through how to expose that through API Connect. 
