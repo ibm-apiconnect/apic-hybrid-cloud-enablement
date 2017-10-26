@@ -24,7 +24,7 @@ Complete the following tutorials:
 
 ##Finished State
 
-Upon completion, you should have two APIs completed in your Drafts folder.  Let's leave them there for now.  We will come back to these at a later time.
+Upon completion, you should have two APIs completed in your Drafts folder on the Bluemix Cloud.  Let's leave them there for now.  We will come back to these at a later time.
 
 
 ## Continue

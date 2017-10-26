@@ -124,5 +124,5 @@ Your API Connect environment in Bluemix uses IBM DataPower to enforce API polici
 
 ## Continue
 
-Proceed to Proceed to [Lab 2 - Run and Test your API in the Cloud](lab2_overview.html).
+Proceed to Proceed to [Publishing Loopback Services](lab5_overview.html).
 

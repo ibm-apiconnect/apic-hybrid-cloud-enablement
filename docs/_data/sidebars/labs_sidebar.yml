@@ -138,18 +138,26 @@ entries:
       url: /lab7_overview.html
       output: web, pdf
 
-  - title: Lab 8 - Syndication
-    output: web, pdf
-    folderitems:
-
-    - title: Overview
-      url: /lab8_overview.html
-      output: web, pdf
-
   - title: Lab 9 - Developer Portal
     output: web, pdf
     folderitems:
 
     - title: Overview
       url: /lab9_overview.html
+      output: web, pdf
+
+  - title: Lab - Intro to IIB
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /iib_overview.html
+      output: web, pdf
+
+  - title: Lab - Intro to App Connect
+    output: web, pdf
+    folderitems:
+
+    - title: Overview
+      url: /appconnect_overview.html
       output: web, pdf

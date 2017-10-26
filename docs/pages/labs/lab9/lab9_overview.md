@@ -1,5 +1,5 @@
 ---
-title: Lab 9 - Developer Portal
+title: Lab 9 - Developer Portal Customization
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab9
@@ -9,19 +9,23 @@ applies_to: [consumer]
 
 ## Objective
 
-In this lab, you will get more experience doing a quick customization of the developer portal. 
+In this lab, you will get more experience doing a quick customization of the developer portal. From the lecture, we explored the art of the possible with some great samples.  The goal of this lab is allow you to perform a simple Developer Portal customization using our 4 simple steps.  
 
 ## Files Needed
 
-+ United Airlines Images
+To guide you through this, we'll give you some start files to get you started. 
+
++ [United Airlines Website Images](./images/labs/lab9/united-airlines-website-images.zip)
+
 
 ## Assignment
 
-Please follow the two guides for more information on both.  They both include a guide and video explanation.
+Let's walk through the process now of converting the initial portal design to be this image below.
 
-+ [Securing APIs using OAuth in API Connect – Video Tutorial](https://developer.ibm.com/apiconnect/2017/04/11/securing-apis-using-oauth-in-apiconnect/)
-+ [Securing APIs using JSON Web Tokens (JWT) in API Connect – Video Tutorial](https://developer.ibm.com/apiconnect/2016/08/16/securing-apis-using-json-web-tokens-jwt-in-api-connect-video-tutorial/)
+![](./images/labs/lab9/final-image.png)
 
+ + [Lecture on Developer Portal](https://ibm.box.com/s/xxyra5goc0a4d7gjg8b9inwpotjlce11){:target="_blank"}
 
 ## Continue
 
+Use this technique to build many more exciting Developer Portal Customizations

@@ -9,7 +9,7 @@ applies_to: [administrator]
 
 ## Objective
 
-
+In this lab, let's take your Developer Sandbox Catalog and use it to push 
 
 ## Continue
 
