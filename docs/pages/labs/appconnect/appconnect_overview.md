@@ -1,5 +1,5 @@
 ---
-title: Lab 10 - Exposing APP Connect Through API Connect
+title: Lab  - Exposing APP Connect Through API Connect
 toc: false
 sidebar: labs_sidebar
 folder: labs/appconnect

@@ -1,9 +1,9 @@
 ---
-title: Lab 10 - Exposing APP Connect Through API Connect
+title: Lab  - Exposing IIB Through API Connect
 toc: false
 sidebar: labs_sidebar
-folder: labs/appconnect
-permalink: /appconnect_overview.html
+folder: labs/iib
+permalink: /iib_overview.html
 applies_to: [consumer]
 ---
 
