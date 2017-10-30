@@ -7,6 +7,10 @@ permalink: /lab4_overview.html
 applies_to: [developer]
 ---
 
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-Node_Loopback_Services.pdf"> </iframe>
+
 ## Objective
 
 In this lab, you will get a chance to use the APIC Developer Toolkit and its intuitive web-based interface to create a new microservice application which provides access to product inventory via a RESTful API.

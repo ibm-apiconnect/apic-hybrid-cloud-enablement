@@ -7,6 +7,10 @@ permalink: /lab9_overview.html
 applies_to: [consumer]
 ---
 
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-Developer_Portal.pdf"> </iframe>
+
 ## Objective
 
 In this lab, you will get more experience doing a quick customization of the developer portal. From the lecture, we explored the art of the possible with some great samples.  The goal of this lab is allow you to perform a simple Developer Portal customization using our 4 simple steps.  
@@ -24,7 +28,8 @@ Let's walk through the process now of converting the initial portal design to be
 
 ![](./images/labs/lab9/final-image.png)
 
- + [Lecture on Developer Portal](https://ibm.box.com/s/xxyra5goc0a4d7gjg8b9inwpotjlce11){:target="_blank"}
+
+
 
 ## Continue
 

@@ -4,8 +4,12 @@ toc: false
 sidebar: labs_sidebar
 folder: labs/appconnect
 permalink: /appconnect_overview.html
-applies_to: [consumer]
+applies_to: [developer]
 ---
+
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-App_Connect_Pro.pdf"> </iframe>
 
 ## Objective
 

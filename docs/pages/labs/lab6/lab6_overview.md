@@ -7,6 +7,10 @@ permalink: /lab6_overview.html
 applies_to: [api-developer]
 ---
 
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-Secure_Gateway.pdf"> </iframe>
+
 ## Objective
 
 In this lab, we will use our loopback service from Lab 5.  In order to showcase the true power of Secure Gateways, we will leverage an Bluemix Cloud Instance to consume a service we are running in real time.  

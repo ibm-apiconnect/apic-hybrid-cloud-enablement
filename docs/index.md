@@ -9,13 +9,9 @@ permalink: /index.html
 
 Within, you will explore a series of hands-on labs designed to give you a high-level understanding of the IBM API Connect solution.
 
-Throughout the labs, you will take on the role of four key persona's:
+![](./images/labs/speakers.png)
 
-<span class="label label-developer">API Developer</span>
-<span class="label label-product-manager">API Product Manager</span>
-<span class="label label-administrator">API Administrator</span>
-<span class="label label-consumer">API Consumer</span>
-
+## Site Tools
 Each section of the guide will identify the persona with which the next few steps relate to, as well as a summary of the tasks you will perform.
 
 Keep an eye out for the tooltips below. These will help guide you through common mistakes, provide tips and helpful context to the task at hand. 

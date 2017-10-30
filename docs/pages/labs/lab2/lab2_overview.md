@@ -7,6 +7,11 @@ permalink: /lab2_overview.html
 applies_to: [developer,administrator,consumer]
 ---
 
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-REST_API_Proxy.pdf"> </iframe>
+
+
 ## Objective
 
 At this point, we are familiar with creating working inside the API Designer.  Now we will create two REST APIs using instructions from the API Connect Knowledge Center Tutorials.  

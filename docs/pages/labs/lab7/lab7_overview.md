@@ -7,10 +7,13 @@ permalink: /lab7_overview.html
 applies_to: [consumer]
 ---
 
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-oAuth_JWT.pdf"> </iframe>
+
 ## Objective
 
 In this lab, you will get more experience with using oAuth and JWT to secure API traffic.  
-
 ## Assignment
 
 Please follow the two guides for more information on both.  They both include a guide and video explanation.

@@ -7,6 +7,10 @@ permalink: /lab3_overview.html
 applies_to: [developer]
 ---
 
+## Lecture PDF
+
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-SOAP_API_Proxy.pdf"> </iframe>
+
 ## Objective
 
 Great job working with the API Designer and REST APIs.  Now let's work with SOAP APIs.  Did you know though that you can mimic the same activities from the API Designer in the API Manager in Bluemix?  Well, we are about to find out as we create two SOAP APIs using the API Connect Knowledge Center Tutorials.  
