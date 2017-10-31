@@ -52,4 +52,4 @@ applies_to: [developer]
 
 ## Continue
 
-Proceed to [Create a Model for the Inventory Items](lab1_items_model.html)
+Proceed to [Create a Model for the Inventory Items](lab4_items_model.html)

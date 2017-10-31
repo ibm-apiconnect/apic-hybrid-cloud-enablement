@@ -126,10 +126,6 @@ entries:
       url: /lab4_items_model.html
       output: web, pdf
 
-    - title: Create a Non Persisted Model
-      url: /lab4_product_model.html
-      output: web, pdf
-
     - title: Verify the Microservice API
       url: /lab4_verify_api.html
       output: web, pdf

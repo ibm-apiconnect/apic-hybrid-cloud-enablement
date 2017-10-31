@@ -1,5 +1,5 @@
 ---
-title: Lab 4 - Node & Loopback Services
+title: Node & Loopback Services
 toc: false
 sidebar: labs_sidebar
 folder: labs/lab4

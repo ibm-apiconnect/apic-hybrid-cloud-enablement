@@ -126,10 +126,6 @@ entries:
       url: /lab4_items_model.html
       output: web, pdf
 
-    - title: Create a Non Persisted Model
-      url: /lab4_product_model.html
-      output: web, pdf
-
     - title: Verify the Microservice API
       url: /lab4_verify_api.html
       output: web, pdf
@@ -192,20 +188,4 @@ entries:
 
     - title: Overview
       url: /lab9_overview.html
-      output: web, pdf
-
-  - title: Intro to IIB [LAB]
-    output: web, pdf
-    folderitems:
-
-    - title: Overview
-      url: /iib_overview.html
-      output: web, pdf
-
-  - title: Intro to App Connect [LAB]
-    output: web, pdf
-    folderitems:
-
-    - title: Overview
-      url: /appconnect_overview.html
       output: web, pdf

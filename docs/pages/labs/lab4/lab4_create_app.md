@@ -58,5 +58,5 @@ applies_to: [developer]
 
 ## Continue
 
-Proceed to [Create a Data Source Connector](lab1_items_db.html).
+Proceed to [Create a Data Source Connector](lab4_items_db.html).
 

@@ -20,4 +20,4 @@ applies_to: [developer]
 
 ## Continue
 
-Proceed to [Create the Inventory App](lab1_create_app.html).
+Proceed to [Create the Inventory App](lab4_create_app.html).

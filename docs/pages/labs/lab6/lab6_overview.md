@@ -13,13 +13,17 @@ applies_to: [api-developer]
 
 ## Objective
 
-In this lab, we will use our loopback service from Lab 5.  In order to showcase the true power of Secure Gateways, we will leverage an Bluemix Cloud Instance to consume a service we are running in real time.  
+In this lab, we will use our loopback service from [Node & Loopback Services](lab4_overview.html) Lecture and Lab.  In order to showcase the true power of Secure Gateways, we will leverage an Bluemix Cloud Instance to consume a service we are running in real time locally.  
 
 ## Assignment
 
-Follow this guide to complete this lab. [Secure Gateway Lab PDF](./images/labs/pdfs/SecureGatewayLab.pdf)
- 
+Follow the following steps to complete this lab. 
 
++ Start the Existing Loopback Service and ensure it is running. 
++ Install the Secure Gateway Client and get it running. 
++ Connect the Bluemix Cloud  guide to complete this lab. 
+ 
+ 
 ## Continue
-Proceed to [Securing APIs with oAuth & JWT](lab7_overview.html)
+Proceed to [Start the Existing Loopback Service](lab6_starting.html)
  

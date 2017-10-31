@@ -28,4 +28,4 @@ applies_to: [developer]
 
 ## Continue
 
-Proceed to [Verify the Microservice API](lab1_verify_api.html).
+Proceed to [Create a Non Persisted Model](lab4_product_model.html).
