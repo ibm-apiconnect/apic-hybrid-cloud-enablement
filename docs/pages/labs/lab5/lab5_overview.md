@@ -9,7 +9,7 @@ applies_to: [developer]
 
 ## Lecture PDF
 
- <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-Publlishing_Loopback_Services.pdf"> </iframe>
+ <iframe style="overflow:hidden;height:500;width:100%" height="500" width="100%" src="./assets/lectures/Lecture-Publishing_Loopback_Services.pdf"> </iframe>
 
 ## Objective
 
@@ -21,10 +21,21 @@ In the previous lab, we created a node loopback service.  This lab will work wit
 
 ## Assignment
 
-Use the existing slide deck to Debug and Profile the loopback application
+Use the existing slide deck to Debug and Profile the loopback application.  Here are 3 easy steps to follow. 
+
+1. View all debugs from your existing loopback inventory application. make an api call via the browser window ( http://localhost:3000/api/items ) and view the logs. Hit CTRL + C to stop the server after your view everything.
+
+    ```shell
+    DEBUG=* npm start
+    ```
+1. Restart the service with the command below.  This will view the DEBUG logs to just view the mysql connector. Make an API call via 
+
+    ```shell
+    DEBUG=*mysql
+    ```
 
  
 ## Continue
 
-Proceed to [Securing Gateway](lab6_overview.html)
+Proceed to [Secure Gateway](lab6_overview.html)
  

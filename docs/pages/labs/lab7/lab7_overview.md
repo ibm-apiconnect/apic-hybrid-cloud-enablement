@@ -23,4 +23,4 @@ Please follow the two guides for more information on both.  They both include a 
 
 
 ## Continue
-Proceed to [Lab 9](lab9_overview.html) 
+Proceed to [Syndication](lecture_syndication.html) 

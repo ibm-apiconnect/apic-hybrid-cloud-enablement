@@ -146,6 +146,18 @@ entries:
       url: /lab6_overview.html
       output: web, pdf
 
+    - title: Starting Existing Service
+      url: /lab6_starting.html
+      output: web, pdf
+
+    - title: Configure SG Client
+      url: /lab6_configure.html
+      output: web, pdf
+
+    - title: Test Service
+      url: /lab6_testing.html
+      output: web, pdf
+
   - title: oAuth & JWT [LAB]
     output: web, pdf
     folderitems:
