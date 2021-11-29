@@ -1,2 +1,14 @@
-node_modules
-.DS_Store
+*~
+*zip
+*7z
+*tar
+*tar.gz
+**/POC/**
+**/temp/**
+**/confidential/**
+*html
+*pdf
+*#
+**/root-ca/**
+**/Simple-TLS/**
+**/Hybrid-TLS/**
