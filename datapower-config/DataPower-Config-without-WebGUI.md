@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan, Dalwinder Bagdi   
->  &copy; IBM v1.9  2021-11-30   
+>  &copy; IBM v1.95  2021-12-02   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
@@ -37,7 +37,7 @@ Though the use cases differ in complexity the solutions traverse the same trail.
     The configurations will propagate to all DataPower pods which support the `apiconnect` domain.
   - Verify DataPower configurations  
 
->***Note***: Folder [`crypto-samples`](./crypto-samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
+>***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
 
 ## JWT Key  
 The Crypto Key solution is presented first and, for completeness and contrast, this document includes a solution for JWT Key which uses the APIC Catalog Property.  
@@ -130,7 +130,7 @@ Any API published to the DataPower `apiconnect` domain could use JWT key. The AP
 
 #### Extend the DataPower GatewayCluster   
 
->***Note***: Folder [`crypto-samples`](./crypto-samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
+>***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
   - **k8s**   
     Apply `additionalDomainConfig` to the GatewayCluster.  
@@ -287,7 +287,7 @@ The finished TLS Server Profile as it would appear in the DataPower WebGUI.
 #### Building blocks: Secrets & ConfigMaps  
 The building blocks are the same for k8s or OCP. Start with Secrets and construct ConfigMaps.  
 
->***Note***: Folder [`crypto-samples`](./crypto-samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
+>***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
 - **Secrets**  
 You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) and [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/). Far better, use:  
@@ -348,7 +348,7 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
   >***Note***: You can [Develop DataPower `config` on your desktop](#develop-datapower-config-on-your-desktop) and place them in ConfigMaps.  
 
   - API Connect Client Validation Credential  
-    - Create file [210-apiconnect-client-valcred.cfg](./crypto-samples/210-apiconnect-client-valcred.cfg) with the content
+    - Create file [210-apiconnect-client-valcred.cfg](./samples/210-apiconnect-client-valcred.cfg) with the content
       ```
       crypto
         certificate "my-apic-cert" "cert:///my-apic-cert-bundle.pem"
@@ -377,7 +377,7 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
 
 
   - DataPower TLS Server Profile    
-    - Create certificate and key definition in [221-apiconnect-server-tls.cfg](./crypto-samples/221-apiconnect-server-tls.cfg)   
+    - Create certificate and key definition in [221-apiconnect-server-tls.cfg](./samples/221-apiconnect-server-tls.cfg)   
       ```  
       crypto
         certificate "dp-apigwy-cert" "cert:///dp-apigwy.crt"
@@ -386,9 +386,9 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
       ```
       >***Note***: You cannot create a sub-directory under `cert:///`. Use naming conventions to associate the private key with the corresponding certificate.  
 
-    - Create the `idcred` definition [222-apiconnect-server-tls.cfg](./crypto-samples/222-apiconnect-server-tls.cfg)   
+    - Create the `idcred` definition [222-apiconnect-server-tls.cfg](./samples/222-apiconnect-server-tls.cfg)   
 
-    - Create the `ssl-server` definition [223-apiconnect-server-tls.cfg](./crypto-samples/223-apiconnect-server-tls.cfg)   
+    - Create the `ssl-server` definition [223-apiconnect-server-tls.cfg](./samples/223-apiconnect-server-tls.cfg)   
 
     - Create ConfigMaps  
       **k8s**: `kubectl create configmap 221-apiconnect-server-tls-cfg --from-file=./221-apiconnect-server-tls.cfg -n dev`  
@@ -403,10 +403,10 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
 #### Extend the DataPower GatewayCluster *Custom Resource*  
 The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we patch the GatewayCluster with `additionalDomainConfig`. On Openshift we patch the APIConnectCluster's `gateway` section with `additionalDomainConfig`. Primary Reference: [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment)    
 
->***Note***: Folder [`crypto-samples`](./crypto-samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
+>***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
 - **API Connect on k8s**  
-  - File [522-apiconnect-k8s-additionalDomainConfig.yam](./crypto-samples/522-apiconnect-k8s-additionalDomainConfig.yaml) contains:  
+  - File [522-apiconnect-k8s-additionalDomainConfig.yam](./samples/522-apiconnect-k8s-additionalDomainConfig.yaml) contains:  
 
     ```
     # Add the TLS Server Profile to apiconnect domain
@@ -526,7 +526,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
     `Ctrl-P Ctrl-Q`  
 
 - **API Connect on Openshift / CP4i**  
-  - File [622-apiconnect-ocp-additionalDomainConfig.yaml](./crypto-samples/622-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
+  - File [622-apiconnect-ocp-additionalDomainConfig.yaml](./samples/622-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
 
     ```
     spec:
