@@ -3,6 +3,10 @@
 *7z
 *tar
 *tar.gz
+*pem
+*crt
+*csr
+*p12
 **/POC/**
 **/temp/**
 **/confidential/**
