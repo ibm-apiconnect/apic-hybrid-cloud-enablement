@@ -1,19 +1,20 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan, Dalwinder Bagdi   
->  &copy; IBM v1.95  2021-12-02   
+>  &copy; IBM v2.00  2021-12-09   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
-- [JWT Key](#jwt-key)  
+- [JWT Key in `apiconnect` domain](#jwt-key-in-apiconnect-domain)  
   - [JWT Key in DataPower Crypto Key](#jwt-key-in-datapower-crypto-key)  
   - [JWT Key in Catalog Property](#jwt-key-in-catalog-property)  
-- [TLS Server Profile](#tls-server-profile)  
+- [TLS Server Profile in `apiconnect` domain](#tls-server-profile-in-apiconnect-domain)  
+- [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain)
 - [Oops *!#^&](#oops-)
 - [Develop DataPower `config` on your desktop](#develop-datapower-config-on-your-desktop)
 
 ## DataPower Config   
-The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), Redhat Openshift (OCP) or IBM CloudPak (CP4i), we can create and manage configurations through k8s or OCP commands. This document posits two use cases and details steps to create crypto objects on DataPower running on k8s/OCP. While Crypto objects are the focus in this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s and OCP installations.    
+The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), Redhat Openshift (OCP) or IBM CloudPak (CP4i), we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s and OCP installations.    
 
 ### Goals  
 - Empower IBM API Connect clients to configure DataPower k8s/OCP/CP4i as they would DataPower appliances, physical or virtual  
@@ -25,21 +26,22 @@ The DataPower WebGUI makes it easy to customize domain configurations. When Data
 - Specific items: k8s/OCP commands, DataPower commands, DataPower login k8s/OCP   
 
 ### Use cases  
-The solutions use the `apiconnect` domain, the typical name for the DataPower domain which supports API Connect.    
-- JWT Key  
+The use cases address configurations for the `apiconnect` domain and the system wide `default` domain.
+- JWT Key in `apiconnect` domain  
   Almost all installations of IBM API Connect (APIC) use the JWT feature. Clients would like API to use a common JWT Key.  
-- TLS Server Profile  
+- TLS Server Profile in `apiconnect` domain  
   A less frequent need which is more complex to implement, with or without the WebGUI.  
+- Enable `web-mgmt` in `default` domain  
 
 Though the use cases differ in complexity the solutions traverse the same trail.
   - Create Secrets and ConfigMaps  
-  - Apply `additionalDomainConfig` to the `apiconnect` domain   
-    The configurations will propagate to all DataPower pods which support the `apiconnect` domain.
+  - Apply `additionalDomainConfig` to the `apiconnect` or `default` domain   
+    The configurations will propagate to all DataPower pods which support the `apiconnect` domain or all pods for the `default` domain
   - Verify DataPower configurations  
 
 >***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
 
-## JWT Key  
+## JWT Key in `apiconnect` domain  
 The Crypto Key solution is presented first and, for completeness and contrast, this document includes a solution for JWT Key which uses the APIC Catalog Property.  
 
 ### JWT Key in DataPower Crypto Key  
@@ -135,7 +137,7 @@ Any API published to the DataPower `apiconnect` domain could use JWT key. The AP
   - **k8s**   
     Apply `additionalDomainConfig` to the GatewayCluster.  
 
-    - Create file `511-apiconnect-additionalDomainConfig.yaml` with the following lines:
+    - Create file `251-apiconnect-k8s-additionalDomainConfig.yaml` with the following lines:
       ```
       # Add mycryptokey to apiconnect domain
       spec:
@@ -149,12 +151,12 @@ Any API published to the DataPower `apiconnect` domain could use JWT key. The AP
             - "111-apiconnect-mycryptokey-cfg"
       ```
     - Modify the DataPower Gateway Cluster in the namespace `dev`  
-      `kubectl patch gatewaycluster gwv6 --type merge --patch-file='511-apiconnect-additionalDomainConfig.yaml' -n dev`  
+      `kubectl patch gatewaycluster gwv6 --type merge --patch-file='251-apiconnect-k8s-additionalDomainConfig.yaml' -n dev`  
 
   - **OCP**   
     Apply `additionalDomainConfig` to the `gateway` section of the APIConnectCluster.  
 
-    - Create file `611-apiconnect-additionalDomainConfig.yaml` with the following lines:
+    - Create file `261-apiconnect-ocp-additionalDomainConfig.yaml` with the following lines:
       ```
       # Add mycryptokey to apiconnect domain
       spec:
@@ -179,7 +181,7 @@ Any API published to the DataPower `apiconnect` domain could use JWT key. The AP
       ```
     - Patch APIConnectCluster with `additionalDomainConfig`  
 
-      `oc patch apiconnectcluster apic-rr --type merge --patch-file='611-apiconnect-ocp-additionalDomainConfig.yaml'`  
+      `oc patch apiconnectcluster apic-rr --type merge --patch-file='261-apiconnect-ocp-additionalDomainConfig.yaml'`  
 
     - Determine the name(s) of the DataPower pod(s)  
       From the above we know that `apic-rr` is the prefix for installation.  
@@ -250,7 +252,7 @@ Any API in the catalog could obtain the JWT Key from the Catalog Property.
 
 
 
-## TLS Server Profile  
+## TLS Server Profile in `apiconnect` domain  
 TLS Server Profile is the protagonist chosen for its complex character. All the world's a stage. The script can be used to configure other DataPower objects.
 
 ### TLS Server Profile in DataPower Crypto `ssl-server`  
@@ -406,7 +408,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
 >***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
 - **API Connect on k8s**  
-  - File [522-apiconnect-k8s-additionalDomainConfig.yam](./samples/522-apiconnect-k8s-additionalDomainConfig.yaml) contains:  
+  - File [252-apiconnect-k8s-additionalDomainConfig.yam](./samples/252-apiconnect-k8s-additionalDomainConfig.yaml) contains:  
 
     ```
     # Add the TLS Server Profile to apiconnect domain
@@ -430,7 +432,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
 
   - Patch DataPower GatewayCluster with `additionalDomainConfig`  
 
-    `kubectl patch gatewaycluster gwv6 --type merge --patch-file='522-apiconnect-additionalDomainConfig.yaml' -n dev`  
+    `kubectl patch gatewaycluster gwv6 --type merge --patch-file='252-apiconnect-k8s-additionalDomainConfig.yaml' -n dev`  
 
     >***Note***: `gwv6` is the new DataPower API Gateway (APIGW). `gwv5` is the v5 Compatible Gateway.  
 
@@ -526,7 +528,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
     `Ctrl-P Ctrl-Q`  
 
 - **API Connect on Openshift / CP4i**  
-  - File [622-apiconnect-ocp-additionalDomainConfig.yaml](./samples/622-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
+  - File [262-apiconnect-ocp-additionalDomainConfig.yaml](./samples/262-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
 
     ```
     spec:
@@ -556,7 +558,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
     ```
   - Patch APIConnectCluster with `additionalDomainConfig`  
 
-    `oc patch apiconnectcluster apic-rr --type merge --patch-file='622-apiconnect-ocp-additionalDomainConfig.yaml'`  
+    `oc patch apiconnectcluster apic-rr --type merge --patch-file='262-apiconnect-ocp-additionalDomainConfig.yaml'`  
 
   - Determine the name(s) of the DataPower pod(s)  
     From the above we know that `apic-rr` is the prefix for installation.  
@@ -570,6 +572,67 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
     Most production installations have three DataPower pods. You could attach to any pod to verify the `apiconnect` domain configurations.  
 
     `oc attach -it apic-rr-gw-0 -c datapower `   
+
+
+## Enable `web-mgmt` in `default` domain   
+
+This is usually the first tweak to DataPower installations since the dawn of the WebGUI. No secrets up the sleeves.  
+
+- Create file `311-default-web-mgmt.cfg` with the content:
+  ```
+  web-mgmt
+    admin enabled
+  exit
+  ```
+
+- Create a ConfigMap  
+  `kubectl create configmap 311-default-web-mgmt-cfg --from-file=./311-default-web-mgmt.cfg -n dev`  
+
+#### Extend the DataPower GatewayCluster *Custom Resource*  
+- **API Connect on OCP**
+  - File [361-default-ocp-additionalDomainConfig.yaml](./samples/361-default-ocp-additionalDomainConfig.yaml) contains:
+    ```
+    spec:
+      gateway:
+        additionalDomainConfig:
+        - name: "default"
+          dpApp:
+            config:
+            - "311-default-web-mgmt-cfg"
+    ```
+  - Determine the name of the APIConnectCluster:
+    ```
+    # oc project dev  
+    # oc get apiconnectcluster  
+    NAME      READY   STATUS   VERSION        RECONCILED VERSION   AGE
+    apic-rr   4/4     Ready    10.0.1.5-eus   10.0.1.5-3440-eus    18h
+    ```
+  - Patch APIConnectCluster with `additionalDomainConfig`  
+
+    `oc patch apiconnectcluster apic-rr --type merge --patch-file='361-default-ocp-additionalDomainConfig.yaml'`  
+
+  - Determine the name(s) of the DataPower pod(s)  
+    From the above we know that `apic-rr` is the prefix for installation.  
+    ```
+    # oc get pod | grep apic-rr-gw  
+    apic-rr-gw-0                                                      1/1     Running     0          12m
+    ```
+    In the lab installation there is only one DataPower pod.  
+
+  - Verify `web-mgmt` setting on DataPower   
+    Most production installations have three DataPower pods. You could attach to any pod to verify the `apiconnect` domain configurations.  
+
+    `oc attach -it apic-rr-gw-0 -c datapower `   
+
+  - Expost the WebGUI on OCP  
+    - Create a new Route in OCP
+
+           Enter name
+           Select the DataPower service
+           Select port 9090
+           Enable security with SSL pass-through
+           Save the route
+
 
 
 ### Oops *!#^&  
