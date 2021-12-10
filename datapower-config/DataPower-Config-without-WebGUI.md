@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan, Dalwinder Bagdi   
->  &copy; IBM v2.00  2021-12-09   
+>  &copy; IBM v2.10  2021-12-10   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
@@ -590,7 +590,7 @@ This is usually the first tweak to DataPower installations since the dawn of the
 
 #### Extend the DataPower GatewayCluster *Custom Resource*  
 - **API Connect on OCP**
-  - File [361-default-ocp-additionalDomainConfig.yaml](./samples/361-default-ocp-additionalDomainConfig.yaml) contains:
+  - File [361-default-ocp-web-mgmt-addConfig.yaml](./samples/361-default-ocp-web-mgmt-addConfig.yaml) contains:
     ```
     spec:
       gateway:
@@ -609,7 +609,7 @@ This is usually the first tweak to DataPower installations since the dawn of the
     ```
   - Patch APIConnectCluster with `additionalDomainConfig`  
 
-    `oc patch apiconnectcluster apic-rr --type merge --patch-file='361-default-ocp-additionalDomainConfig.yaml'`  
+    `oc patch apiconnectcluster apic-rr --type merge --patch-file='361-default-ocp-web-mgmt-addConfig.yaml'`  
 
   - Determine the name(s) of the DataPower pod(s)  
     From the above we know that `apic-rr` is the prefix for installation.  
@@ -624,18 +624,18 @@ This is usually the first tweak to DataPower installations since the dawn of the
 
     `oc attach -it apic-rr-gw-0 -c datapower `   
 
-  - Expose the WebGUI on OCP  
-    - Openshift console: Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp) 
+  - Expose the WebGUI on OCP  ***Optional***  
+    - Openshift console: Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp)
 
 
 
 ### Oops *!#^&  
-  `additionalDomainConfig` is a singleton within each DataPower domain. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate. Create and process an empty `additionalDomainConfig`.
+  `additionalDomainConfig` is a singleton within each DataPower domain, including `default`. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate. Create and process an empty `additionalDomainConfig`. Sample oops file: [datapower-config/samples/362-oops-default-ocp-additionalDomainConfig.yaml](./datapower-config/samples/362-oops-default-ocp-additionalDomainConfig.yaml)
   ```
   spec:
     gateway:                    <<---- for APIC on OCP
       additionalDomainConfig:
-      - name: "apiconnect"
+      - name: "apiconnect"      <<---- or "default"
   ```
 
   If you wish to retain the existing `additionalDomainConfig` settings, weave them in with the new. Remember, the sequence of ConfigMaps in `dpApp.config` is critical.
