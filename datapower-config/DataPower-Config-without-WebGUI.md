@@ -624,14 +624,8 @@ This is usually the first tweak to DataPower installations since the dawn of the
 
     `oc attach -it apic-rr-gw-0 -c datapower `   
 
-  - Expost the WebGUI on OCP  
-    - Create a new Route in OCP
-
-           Enter name
-           Select the DataPower service
-           Select port 9090
-           Enable security with SSL pass-through
-           Save the route
+  - Expose the WebGUI on OCP  
+    - Openshift console: Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp) 
 
 
 
