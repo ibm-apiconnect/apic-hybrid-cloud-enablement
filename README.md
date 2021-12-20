@@ -2,6 +2,8 @@
 
 
 
-### [DataPower Config without WebGUI](./datapower-config/DataPower-Config-without-WebGUI.md)  
+### [DataPower Config without WebGUI](./datapower-config/README.md) - How To   
 
-You can apply DataPower domain configurations to all pods in the domain. We highlight two use cases and the steps to push configurations to a DataPower domain. For other scenarios, you can use the section ***Develop DataPower config on your desktop*** to create custom configurations. 
+### [Hybrid Gateways](./hybrid-gwy/README.md) - How To  
+
+### [Governance Models & Version Control for API Products](./governance/README.md) - Guidelines  
