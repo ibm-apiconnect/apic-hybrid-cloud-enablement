@@ -6,4 +6,6 @@
 
 ### [Hybrid Gateways](./hybrid-gwy/README.md) - How To  
 
-### [Governance Models & Version Control for API Products](./governance/README.md) - Guidelines  
+### [Publish API Product Version to a Consumer Organization](./dev-ops/README.md) - DevOps  
+
+### [Governance Models & Version Control for API Products](./governance/README.md) - Guidelines   
