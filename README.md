@@ -2,7 +2,7 @@
 
 
 
-### [DataPower Config without WebGUI](./docs-and-tools/datapower-config/README.md) - How To   
+### [DataPower Config without WebGUI](./docs-and-tools/datapower/README.md) - How To   
 
 ### [Hybrid Gateways](./docs-and-tools/hybrid-gwy/README.md) - How To  
 
