@@ -2,10 +2,10 @@
 
 
 
-### [DataPower Config without WebGUI](./datapower-config/README.md) - How To   
+### [DataPower Config without WebGUI](./docs-and-tools/datapower-config/README.md) - How To   
 
-### [Hybrid Gateways](./hybrid-gwy/README.md) - How To  
+### [Hybrid Gateways](./docs-and-tools/hybrid-gwy/README.md) - How To  
 
-### [Publish API Product Version to a Consumer Organization](./dev-ops/README.md) - DevOps  
+### [Publish API Product Version to a Consumer Organization](./docs-and-tools/dev-ops/README.md) - DevOps  
 
-### [Governance Models & Version Control for API Products](./governance/README.md) - Guidelines   
+### [Governance Models & Version Control for API Products](./docs-and-tools/governance/README.md) - Guidelines   
