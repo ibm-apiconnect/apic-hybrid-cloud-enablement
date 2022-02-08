@@ -1,23 +1,21 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan, Dalwinder Bagdi   
->  &copy; IBM v2.10  2021-12-10   
+>  &copy; IBM v2.20  2022-02-08   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
-- [JWT Key in `apiconnect` domain](#jwt-key-in-apiconnect-domain)  
-  - [JWT Key in DataPower Crypto Key](#jwt-key-in-datapower-crypto-key)  
-  - [JWT Key in Catalog Property](#jwt-key-in-catalog-property)  
-- [TLS Server Profile in `apiconnect` domain](#tls-server-profile-in-apiconnect-domain)  
+- [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain)  
+  [TLS Server Profile in `apiconnect` domain](#tls-server-profile-in-apiconnect-domain)  
 - [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain)
 - [Oops *!#^&](#oops-)
 - [Develop DataPower `config` on your desktop](#develop-datapower-config-on-your-desktop)
 
 ## DataPower Config   
-The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), Redhat Openshift (OCP) or IBM CloudPak (CP4i), we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s and OCP installations.    
+The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), or Redhat Openshift (OCP) in conjunction with API Connect, we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s and OCP installations.    
 
 ### Goals  
-- Empower IBM API Connect clients to configure DataPower k8s/OCP/CP4i as they would DataPower appliances, physical or virtual  
+- Empower IBM API Connect clients to configure DataPower k8s/OCP as they would DataPower appliances, physical or virtual  
 - Provide the flow of operations and commands (CLI) to implement CI/CD  
 - Preserve the evidence with files in source control  
 
@@ -41,10 +39,7 @@ Though the use cases differ in complexity the solutions traverse the same trail.
 
 >***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
 
-## JWT Key in `apiconnect` domain  
-The Crypto Key solution is presented first and, for completeness and contrast, this document includes a solution for JWT Key which uses the APIC Catalog Property.  
-
-### JWT Key in DataPower Crypto Key  
+## JWT DataPower Crypto Key in `apiconnect` domain
 Any API published to the DataPower `apiconnect` domain could use JWT key. The API may belong to different API Connect Catalogs.
 
 > *Pro*: No need to republish API when the Crypto Key is changed.  
@@ -232,23 +227,6 @@ Wait for the gateway pod(s) to restart and attach to any gateway pod.
 - Log out from DataPower (mind the P's & Q's):  
   `exit;exit`  
   `Ctrl-P Ctrl-Q`  
-
-
-### JWT Key in Catalog Property   
-Instead of a DataPower Crypto object, API could share a JWT key as an APIC Catalog Property.  
-
-> *Pro*: The process is simple.  
-> *Contra*: Need to republish API when the shared secret is changed.  
-
-Any API in the catalog could obtain the JWT Key from the Catalog Property.  
-
-- Generate a shared JWT key with a tool of your choice. For example, [mkjwk - JSON Web Key Generator](https://mkjwk.org/).
-
-  ![JWT Shared Key Options](./images/DataPower-no-WebGUI-B-10.jpg)
-
-- Place the key in a file `cat-prop` and create the Catalog property:
-
-  `$ apic properties:create --scope catalog --catalog p1cat-a --server apim.mgmt.dev.apic.xxxxxx.test  --org p1org cat-prop`
 
 
 
@@ -527,7 +505,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
     `exit;exit`  
     `Ctrl-P Ctrl-Q`  
 
-- **API Connect on Openshift / CP4i**  
+- **API Connect on Openshift**  
   - File [262-apiconnect-ocp-additionalDomainConfig.yaml](./samples/262-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
 
     ```
@@ -627,7 +605,9 @@ This is usually the first tweak to DataPower installations since the dawn of the
   - Expose the WebGUI on OCP  ***Optional***  
     - Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp)
 
-
+  - DataPower WebGUI on CP4I ***Optional***  
+    - [How to enable web-mgmt in cp4i?](https://www.ibm.com/support/pages/node/6496879) walks you through steps to enable WebGUI on CP4I.
+    - Use Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp) to expose the WebGUI to a browser.
 
 ### Oops *!#^&  
   `additionalDomainConfig` is a singleton within each DataPower domain, including `default`. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate. Create and process an empty `additionalDomainConfig`. Sample oops file: [362-oops-default-ocp-additionalDomainConfig.yaml](./samples/362-oops-default-ocp-additionalDomainConfig.yaml)
