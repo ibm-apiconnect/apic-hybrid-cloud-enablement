@@ -604,6 +604,9 @@ This is usually the first tweak to DataPower installations since the dawn of the
 
   - Expose the WebGUI on OCP  ***Optional***  
     - Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp)
+    - Command line  
+    `oc create route passthrough <route-name-webgui> --service='<gwy-datapower-service-name>' --hostname='<webgui-name.hostname-of-ocp-cp4i-installation>' --insecure-policy='None' --port='webgui-port'`
+
 
   - DataPower WebGUI on CP4I ***Optional***  
     - [How to enable web-mgmt in cp4i?](https://www.ibm.com/support/pages/node/6496879) walks you through steps to enable WebGUI on CP4I.
