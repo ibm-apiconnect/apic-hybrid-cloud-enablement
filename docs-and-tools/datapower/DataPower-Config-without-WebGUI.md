@@ -1,18 +1,21 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
->  Ravi Ramnarayan, Dalwinder Bagdi   
->  &copy; IBM v2.20  2022-02-08   
+>  Ravi Ramnarayan, Dalwinder Bagdi    
+>  &copy; IBM v2.30  2022-02-09   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
 - [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain)  
-  [TLS Server Profile in `apiconnect` domain](#tls-server-profile-in-apiconnect-domain)  
-- [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain)
+- [TLS Server Profile in `apiconnect` domain](#tls-server-profile-in-apiconnect-domain)  
+- [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain)  
+  - [API Connect on OCP](#api-connect-on-ocp)  
+  - [API Connect on CP4I](#api-connect-on-cp4i)  
+- [DataPower `config` changes to `default` and `apiconnect` domains](#datapower-config-changes-to-default-and-apiconnect-domains)
 - [Oops *!#^&](#oops-)
 - [Develop DataPower `config` on your desktop](#develop-datapower-config-on-your-desktop)
 
 ## DataPower Config   
-The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), or Redhat Openshift (OCP) in conjunction with API Connect, we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s and OCP installations.    
+The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), or Redhat Openshift (OCP) in conjunction with API Connect, we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s, OCP and CP4I installations.    
 
 ### Goals  
 - Empower IBM API Connect clients to configure DataPower k8s/OCP as they would DataPower appliances, physical or virtual  
@@ -30,10 +33,11 @@ The use cases address configurations for the `apiconnect` domain and the system 
 - TLS Server Profile in `apiconnect` domain  
   A less frequent need which is more complex to implement, with or without the WebGUI.  
 - Enable `web-mgmt` in `default` domain  
+- DataPower configurations in `default` and `apiconnect` domains  
 
 Though the use cases differ in complexity the solutions traverse the same trail.
   - Create Secrets and ConfigMaps  
-  - Apply `additionalDomainConfig` to the `apiconnect` or `default` domain   
+  - Apply `additionalDomainConfig` to the target domain   
     The configurations will propagate to all DataPower pods which support the `apiconnect` domain or all pods for the `default` domain
   - Verify DataPower configurations  
 
@@ -125,7 +129,7 @@ Any API published to the DataPower `apiconnect` domain could use JWT key. The AP
   ```  
 
 
-#### Extend the DataPower GatewayCluster   
+#### Apply `additionalDomainConfig`   
 
 >***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
@@ -566,62 +570,134 @@ This is usually the first tweak to DataPower installations since the dawn of the
 - Create a ConfigMap  
   `kubectl create configmap 311-default-web-mgmt-cfg --from-file=./311-default-web-mgmt.cfg -n dev`  
 
-#### Extend the DataPower GatewayCluster *Custom Resource*  
-- **API Connect on OCP**
-  - File [361-default-ocp-additionalDomainConfig.yaml](./samples/361-default-ocp-additionalDomainConfig.yaml) contains:
-    ```
-    spec:
-      gateway:
-        additionalDomainConfig:
-        - name: "default"
-          dpApp:
-            config:
-            - "311-default-web-mgmt-cfg"
-    ```
-  - Determine the name of the APIConnectCluster:
-    ```
-    # oc project dev  
-    # oc get apiconnectcluster  
-    NAME      READY   STATUS   VERSION        RECONCILED VERSION   AGE
-    apic-rr   4/4     Ready    10.0.1.5-eus   10.0.1.5-3440-eus    18h
-    ```
-  - Patch APIConnectCluster with `additionalDomainConfig`  
+### API Connect on OCP  
+- File [361-default-ocp-additionalDomainConfig.yaml](./samples/361-default-ocp-additionalDomainConfig.yaml) contains:
+  ```
+  spec:
+    gateway:
+      additionalDomainConfig:
+      - name: "default"
+        dpApp:
+          config:
+          - "311-default-web-mgmt-cfg"
+  ```
+- Determine the name of the APIConnectCluster:
+  ```
+  # oc project dev  
+  # oc get apiconnectcluster  
+  NAME      READY   STATUS   VERSION        RECONCILED VERSION   AGE
+  apic-rr   4/4     Ready    10.0.1.5-eus   10.0.1.5-3440-eus    18h
+  ```
+- Patch APIConnectCluster with `additionalDomainConfig`  
 
-    `oc patch apiconnectcluster apic-rr --type merge --patch-file='361-default-ocp-additionalDomainConfig.yaml'`  
+  `oc patch apiconnectcluster apic-rr --type merge --patch-file='361-default-ocp-additionalDomainConfig.yaml'`  
 
-  - Determine the name(s) of the DataPower pod(s)  
-    From the above we know that `apic-rr` is the prefix for installation.  
-    ```
-    # oc get pod | grep apic-rr-gw  
-    apic-rr-gw-0                                                      1/1     Running     0          12m
-    ```
-    In the lab installation there is only one DataPower pod.  
+- Determine the name(s) of the DataPower pod(s)  
+  From the above we know that `apic-rr` is the prefix for installation.  
+  ```
+  # oc get pod | grep apic-rr-gw  
+  apic-rr-gw-0                                                      1/1     Running     0          12m
+  ```
+  In the lab installation there is only one DataPower pod.  
 
-  - Verify `web-mgmt` setting on DataPower   
-    Most production installations have three DataPower pods. You could attach to any pod to verify the `apiconnect` domain configurations.  
+- Verify `web-mgmt` setting on DataPower   
+  Most production installations have three DataPower pods. You could attach to any pod to verify the `apiconnect` domain configurations.  
 
-    `oc attach -it apic-rr-gw-0 -c datapower `   
+  `oc attach -it apic-rr-gw-0 -c datapower `   
 
-  - Expose the WebGUI on OCP  ***Optional***  
-    - Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp)
-    - Command line  
-    `oc create route passthrough <route-name-webgui> --service='<gwy-datapower-service-name>' --hostname='<webgui-name.hostname-of-ocp-cp4i-installation>' --insecure-policy='None' --port='webgui-port'`
+- Expose the WebGUI on OCP using an option below  
+  - Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp)
+  - Command line  
+  `oc create route passthrough <route-name-webgui> --service='<gwy-datapower-service-name>' --hostname='<webgui-name>.<ocp-cp4i-installation>' --insecure-policy='None' --port='webgui-port'`
+    - `<route-name-webgui>`: Should be unique within Routes, all lower case.
+    - `--hostname`: `<ocp-cp4i-installation>` is the value common to all defined Routes. `<webgui-name>` should be unique.
+    - `--insecure-policy`: The value `None` is case sensitive. `N` must be upper case.
+    - `--port`: You could use `9090` or `webgui-port` which is defined in the DataPower Service.
 
+### API Connect on CP4I  
+There are a few settings which can be controlled from the CP4I Openshift console. For all other DataPower configurations, you will have to use `additionalDomainConfig`.  
 
-  - DataPower WebGUI on CP4I ***Optional***  
-    - [How to enable web-mgmt in cp4i?](https://www.ibm.com/support/pages/node/6496879) walks you through steps to enable WebGUI on CP4I.
-    - Use Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp) to expose the WebGUI to a browser.
+- API Connect on CP4I offers an option to enable WebGUI in the Openshift console. [How to enable web-mgmt in cp4i?](https://www.ibm.com/support/pages/node/6496879) walks you through steps to enable WebGUI on CP4I. You will need to define a Route using:
+  - Use Step 2 in [Enable DataPower webgui in cp4i and OCP](https://www.ibm.com/support/pages/enable-datapower-webgui-cp4i-and-ocp) to expose the WebGUI to a browser
+  - Or use the command line (above) to expose the WebGUI  
+
+- You could still use `additionalDomainConfig` on CP4I to enable WebGUI as described above for OCP.  
+
+## DataPower `config` changes to `default` and `apiconnect` domains  
+Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain) with [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain).
+- Define the Secrets & ConfigMaps needed for both use cases  
+- Create [411-default-apiconnect-combo-ocp-addlDomainCfg.yaml](./samples/411-default-apiconnect-combo-ocp-addlDomainCfg.yaml) with  
+  ```
+  # Combo default & apiconnect: web-mgmt & mycryptokey
+  spec:
+    gateway:
+      additionalDomainConfig:
+      - name: "default"
+        dpApp:
+          config:
+          - "311-default-web-mgmt-cfg"
+      - name: "apiconnect"
+        certs:
+        - certType: "usrcerts"
+          secret: "mycryptokey"
+        dpApp:
+          config:
+          - "111-apiconnect-mycryptokey-cfg"
+  ```  
+- Process the combined `additionalDomainConfig`
+  `oc patch apiconnectcluster apic-rr --type merge --patch-file='411-default-apiconnect-combo-ocp-addlDomainCfg.yaml'`  
+
+  FYI... The API Connect Cluster CR will reformat the stanza   
+  ```
+  additionalDomainConfig:
+    - dpApp:
+        config:
+          - 311-default-web-mgmt-cfg
+      name: default
+    - certs:
+        - certType: usrcerts
+          secret: mycryptokey
+      dpApp:
+        config:
+          - 111-apiconnect-mycryptokey-cfg
+      name: apiconnect
+  ```
+
 
 ### Oops *!#^&  
-  `additionalDomainConfig` is a singleton within each DataPower domain, including `default`. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate. Create and process an empty `additionalDomainConfig`. Sample oops file: [362-oops-default-ocp-additionalDomainConfig.yaml](./samples/362-oops-default-ocp-additionalDomainConfig.yaml)
+`additionalDomainConfig` is a singleton within each DataPower domain, including `default`. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate.
+- `additionalDomainConfig` for a Single Domain `apiconnect`  
+  Create and process an empty `additionalDomainConfig`. Sample oops file: [362-oops-default-ocp-additionalDomainConfig.yaml](./samples/362-oops-default-ocp-additionalDomainConfig.yaml)
   ```
   spec:
     gateway:                    <<---- for APIC on OCP
       additionalDomainConfig:
-      - name: "apiconnect"      <<---- or "default"
+      - name: "apiconnect"    
+  ```
+- `additionalDomainConfig` for Two Domains `default` & `apiconnect`  
+  Let's assume you wish to remove all settings for `apiconnect` and retain the `web-mgmt` setting for the `default` domain. Create and process file: `[415-default-apiconnect-oops-ocp-addlDomainCfg.yaml](./samples/415-default-apiconnect-oops-ocp-addlDomainCfg.yaml)` with:
+  ```
+  # Keep default web-mgmt & remove apiconnect config
+  spec:
+    gateway:
+      additionalDomainConfig:
+      - name: "default"
+        dpApp:
+          config:
+          - "311-default-web-mgmt-cfg"
+      - name: "apiconnect"
+  ```  
+  FYI ... The API Connect Cluster CR will reformat the stanza   
+  ```
+  additionalDomainConfig:
+    - dpApp:
+        config:
+          - 311-default-web-mgmt-cfg
+      name: default
+    - name: apiconnect
   ```
 
-  If you wish to retain the existing `additionalDomainConfig` settings, weave them in with the new. Remember, the sequence of ConfigMaps in `dpApp.config` is critical.
+- If you wish to retain the existing `additionalDomainConfig` settings, weave them in with the new. Remember, the sequence of ConfigMaps in `dpApp.config` is critical.
 
 
 ## Develop DataPower `config` on your desktop  

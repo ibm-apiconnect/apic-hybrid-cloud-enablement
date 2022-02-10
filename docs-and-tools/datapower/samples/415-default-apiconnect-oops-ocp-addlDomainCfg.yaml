@@ -1,0 +1,23 @@
+# Keep default web-mgmt & remove apiconnect config
+spec:
+  gateway:
+    additionalDomainConfig:
+    - name: "default"
+      dpApp:
+        config:
+        - "311-default-web-mgmt-cfg"
+    - name: "apiconnect"
+
+
+
+
+
+
+
+
+    additionalDomainConfig:
+      - dpApp:
+          config:
+            - 311-default-web-mgmt-cfg
+        name: default
+      - name: apiconnect
