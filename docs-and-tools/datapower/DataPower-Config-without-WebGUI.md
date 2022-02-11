@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan  
->  &copy; IBM v2.32  2022-02-10   
+>  &copy; IBM v2.4  2022-02-11   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
