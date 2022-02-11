@@ -7,17 +7,3 @@ spec:
         config:
         - "311-default-web-mgmt-cfg"
     - name: "apiconnect"
-
-
-
-
-
-
-
-
-    additionalDomainConfig:
-      - dpApp:
-          config:
-            - 311-default-web-mgmt-cfg
-        name: default
-      - name: apiconnect

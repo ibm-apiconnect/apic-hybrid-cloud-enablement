@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
->  Ravi Ramnarayan, Dalwinder Bagdi    
->  &copy; IBM v2.30  2022-02-09   
+>  Ravi Ramnarayan  
+>  &copy; IBM v2.32  2022-02-10   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
@@ -665,17 +665,17 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
 
 
 ### Oops *!#^&  
-`additionalDomainConfig` is a singleton within each DataPower domain, including `default`. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate.
-- `additionalDomainConfig` for a Single Domain `apiconnect`  
-  Create and process an empty `additionalDomainConfig`. Sample oops file: [362-oops-default-ocp-additionalDomainConfig.yaml](./samples/362-oops-default-ocp-additionalDomainConfig.yaml)
+`additionalDomainConfig` is a singleton within each DataPower domain. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate.
+- You have modified a Single Domain `apiconnect` with `additionalDomainConfig`    
+  Create an empty `additionalDomainConfig` as in sample oops file: [362-oops-apiconnect-ocp-additionalDomainConfig.yaml](./samples/362-oops-apiconnect-ocp-additionalDomainConfig.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
   ```
   spec:
     gateway:                    <<---- for APIC on OCP
       additionalDomainConfig:
       - name: "apiconnect"    
   ```
-- `additionalDomainConfig` for Two Domains `default` & `apiconnect`  
-  Let's assume you wish to remove all settings for `apiconnect` and retain the `web-mgmt` setting for the `default` domain. Create and process file: `[415-default-apiconnect-oops-ocp-addlDomainCfg.yaml](./samples/415-default-apiconnect-oops-ocp-addlDomainCfg.yaml)` with:
+- You have modified Two Domains `default` & `apiconnect` with `additionalDomainConfig`   
+  Let's assume you wish to remove all settings for `apiconnect` and retain the `web-mgmt` setting for the `default` domain. Create file similar to [415-oops-default-apiconnect-ocp-addlDomainCfg.yaml](./samples/415-oops-default-apiconnect-ocp-addlDomainCfg.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
   ```
   # Keep default web-mgmt & remove apiconnect config
   spec:

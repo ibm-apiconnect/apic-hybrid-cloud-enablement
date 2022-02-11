@@ -13,19 +13,3 @@ spec:
       dpApp:
         config:
         - "111-apiconnect-mycryptokey-cfg"
-
-
-
-
-    additionalDomainConfig:
-      - dpApp:
-          config:
-            - 311-default-web-mgmt-cfg
-        name: default
-      - certs:
-          - certType: usrcerts
-            secret: mycryptokey
-        dpApp:
-          config:
-            - 111-apiconnect-mycryptokey-cfg
-        name: apiconnect
