@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan  
->  &copy; IBM v2.4  2022-02-11   
+>  &copy; IBM v2.5  2022-03-25   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
@@ -38,7 +38,7 @@ The use cases address configurations for the `apiconnect` domain and the system 
 Though the use cases differ in complexity the solutions traverse the same trail.
   - Create Secrets and ConfigMaps  
   - Apply `additionalDomainConfig` to the target domain   
-    The configurations will propagate to all DataPower pods which support the `apiconnect` domain or all pods for the `default` domain
+    The configurations will propagate to all DataPower pods which support the `apiconnect` domain or all pods for the `default` domain. Reference: [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment).
   - Verify DataPower configurations  
 
 >***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/example-toolkit-scripts/blob/master/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
