@@ -41,7 +41,7 @@ Though the use cases differ in complexity the solutions traverse the same trail.
     The configurations will propagate to all DataPower pods which support the `apiconnect` domain or all pods for the `default` domain. Reference: [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment).
   - Verify DataPower configurations  
 
->***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
+>***Note***: Folder [`samples/dpg-cfg-no-webgui`](./samples/dpg-cfg-no-webgui) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate keys and certificates.  
 
 ## JWT DataPower Crypto Key in `apiconnect` domain
 Any API published to the DataPower `apiconnect` domain could use JWT key. The API may belong to different API Connect Catalogs.
@@ -131,7 +131,7 @@ Any API published to the DataPower `apiconnect` domain could use JWT key. The AP
 
 #### Apply `additionalDomainConfig`   
 
->***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
+>***Note***: Folder [`samples/dpg-cfg-no-webgui`](./samples/dpg-cfg-no-webgui) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
   - **k8s**   
     Apply `additionalDomainConfig` to the GatewayCluster.  
@@ -271,7 +271,7 @@ The finished TLS Server Profile as it would appear in the DataPower WebGUI.
 #### Building blocks: Secrets & ConfigMaps  
 The building blocks are the same for k8s or OCP. Start with Secrets and construct ConfigMaps.  
 
->***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
+>***Note***: Folder [`samples/dpg-cfg-no-webgui`](./samples/dpg-cfg-no-webgui) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
 - **Secrets**  
 You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secret/) and [Managing Secrets using kubectl](https://kubernetes.io/docs/tasks/configmap-secret/managing-secret-using-kubectl/). Far better, use:  
@@ -332,7 +332,7 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
   >***Note***: You can [Develop DataPower `config` on your desktop](#develop-datapower-config-on-your-desktop) and place them in ConfigMaps.  
 
   - API Connect Client Validation Credential  
-    - Create file [210-apiconnect-client-valcred.cfg](./samples/210-apiconnect-client-valcred.cfg) with the content
+    - Create file [210-apiconnect-client-valcred.cfg](./samples/dpg-cfg-no-webgui/210-apiconnect-client-valcred.cfg) with the content
       ```
       crypto
         certificate "my-apic-cert" "cert:///my-apic-cert-bundle.pem"
@@ -361,7 +361,7 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
 
 
   - DataPower TLS Server Profile    
-    - Create certificate and key definition in [221-apiconnect-server-tls.cfg](./samples/221-apiconnect-server-tls.cfg)   
+    - Create certificate and key definition in [221-apiconnect-server-tls.cfg](./samples/dpg-cfg-no-webgui/221-apiconnect-server-tls.cfg)   
       ```  
       crypto
         certificate "dp-apigwy-cert" "cert:///dp-apigwy.crt"
@@ -370,9 +370,9 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
       ```
       >***Note***: You cannot create a sub-directory under `cert:///`. Use naming conventions to associate the private key with the corresponding certificate.  
 
-    - Create the `idcred` definition [222-apiconnect-server-tls.cfg](./samples/222-apiconnect-server-tls.cfg)   
+    - Create the `idcred` definition [222-apiconnect-server-tls.cfg](./samples/dpg-cfg-no-webgui/222-apiconnect-server-tls.cfg)   
 
-    - Create the `ssl-server` definition [223-apiconnect-server-tls.cfg](./samples/223-apiconnect-server-tls.cfg)   
+    - Create the `ssl-server` definition [223-apiconnect-server-tls.cfg](./samples/dpg-cfg-no-webgui/223-apiconnect-server-tls.cfg)   
 
     - Create ConfigMaps  
       **k8s**: `kubectl create configmap 221-apiconnect-server-tls-cfg --from-file=./221-apiconnect-server-tls.cfg -n dev`  
@@ -387,10 +387,10 @@ You may consult [Secrets](https://kubernetes.io/docs/concepts/configuration/secr
 #### Extend the DataPower GatewayCluster *Custom Resource*  
 The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we patch the GatewayCluster with `additionalDomainConfig`. On Openshift we patch the APIConnectCluster's `gateway` section with `additionalDomainConfig`. Primary Reference: [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment)    
 
->***Note***: Folder [`samples`](./samples) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
+>***Note***: Folder [`samples/dpg-cfg-no-webgui`](./samples/dpg-cfg-no-webgui) contains sample config files. [TLS-for-Hybrid-DataPowerGateway](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/hybrid-gwy/TLS-for-Hybrid-DataPowerGateway.md) contains steps to generate certificates and keys.  
 
 - **API Connect on k8s**  
-  - File [252-apiconnect-k8s-additionalDomainConfig.yaml](./samples/252-apiconnect-k8s-additionalDomainConfig.yaml) contains:  
+  - File [252-apiconnect-k8s-additionalDomainConfig.yaml](./samples/dpg-cfg-no-webgui/252-apiconnect-k8s-additionalDomainConfig.yaml) contains:  
 
     ```
     # Add the TLS Server Profile to apiconnect domain
@@ -510,7 +510,7 @@ The implementation for APIC on k8s differs slightly from APIC on OCP. On k8s we 
     `Ctrl-P Ctrl-Q`  
 
 - **API Connect on Openshift**  
-  - File [262-apiconnect-ocp-additionalDomainConfig.yaml](./samples/262-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
+  - File [262-apiconnect-ocp-additionalDomainConfig.yaml](./samples/dpg-cfg-no-webgui/262-apiconnect-ocp-additionalDomainConfig.yaml) contains:  
 
     ```
     spec:
@@ -571,7 +571,7 @@ This is usually the first tweak to DataPower installations since the dawn of the
   `kubectl create configmap 311-default-web-mgmt-cfg --from-file=./311-default-web-mgmt.cfg -n dev`  
 
 ### API Connect on OCP  
-- File [361-default-ocp-additionalDomainConfig.yaml](./samples/361-default-ocp-additionalDomainConfig.yaml) contains:
+- File [361-default-ocp-additionalDomainConfig.yaml](./samples/dpg-cfg-no-webgui/361-default-ocp-additionalDomainConfig.yaml) contains:
   ```
   spec:
     gateway:
@@ -626,7 +626,7 @@ There are a few settings which can be controlled from the CP4I Openshift console
 ## DataPower `config` changes to `default` and `apiconnect` domains  
 Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain) with [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain).
 - Define the Secrets & ConfigMaps needed for both use cases  
-- Create [411-default-apiconnect-combo-ocp-addlDomainCfg.yaml](./samples/411-default-apiconnect-combo-ocp-addlDomainCfg.yaml) with  
+- Create [411-default-apiconnect-combo-ocp-addlDomainCfg.yaml](./samples/dpg-cfg-no-webgui/411-default-apiconnect-combo-ocp-addlDomainCfg.yaml) with  
   ```
   # Combo default & apiconnect: web-mgmt & mycryptokey
   spec:
@@ -667,7 +667,7 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
 ### Oops *!#^&  
 `additionalDomainConfig` is a singleton within each DataPower domain. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate.
 - You have modified a Single Domain `apiconnect` with `additionalDomainConfig`    
-  Create an empty `additionalDomainConfig` as in sample oops file: [362-oops-apiconnect-ocp-additionalDomainConfig.yaml](./samples/362-oops-apiconnect-ocp-additionalDomainConfig.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
+  Create an empty `additionalDomainConfig` as in sample oops file: [362-oops-apiconnect-ocp-additionalDomainConfig.yaml](./samples/dpg-cfg-no-webgui/362-oops-apiconnect-ocp-additionalDomainConfig.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
   ```
   spec:
     gateway:                    <<---- for APIC on OCP
@@ -675,7 +675,7 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
       - name: "apiconnect"    
   ```
 - You have modified Two Domains `default` & `apiconnect` with `additionalDomainConfig`   
-  Let's assume you wish to remove all settings for `apiconnect` and retain the `web-mgmt` setting for the `default` domain. Create file similar to [415-oops-default-apiconnect-ocp-addlDomainCfg.yaml](./samples/415-oops-default-apiconnect-ocp-addlDomainCfg.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
+  Let's assume you wish to remove all settings for `apiconnect` and retain the `web-mgmt` setting for the `default` domain. Create file similar to [415-oops-default-apiconnect-ocp-addlDomainCfg.yaml](./samples/dpg-cfg-no-webgui/415-oops-default-apiconnect-ocp-addlDomainCfg.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
   ```
   # Keep default web-mgmt & remove apiconnect config
   spec:
