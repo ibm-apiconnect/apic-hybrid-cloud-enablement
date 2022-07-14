@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## DataPower Config without WebGUI   
 >  Ravi Ramnarayan  
->  &copy; IBM v2.51  2022-03-29   
+>  &copy; IBM v2.6  2022-07-14   
 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
@@ -702,22 +702,18 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
 
 ## Develop DataPower `config` on your desktop  
 
-The IBM Techcon 2021 session [Re-imagining DataPower in the container world](https://techcon2021.ibm.com/agenda/session/578106) explains steps to develop DataPower assemblies and configurations on your workstation.
+The IBM Techcon 2022 session [Gateways in a container world - best practices](https://bzb.tools.ibm.com/TechCon2022/agenda/session/814332) explains steps to develop DataPower assemblies and configurations on your workstation.  
 
-  >***Note***: You might have to register to access the recording or download slides.  
+> ***Note***: You might have to register to access the recording or download slides.  
 
-Correction to slide #9  
-  ```
-  # start a container with volume mounts
-  docker run -it \
-  -e DATAPOWER_ACCEPT_LICENSE=true \
-  -e DATAPOWER_INTERACTIVE=true \
-  -v $(pwd)/config:/opt/ibm/datapower/drouter/config \
-  -v $(pwd)/local:/opt/ibm/datapower/drouter/local \
-  -v $(pwd)/certs:/opt/ibm/datapower/root/secure/usrcerts \
-  -p 9090:9090 \                    <--- Add this line to expose WebGUI
-  --name dp-dev \
-  icr.io/integration/datapower/datapower-limited:10.0.3.0
-  ```
-
+  Correction to slide #14  
+  `docker run -it -e DATAPOWER_ACCEPT_LICENSE=true \`  
+  `-e DATAPOWER_INTERACTIVE=true \ `  
+  `-v $(pwd)/config:/opt/ibm/datapower/drouter/config \`  
+  `-v $(pwd)/local:/opt/ibm/datapower/drouter/local \`  
+  `-v $(pwd)/certs:/opt/ibm/datapower/root/secure/usrcerts \`  
+  `-p 9090:9090 \                    <--- Add this line to expose WebGUI`  
+  `--name dp-dev \`  
+  `icr.io/integration/datapower/datapower-limited:10.0.4.0`  
+  
 Develop complex configurations like the TLS Sever Profile using the WebGUI and extract the `config` statements from the underlying file system.
