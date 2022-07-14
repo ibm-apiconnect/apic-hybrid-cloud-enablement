@@ -1,0 +1,13 @@
+spec:
+  gateway:
+    additionalDomainConfig:
+    - name: "default"
+      dpApp:
+        config:
+        - "311-default-web-mgmt-cfg"
+    - name: "MQFYRE"
+      dpApp:
+        config:
+        - "mqfyre-config"
+        local:
+        - "mqfyre-local"

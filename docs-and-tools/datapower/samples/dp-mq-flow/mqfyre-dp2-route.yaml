@@ -1,0 +1,12 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mqfyre-dp2
+  namespace: cp4i
+spec:
+  host: mqfyre-dp2-cp4i.apps.angler.cp.fyre.ibm.com
+  to:
+    kind: Service
+    name: mqfyre-gw-datapower
+  port:
+    targetPort: mqfyre
