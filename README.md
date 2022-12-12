@@ -1,7 +1,7 @@
 # IBM API Connect: Hybrid Cloud Enablement    
 
 
-
+- [**High Availability with Two Data Centers**](./docs-and-tools/architecture/README.md) - Architecture  
 - [**DataPower Config without WebGUI**](./docs-and-tools/datapower/README.md) - How To   
 - [**Port DataPower Service to OpenShift**](./docs-and-tools/datapower/README.md) - How To   
 - [**Hybrid Gateways**](./docs-and-tools/hybrid-gwy/README.md) - How To  
