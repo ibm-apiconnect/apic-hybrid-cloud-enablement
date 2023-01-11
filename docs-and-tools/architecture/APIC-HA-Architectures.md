@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## High Availability with Two Data Centers  
 >  Ravi Ramnarayan   
->  &copy; IBM v1.33  2022-12-09   
+>  &copy; IBM v1.5  2023-01-11   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -98,37 +98,29 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
 
 #### Namespace & Operators    
 - Create a namespace, for example, `apigw2`   
+  >***Note***: Follow your naming conventions. `apigw2` is just an example.  
 - Install the *IBM API Connect* operator   
 - Subscribe to the same channel as the parent APIC in DC1    
 
 #### Common Issuers & Gateway Secrets   
-- Seed `ingress-ca ` with a clone from the primary OCP in DC1      
-  [Extracting the Management ingress-ca certificates](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-extracting-management-ingress-ca-certificates). You could extract the `ingress-ca` manually from the parent APIC or use the steps below:  
+Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem) section **Before you begin**.    
+- Clone `ingress-ca ` from the primary OCP in DC1      
+  [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem) section **Before you begin** Step 1. Detailed instructions are in [Extracting the Management ingress-ca certificates](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-extracting-management-ingress-ca-certificates).  
 
-  - Log into OCP of the parent APIC   
-    You should have the *Administrator* role.  
-  - Ensure access to the APIC project   
-    `oc project apic`  
-  - Edit the script [220-get-APICMgmt-Secret.sh](scripts/220-get-APICMgmt-Secret.sh)  
-    Set parameters `APIC_OUTPUT_DIR`, `YQ_TOOL`, `OC`   
-  - Execute the script [220-get-APICMgmt-Secret.sh](scripts/220-get-APICMgmt-Secret.sh)  
-    `$APIC_OUTPUT_DIR/225-ingress-ca.yaml` should contain the desired `ingress-ca` definition.   
-
-
-- Define Common issuers and Gateway secrets   
-  Follow steps in section *Before you begin* of [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem)   
-
-  - Apply the extracted `ingress-ca` to the Project `apigw2`  
-    `oc apply -f $APIC_OUTPUT_DIR/225-ingress-ca.yaml -n apigw2`  
+  - Apply the extracted `ingress-ca` to the DC2 Project `apigw2`  
+    `oc apply -f <your ingress-ca extract.yaml> -n apigw2`  
   - Get the complete name of `ingress-ca`  
     ```
     oc get secret | grep ingress-ca
-    apis-minimum-ingress-ca                     kubernetes.io/tls                   3      16m
-    ```
-  - Create & edit [230-common-issuer-and-gateway-certs.yaml](scripts/230-common-issuer-and-gateway-certs.yaml)  
-    > ***Note***: YAML is from Step 2 in section *Before you begin* of [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem). You **should** update the script with the latest YAML from the IBM document.     
-
-    Ensure that the secret name matches the name above  
+    apis-minimum-ingress-ca                     kubernetes.io/tls                  3      16m
+    ```  
+    >***Note***: The secret name in your installation will be different.  
+  
+- Define Common issuers and Gateway secrets   
+  Obtain YAML from [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem) section **Before you begin** Step 2.
+  
+  - Edit the YAML and set the Issuer `spec.ca.secretName` to value above  
+    See example [230-common-issuer-and-gateway-certs.yaml](scripts/230-common-issuer-and-gateway-certs.yaml) which sets `spec.ca.secretName` to `apis-minimum-ingress-ca`.
     ```
     apiVersion: cert-manager.io/v1
     kind: Issuer
@@ -144,9 +136,9 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
         secretName: apis-minimum-ingress-ca
     ```
 
-  - Apply [230-common-issuer-and-gateway-certs.yaml](scripts/230-common-issuer-and-gateway-certs.yaml) to Project `apigw2` in DC2    
+  - Apply your YAML to Project `apigw2` in DC2    
 
-    `oc apply -f 230-common-issuer-and-gateway-certs.yaml -n apigw2`  
+    `oc apply -f <your-common-issuer-and-gateway-certs.yaml> -n apigw2`  
 
   - Confirm *issuers* were created and ready for use  
     ```
@@ -165,38 +157,45 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
 
 #### Deploy DataPower Gateway in `apigw2`   
 - Create Gateway *admin secret*   
-  - To assign the same value as in `apic`, copy the password from the DC1 OCP web console or run [240-clone-apic-gw-admin-secret.sh](scripts/240-clone-apic-gw-admin-secret.sh) to extract the current password. Create the secret in DC2 `apigw2`:  
-
-    `oc -n apigw2 create secret generic $GW_ADMIN_SECRET_NAME --from-literal=password=$GW_ADMIN_PSWD`  
-  - You could assign a password which is different from the value in the parent APIC  
+  You could use the same password as in the DC1 OCP or assign a different value. Create the secret in DC2 `apigw2`:  
+  ```
+  oc -n apigw2 create secret generic <gw_admin_secret_name> \
+    --from-literal=password=<gw_admin_pswd>  
+  ```
 
 - Define the APIGW Gateway    
-  Edit [250-apigateway_cr.yaml](scripts/250-apigateway_cr.yaml) with values pertinent to your installation.  
-  > ***Note***: The YAML is from Step 2 in section *Procedure* of [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem). You **should** update the script with the latest YAML from the IBM document.        
+  Copy the YAML from [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem) section **Procedure** Step 2. Use values appropriate to your installation. Recommend following naming conventions in DC1.    
+  - **$** fields  
+  - `metadata.name`  
+  - `metadata.labels.app.kubernetes.io/name`  
+  - `spec.adminUser.secretName` should be `<gw_admin_secret_name>`, which you created in the previous step    
+  
+  See **Example Values** in [250-apigateway_cr.yaml](scripts/250-apigateway_cr.yaml).  
+  
+    >***Note***:  Example values are NOT shell script substitutions. You should edit the file manually.  
 
-  `oc apply -f 250-apigateway_cr.yaml -n apigw2`  
+  oc apply -f <your-apigateway_cr.yaml> -n apigw2`  
 
-  Hold your breath. For about five minutes.  
+  It takes about five minutes to create the GatewayCluster.     
 
 - Is the gateway running?    
   `oc get GatewayCluster -n apigw2`  
 
 - Is the Gateway Management endpoint active?  
-  `curl -k https://<-gateway-manager->/health`  
+  `curl -k https://<spec.gatewayManagerEndpoint.hosts.name>/health`  
   should return:  
   `{"status":"ok"}`  
 
 - Register DC2 Gateway Service in the parent DC1 APIC  
-  - Management endpoint on the gateway service  
-    Location URL for Route *gwv6-gateway-manager* in project `apigw2`.  
-  - API invocation endpoint  
-    Location URL for Route *gwv6-gateway* in project `apigw2`.  
+  Obtain URL for endpoints from OCP Routes in project `apigw2`.
 
 #### Deploy Analytics in `apigw2`   
 Deploy the Analytics subsystem in DC2 within the same namespace as the DataPower Gateway. The steps in [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) are similar to [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem).   
 
-- Skip the steps in *Before you begin* -- been there, done that for DPG (above)  
-- Obtain YAML from Step 1 in section *Procedure* of [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem).   
+- Common Issuers  
+  Nothing to do. Been there, done that in [Common Issuers & Gateway Secrets](#common-issuers--gateway-secrets). Skip over [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) section **Before you begin**.    
+
+- Obtain YAML from [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) section **Procedure**  Step 1.   
 
 - Ensure `clientSubjectDN` in DC2 Analytics matches the  **Subject common name** of DC1 APIC CMC *Analytics ingestion keystore*.
   - In APIC 10.0.5.1, the *Analytics ingestion keystore* **Subject common name** is `a7s-ing-client`      
@@ -204,8 +203,7 @@ Deploy the Analytics subsystem in DC2 within the same namespace as the DataPower
     The sample file [280-analytics_cr.yaml](scripts/280-analytics_cr.yaml)  contains the correction.  
 
 - Create the Analytics subsystem in DC2  
-
-  `oc apply -f 280-analytics_cr.yaml -n apigw2`  
+  `oc apply -f <your-analytics_cr.yaml> -n apigw2`  
 
 - Is the Analytics subsystem running?    
 `oc get AnalyticsCluster -n apigw2`  

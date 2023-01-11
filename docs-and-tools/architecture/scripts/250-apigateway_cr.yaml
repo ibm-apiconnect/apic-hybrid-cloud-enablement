@@ -1,14 +1,15 @@
-#
-# $APP_PRODUCT_VERSION="10.0.5.1"
-# $PROFILE="n1xc1.m8"
-# $rgw="api-apigw2"
-# $rgwd="gw-mgr-apigw2"
-# $STACK_HOST="apps.audio.cp.myco.com"
-# $LICENSE_ACCEPTANCE="true"
-# $LICENSE_USE="nonproduction"
-# $LICENSE_ID="L-RJON-CEBLEH"   -- same as APIC
-# $STORAGE_CLASS="rook-ceph-block"
-# $ADMIN_SECRET="apis-minimum-gw-admin"
+# *** BEGIN *** Example values ***
+# APP_PRODUCT_VERSION="10.0.5.1"
+# PROFILE="n1xc1.m8"
+# rgw="api-apigw2"
+# rgwd="gw-mgr-apigw2"
+# STACK_HOST="apps.audio.cp.myco.com"
+# LICENSE_ACCEPTANCE="true"
+# LICENSE_USE="nonproduction"
+# LICENSE_ID="L-RJON-CEBLEH"   -- same as APIC
+# STORAGE_CLASS="rook-ceph-block"
+# ADMIN_SECRET="apis-minimum-gw-admin"
+# ***  END  *** Example values ***
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
