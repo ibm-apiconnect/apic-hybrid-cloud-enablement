@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## High Availability with Two Data Centers  
 >  Ravi Ramnarayan   
->  &copy; IBM v1.5  2023-01-11   
+>  &copy; IBM v1.52  2023-01-12   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -99,8 +99,8 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
 #### Namespace & Operators    
 - Create a namespace, for example, `apigw2`   
   >***Note***: Follow your naming conventions. `apigw2` is just an example.  
-- Install the *IBM API Connect* operator   
-- Subscribe to the same channel as the parent APIC in DC1    
+- Install the *IBM API Connect* operator in `apigw2`     
+  - Subscribe to the same channel as the parent APIC in DC1    
 
 #### Common Issuers & Gateway Secrets   
 Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem) section **Before you begin**.    
