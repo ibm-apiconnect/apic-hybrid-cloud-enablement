@@ -1,7 +1,7 @@
 # IBM API Connect  
 > ## High Availability with Two Data Centers  
 >  Ravi Ramnarayan   
->  &copy; IBM v1.52  2023-01-12   
+>  &copy; IBM v1.55  2023-01-13   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -89,8 +89,8 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
 ### DataPower + Analytics in DC2  
 [Installing with subsystem CRs in different namespaces or environments](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-subsystem-crs-in-different-namespaces-environments) provides the overview. We will install DataPower and Analytics subsystems in DC2.    
 - OCP in DC2 needs preparations such as `pull-secret` and the IBM Operator Catalog source.
-- Install the API Connect, DataPower and Common Services operators in `apigw2` namespace in DC2     
-  This is the same set of operators used to install APIC in DC1.  
+- Install the IBM API Connect operator in `apigw2` namespace in DC2     
+  This is the same operator used to install APIC in DC1.  
 - The versions of the operators in DC1 & DC2 must be the same      
 - Make sure the DC2 cluster has the same certificates as APIC in DC1    
   See [Common Issuers & Gateway Secrets](#common-issuers--gateway-secrets).  
@@ -166,8 +166,8 @@ Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/a
 - Define the APIGW Gateway    
   Copy the YAML from [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem) section **Procedure** Step 2. Use values appropriate to your installation. Recommend following naming conventions in DC1.    
   - **$** fields  
-  - `metadata.name`  
-  - `metadata.labels.app.kubernetes.io/name`  
+  - `metadata.name` (optional, default value is okay)  
+  - `metadata.labels.app.kubernetes.io/name` (optional, default value is okay) 
   - `spec.adminUser.secretName` should be `<gw_admin_secret_name>`, which you created in the previous step    
   
   See **Example Values** in [250-apigateway_cr.yaml](scripts/250-apigateway_cr.yaml).  
