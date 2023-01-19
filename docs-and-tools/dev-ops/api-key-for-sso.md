@@ -49,7 +49,7 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
     pipelines-company.com-from-azure-oidc-of-type-standard    [state: enabled]   https://platform.lab.ibm.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52
     ```
  
->> The output shows the definition for user ```pipelines@company.com``` enabled in  a Standard type OIDC configuration named ```azure-oidc```.
+    The output shows the definition for user ```pipelines@company.com``` enabled in  a Standard type OIDC configuration named ```azure-oidc```.
 
 3.	Create a JSON file (we will name it my-key-definition.json) to define metadata for your new API key. For example:
     ```json
