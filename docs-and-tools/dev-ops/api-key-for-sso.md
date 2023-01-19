@@ -11,18 +11,19 @@ However, when authentication is performed via an external provider, such as OIDC
 Here is an example that uses Azure AD as the OIDC provider:
 
 ```
-apic login -s apim.lab.ibm.com \
+apic login -s apim.lab.company.com \
 -u pipelines@company.com \ 
 -r provider/azure-oidc --context provider \
 --sso login.microsoftonline.com
 
-Please copy and paste the url https://apim.lab.ibm.com/manager/auth/manager/sign-in/?from=TOOLKIT to a browser to start the authentication process.
+Please copy and paste the url https://apim.lab.company.com/manager/auth/manager/sign-in/?from=TOOLKIT 
+to a browser to start the authentication process.
 Do you want to open the url in default browser? [y/n]: y
 API Key?
 ```
 For purposes of CICD, this is not practical to automate due to the required human interaction. 
 
-We provide a workaround.
+We provide a solution.
 
 ## Solution:
 Use the CLI command ```apic api-key:create``` to create a custom key with a custom TTL and other properties.
@@ -35,18 +36,18 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
 1. Obtain the “user URL” for the userID that will be associated with this API key
     * Logon to APIM (provider realm) as org owner
     ```
-    apic login -s apim.lab.ibm.com -u org-owner@company.com -r provider/idp-default-2
+    apic login -s apim.lab.company.com -u org-owner@company.com -r provider/idp-default-2
     Enter your API Connect credentials
     Password?
-    Logged into apim.lab.ibm.com successfully
+    Logged into apim.lab.company.com successfully
     ```
  
 
 2. List org members using ```apic members:list```
     ```
-    apic members:list -s apim.lab.ibm.com --scope catalog -c sandbox -o my-org
+    apic members:list -s apim.lab.company.com --scope catalog -c sandbox -o my-org
 
-    pipelines-company.com-from-azure-oidc-of-type-standard    [state: enabled]   https://platform.lab.ibm.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52
+    pipelines-company.com-from-azure-oidc-of-type-standard    [state: enabled]   https://platform.lab.company.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52
     ```
  
     The output shows the definition for user ```pipelines@company.com``` enabled in  a Standard type OIDC configuration named ```azure-oidc```.
@@ -61,7 +62,7 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
     "summary": "Use this key for SSO login.",
     "client_type": "toolkit",
     "realm": "provider",
-    "user_url": "https://platform.lab.ibm.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52",
+    "user_url": "https://platform.lab.company.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52",
     "description": "API Key for CI/CD operations",
     "ttl": 62294394
     }
@@ -71,25 +72,25 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
 
 4.	Create the API key using the ```api-keys:create``` command, passing the file created in Step 3.
     ```
-    apic api-keys:create -s apim.lab.ibm.com my-key-definition.json
+    apic api-keys:create -s apim.lab.company.com my-key-definition.json
 
-    PipelineKey   https://platform.lab.ibm.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
+    PipelineKey   https://platform.lab.company.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
     ```
 
 5.	Verify the API key was created  
     * List API keys
     ```
-    apic api-keys:list -s apim.lab.ibm.com
+    apic api-keys:list -s apim.lab.company.com
 
-    PipelineKey   https://platform.lab.ibm.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
+    PipelineKey   https://platform.lab.company.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
     ```
  
 
     * Retrieve the API key you just created:
     ```
-    apic api-keys get KasovoniKey-3 -s apim.lab.ibm.com --format json
+    apic api-keys get KasovoniKey-3 -s apim.lab.company.com --format json
 
-    PipelineKey   PipelineKey.json   https://platform.lab.ibm.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
+    PipelineKey   PipelineKey.json   https://platform.lab.company.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
     ```
     A json file named after the name of your new API key (in this example, PipelineKey), is dumped into you current directory:
 
@@ -105,7 +106,7 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
         "summary": "Use this key for SSO login.",
         "client_type": "toolkit",
         "realm": "provider/azure-oidc",
-        "user_url": "https://platform.lab.ibm.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52",
+        "user_url": "https://platform.lab.company.com/api/catalogs/84bce7eb-354e-49c9-8d6b-48e82ac45084/e0843be8-0beb-43d5-b304-e55861e45f2c/members/4c0764a9-a4d8-4926-9759-1d3d02334c52",
         "id_token": "eyJhbGciOiJSUzI1Ni...bT4IX7w",
         "token_exp": 1674104837,
         "token_iat": 1674076037,
@@ -114,7 +115,7 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
         "description": "API Key for CI/CD operations",
         "created_at": "2023-01-18T21:35:19.000Z",
         "updated_at": "2023-01-18T21:35:19.000Z",
-        "url": "https://platform.lab.ibm.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948"
+        "url": "https://platform.lab.company.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948"
     }
     ```
  
@@ -125,14 +126,14 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
 
 7.	Test the new API key
     ```
-    apic login -s apim.lab.ibm.com \
+    apic login -s apim.lab.company.com \
     -u pipelines@company.com \
     -r provider/azure-oidc \
     --context provider \
     --sso login.microsoftonline.com \
     --apiKey 14f27ecd-919a-41f5-a4f1-2a6012cb471c
 
-    Logged into apim.lab.ibm.com successfully
+    Logged into apim.lab.company.com successfully
     ```
 
 We have successfully logged into APIM and can now proceed with CI/CD operations.
