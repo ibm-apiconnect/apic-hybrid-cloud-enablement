@@ -48,8 +48,8 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
  
 >> The output shows the definition for user ```pipelines@company.com``` enabled in  a Standard type OIDC configuration named ```azure-oidc```.
 
-3.	Create a JSON file to define API key metadata. For example:
-    ```
+3.	Create a JSON file (we will name it my-key-definition.json) to define metadata for your new API key. For example:
+    ```json
     {
     "type": "api_key",
     "api_version": "2.0.0",
@@ -91,8 +91,8 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
     A json file named after the name of your new API key (in this example, PipelineKey), is dumped into you current directory:
 
 
-    * Review the contents of the json file:
-    ```
+6. Review the contents of the json file:
+    ```json
     {
         "type": "api_key",
         "api_version": "2.0.0",
@@ -107,19 +107,18 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
         "token_exp": 1674104837,
         "token_iat": 1674076037,
         "token_jti": "c73472c2-8c93-4fb6-bc8e-9b6a88775dfd",
-        "api_key": "14f27ecd-919a-41f5-a4f1-2a6012cb471c",
+        **_"api_key"_**: "14f27ecd-919a-41f5-a4f1-2a6012cb471c",
         "description": "API Key for CI/CD operations",
         "created_at": "2023-01-18T21:35:19.000Z",
         "updated_at": "2023-01-18T21:35:19.000Z",
         "url": "https://platform.lab.ibm.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948"
     }
     ```
-
-
-
-6.	View the contents of the newly-created API key retrieved in Step 4.
  
-    Your API key is highlighted above .
+    Your API key is the 5th property from the bottom:
+    ```
+    "api_key": "14f27ecd-919a-41f5-a4f1-2a6012cb471c"
+    ``` 
 
 7.	Test the new API key
  
