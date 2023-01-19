@@ -143,6 +143,7 @@ You are now able to automate CI/CD operations using a pre-defined API key.
 ### References
 - CLI Tool Reference - https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=reference-apic-api-keys
 - Configuring an OIDC user registry - https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=overview-configuring-oidc-user-registry
+- API Connect Platform REST APIs - https://apic-api.apiconnect.ibmcloud.com/v10/#/documentation/introduction
 
 
 
