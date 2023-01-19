@@ -127,10 +127,10 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
     Logged into apim.lab.ibm.com successfully
     ```
 
-We have successfully logged into APIM and can now proceed with CICD operations.
+We have successfully logged into APIM and can now proceed with CI/CD operations.
 
 ## Conclusion
-You are now able to automate CICD operations using a pre-defined API key.
+You are now able to automate CI/CD operations using a pre-defined API key.
 
 
 
