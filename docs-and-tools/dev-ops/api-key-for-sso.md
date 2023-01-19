@@ -115,18 +115,22 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
     }
     ```
  
-    Your API key is the 5th property from the bottom:
+    Your new API key, ready for use, is highlighted above.
     ```
     "api_key": "14f27ecd-919a-41f5-a4f1-2a6012cb471c"
     ``` 
 
 7.	Test the new API key
- 
+    ```
+    apic login -s apim.lab.ibm.com -u pipelines@company.com -r provider/azure-oidc --context provider --sso login.microsoftonline.com --apiKey 14f27ecd-919a-41f5-a4f1-2a6012cb471c
+
+    Logged into apim.lab.ibm.com successfully
+    ```
 
 We have successfully logged into APIM and can now proceed with CICD operations.
 
 ## Conclusion
-You are now able to automate Jenkins CICD operations using a pre-defined API key.
+You are now able to automate CICD operations using a pre-defined API key.
 
 
 
