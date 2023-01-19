@@ -4,10 +4,25 @@
 >  &copy; IBM v1.0  2023-01-18  
 
 ## Problem: 
-The conventional method of CLI login with SSO provides a URL for API key retrieval and requires the user to open a browser to retrieve it. For purposes of CICD, this is not practical to automate due to the required human interaction. We provide a workaround.
+It is common for APIC deployments to leverage existing enterprise Continuous Integration/Continuous Deployment (CI/CD) practices to automate code delivery. Typically, a pipeline is configured to log onto API Manager and execute a series of CLI commands.
+
+However, when authentication is performed via an external provider, such as OIDC with Single Sing-On (SSO), the default CLI behavior requires the user to login via a browser in order to retrieve the required API key. 
+
+For example:
+
+```
+apic login -s apic.lab.ibm.com -u pipelines@apic-cli.com -r provider/azure-oidc --context provider --sso login.microsoftonline.com
+
+Please copy and paste the url https://apic.lab.ibm.com/manager/auth/manager/sign-in/?from=TOOLKIT to a browser to start the authentication process.
+Do you want to open the url in default browser? [y/n]: y
+API Key?
+```
+For purposes of CICD, this is not practical to automate due to the required human interaction. 
+
+We provide a workaround.
 
 ## Solution:
-Use the CLI API apic api-key:create to create a custom key with a custom TTL and other properties.
+Use the CLI command ```apic api-key:create``` to create a custom key with a custom TTL and other properties.
 
 ### Requirements:
 -	An input file describing the API key metadata
@@ -18,7 +33,7 @@ Use the CLI API apic api-key:create to create a custom key with a custom TTL and
     * Logon to APIM (provider realm) as org owner
  
 
-    * List org members – apic members:list
+    * List org members using ```apic members:list```
  
  
 
@@ -26,10 +41,10 @@ Use the CLI API apic api-key:create to create a custom key with a custom TTL and
  
 
     NOTE: The value for user_url is derived from Step 1(b). 
-3.	Create the API key using api-keys:create API
+3.	Create the API key using ```api-keys:create``` API
  
 
-4.	Verify by listing available API keys using api-keys:list
+4.	Verify by listing available API keys using ```api-keys:list```
  
 
     * Retrieve the API key you just created:
