@@ -11,7 +11,10 @@ However, when authentication is performed via an external provider, such as OIDC
 Here is an example that uses Azure AD as the OIDC provider:
 
 ```
-apic login -s apim.lab.ibm.com -u pipelines@company.com -r provider/azure-oidc --context provider --sso login.microsoftonline.com
+apic login -s apim.lab.ibm.com \
+-u pipelines@company.com \ 
+-r provider/azure-oidc --context provider \
+--sso login.microsoftonline.com
 
 Please copy and paste the url https://apim.lab.ibm.com/manager/auth/manager/sign-in/?from=TOOLKIT to a browser to start the authentication process.
 Do you want to open the url in default browser? [y/n]: y
@@ -122,7 +125,12 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
 
 7.	Test the new API key
     ```
-    apic login -s apim.lab.ibm.com -u pipelines@company.com -r provider/azure-oidc --context provider --sso login.microsoftonline.com --apiKey 14f27ecd-919a-41f5-a4f1-2a6012cb471c
+    apic login -s apim.lab.ibm.com \
+    -u pipelines@company.com \
+    -r provider/azure-oidc \
+    --context provider \
+    --sso login.microsoftonline.com \
+    --apiKey 14f27ecd-919a-41f5-a4f1-2a6012cb471c
 
     Logged into apim.lab.ibm.com successfully
     ```
