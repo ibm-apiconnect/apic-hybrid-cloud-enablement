@@ -34,14 +34,19 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
 
 ## Procedure
 1. Obtain the “user URL” for the userID that will be associated with this API key
-    * Logon to APIM (provider realm) as org owner
+    * Logon to APIM (provider realm) as using your OIDC user ID
     ```
-    apic login -s apim.lab.company.com -u org-owner@company.com -r provider/idp-default-2
-    Enter your API Connect credentials
-    Password?
-    Logged into apim.lab.company.com successfully
+    apic login -s apim.lab.company.com \
+    -u pipelines@company.com \ 
+    -r provider/azure-oidc --context provider \
+    --sso login.microsoftonline.com
+
+    Please copy and paste the url https://apim.lab.company.com/manager/auth/manager/sign-in/?from=TOOLKIT 
+    to a browser to start the authentication process.
+    Do you want to open the url in default browser? [y/n]: y
+    API Key? <<paste your API key copied from the browser>>
     ```
- 
+ NOTE: this is the only time you will have to interact with the browser.
 
 2. List org members using ```apic members:list```
     ```
@@ -52,7 +57,9 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
  
     The output shows the definition for user ```pipelines@company.com``` enabled in  a Standard type OIDC configuration named ```azure-oidc```.
 
-3.	Create a JSON file (we will name it my-key-definition.json) to define metadata for your new API key. For example:
+    Copy the URL from the output - you will need it in the next step.
+
+3.	Create a JSON file (we will name it my-key-definition.json) to define metadata for your new API key. Paste in the URL from Step 2 into the ```user_url`` property. Here is a sample API key creation file:
     ```json
     {
         "type": "api_key",
@@ -92,7 +99,9 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
 
     PipelineKey   PipelineKey.json   https://platform.lab.company.com/api/cloud/api-keys/b6882e4a-4b8e-43b0-963f-0478b79c7948
     ```
-    A json file named after the name of your new API key (in this example, PipelineKey), is dumped into you current directory:
+    A json file named after the name of your new API key (in this example, PipelineKey), is dumped into you current directory.
+
+    THis file represents your API key definition in API Manager.
 
 
 6. Review the contents of the json file:
