@@ -46,7 +46,7 @@ Use the CLI command ```apic api-key:create``` to create a custom key with a cust
     Do you want to open the url in default browser? [y/n]: y
     API Key? <<paste your API key copied from the browser>>
     ```
- NOTE: this is the only time you will have to interact with the browser.
+    **NOTE: this is the only time you will have to interact with the browser.**
 
 2. List org members using ```apic members:list```
     ```
