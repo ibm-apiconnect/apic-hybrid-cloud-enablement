@@ -1,0 +1,89 @@
+site_name: Event-driven Solution - Saga Orchestration
+site_description: IBM Automation - Event-Driven Solution - Sharing knowledge
+site_author: Sila Kissuu
+site_url: https://ibm-cloud-architecture.github.com/eda-saga-orchestration
+repo_name: ibm-cloud-architecture/refarch-eda
+repo_url: https://github.com/ibm-cloud-architecture/eda-saga-orchestration
+copyright: Copyright © 2022  IBM
+
+docs_dir: docs
+site_dir: public
+edit_uri: edit/main/docs
+
+theme: 
+  name: material
+  logo: images/es-icon.png
+  include_search_page: false
+  search_index_only: true
+  language: en
+  palette:
+    scheme: default
+    primary: 'gray'
+    accent: #f2f2f2
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
+  features:
+      - content.code.annotate
+      - content.tooltips
+      - navigation.instant
+      - navigation.indexes
+      - navigation.tracking
+      - search.highlight
+      - search.share
+      - search.suggest
+      - toc.follow
+      - toc.integrate
+extra_css: ["extra.css"]
+use_directory_urls: true
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ibm-cloud-architecture
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/agileitarchitecture
+plugins:
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
+      
+markdown_extensions:
+  - abbr
+  - attr_list
+  - admonition
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - pymdownx.snippets:
+      base_path: docs-mk/snippets
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  
+nav:
+  - Home: index.md
+  - Saga Design Pattern: https://ibm-cloud-architecture.github.io/refarch-eda/patterns/saga/
