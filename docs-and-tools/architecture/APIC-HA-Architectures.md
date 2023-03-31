@@ -1,13 +1,13 @@
-# IBM API Connect  
-> ## High Availability with Two Data Centers  
+# IBM API Connect: High Availability with Two Data Centers  
+
 >  Ravi Ramnarayan   
->  &copy; IBM v1.55  2023-01-13   
+>  &copy; IBM v1.6  2023-03-31   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
-  - [Two Data Center High Availability (2DCHA)](#1-two-data-center-high-availability-2dcha--ibm-docs)  
-  - [APIC + DataPower in DC1 & DataPower in DC2](#2-apic--datapower-in-dc1--datapower-in-dc2-this-document)
-- Outline steps to implement [APIC + DataPower in DC1 & DataPower in DC2](#implementation-apic--datapower-in-dc1--datapower-in-dc2)    
+  - [Two Data Center Deployment (2DCDR)](#1-two-data-center-deployment-2dcdr)  
+  - [APIC with DataPower HA in DC2](#2-apic-with-datapower-ha-in-dc2)
+- Outline steps to deploy [APIC with DataPower HA in DC2](#deploy-apic-with-datapower-ha-in-dc2)    
 
 ## Prologue  
 The data centers could be *on premises* or vendor sites. Ideally, the data centers should be in different locations with separate lines for power and communication.   
@@ -15,13 +15,13 @@ The data centers could be *on premises* or vendor sites. Ideally, the data cente
 ### Tabled for a later discussion  
 Modern cloud vendors can provide a variation which might be less expensive. APIC subsystems comprise three pods in *Production* deployments. Within a single OCP cluster, each pod could run in different *regions* (vendor nomenclature vary). The subsystems will operate even if one region fails as two active pods provide adequate quorum.  
 
-## APIC Architecture  
-We compare two APIC High Availability architectures using the metrics *Recovery Time Objective (RTO)* and *Recovery Point Objective (RPO)*. Please see [Planning your deployment topology](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=deployment-planning-your-topology).   
+## APIC Deployemnt Architecture  
+We compare two APIC deployment architectures using the metrics *Recovery Time Objective (RTO)* and *Recovery Point Objective (RPO)*. Please see [Planning your deployment topology](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=deployment-planning-your-topology).   
 
 > **Recovery Point Objective (RPO)**  
 >  The RPO measures how far back in time the recovery point is, and therefore how much new data is lost. An **RPO of zero** would assert that no data is lost, but such a solution is often a **compromise against the cost and performance** of the system.
 
-### 1. Two Data Center High Availability (2DCHA)  *IBM Docs*  
+### 1. Two Data Center Deployment (2DCDR) 
 
 ![A7B-APIC-2-DC-HA](images/A7B-APIC-2-DC-HA.jpg)
 
@@ -31,7 +31,7 @@ We compare two APIC High Availability architectures using the metrics *Recovery 
 - RPO for API Products  
   Near zero RPO for published API Products.  
 - RPO for Consumer Subscriptions  
-  Near zero RPO for Consumer Subscriptions. If the business requires near zero RPO, the [Two data center deployment strategy on Kubernetes and OpenShift](https://www.ibm.com/docs/en/SSMNED_10.0.5/com.ibm.apic.install.doc/planning_2dcdr_k8s_ocp.html) is the appropriate choice.  
+  Near zero RPO for Consumer Subscriptions. If the business requires near zero RPO, the [Two data center deployment strategy on Kubernetes and OpenShift](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=deployment-two-data-center-strategy-kubernetes-openshift) is the appropriate choice.  
 - *RTO Failover*   
   If the *active* APIC cluster fails, it is possible to activate APIC on the other cluster in a short period. APIC functions cannot be performed until the completion of *RTO Failover*.   
   - Consumer Organizations cannot initiate new Subscriptions   
@@ -40,40 +40,40 @@ We compare two APIC High Availability architectures using the metrics *Recovery 
 #### Contra  
 - Maintenance  
   Typically, APIC upgrades occur three or four times a year. Each upgrade bears the burden of increased time and effort.       
-  - [Maintaining a two data center deployment](https://www.ibm.com/docs/en/SSMNED_10.0.5/com.ibm.apic.install.doc/capic_2siteha_maintain_k8s.html) is complex  
-  - [Upgrading a two data center deployment](https://www.ibm.com/docs/en/SSMNED_10.0.5/com.ibm.apic.install.doc/capic_2siteha_upgrade_k8s.html) specifies operations on **both** OCP clusters within the **same** change window    
-- *RTO to restore 2DCHA* requires Disaster Recovery (DR)     
-  The goal of DR is to restore 2DCHA, which is different from *RTO Failover*. DR processes need to be aware of the *active* APIC site, adding complexity.       
+  - [Maintaining a two data center deployment](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=connect-maintaining-two-data-center-deployment) is complex  
+  - [Upgrading a two data center deployment](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=connect-upgrading-two-data-center-deployment-kubernetes-openshift) specifies operations on **both** OCP clusters within the **same** change window    
+- *RTO to restore 2DCDR* requires Disaster Recovery (DR)     
+  The goal of DR is to restore 2DCDR, which is different from *RTO Failover*. DR processes need to be aware of the *active* APIC site, adding complexity.       
 - Costs  
   Software license and operational costs might be higher than the other architectures. Please verify specifics for your installations.  
 
-### 2. APIC + DataPower in DC1 & DataPower in DC2 *This Document*   
+### 2. APIC with DataPower HA in DC2  
 
 ![A3E-OCP-APIC-2-DPG-HA](images/A3E-OCP-APIC-2-DPG-HA.jpg)  
 
 #### Pro  
 - High Availability (HA) for API traffic  
-  Same HA level as the 2DCHA architecture.  
+  Same HA level as the 2DCDR architecture.  
 - RPO for API Products  
   It is possible to achieve *near zero* RPO tolerance with a backup soon after publishing products.  
 - Maintenance   
-  - Upgrade of APIC & DPG in DC1 using the *top level* APIConnectCluster Custom Resource (CR) requires less effort than upgrading APIC subsystems of the 2DCHA deployment
+  - Upgrade of APIC & DPG in DC1 using the *top level* APIConnectCluster Custom Resource (CR) requires less effort than upgrading APIC subsystems of the 2DCDR deployment
   - DPG & Analytics subsystems in DC2 can be upgraded in a **separate change window**  
     Starting with APIC v10.0.5.x, all fixpacks (fourth position) of APIC will be compatible with DPG v10.5.0.x. The flexibility allows a relaxed schedule to upgrade DC2.     
 - Disaster Recovery (DR)   
-  The process is less complex than DR for 2DCHA and should to be quicker to complete.   
+  The process is less complex than DR for 2DCDR and should to be quicker to complete.   
 - Costs  
-  Software license and operational costs might be lower than for 2DCHA. Please verify specifics for your installations.  
+  Software license and operational costs might be lower than for 2DCDR. Please verify specifics for your installations.  
 
 #### Contra  
 - RPO for *Consumer Subscriptions* depends on the frequency of backups
-  It is possible to capture backups frequently, but RPO will not be comparable to 2DCHA's *near zero* tolerance for Consumer Subscriptions.    
+  It is possible to capture backups frequently, but RPO will not be comparable to 2DCDR's *near zero* tolerance for Consumer Subscriptions.    
 - RTO depends on DR  
-  The recovery time can be reduced with automation and DR drills. However, it is likely to take longer than the *RTO Failover* enabled by 2DCHA. APIC functions cannot be performed until DR restores normal service.   
+  The recovery time can be reduced with automation and DR drills. However, it is likely to take longer than the *RTO Failover* enabled by 2DCDR. APIC functions cannot be performed until DR restores normal service.   
   - Consumer Organizations cannot initiate new Subscriptions   
   - Provider Organizations cannot publish or update API Products  
 
-## Implementation: APIC + DataPower in DC1 & DataPower in DC2   
+## Deploy APIC with DataPower HA in DC2   
 
 > ***Note***: The steps below assume a *connected* OCP. Adjust as needed for *air-gapped* OCP.     
 
@@ -83,10 +83,10 @@ Use [Installing operators](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?
 Use the appropriate recipe in [Air-gapped installation](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-air-gapped-installation).  
 
 
-### APIC + DataPower in  DC1   
+### Install APIC in DC1   
 Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-api-connect) and follow the trail to [Installing with the top-level CR on OpenShift](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-top-level-cr-openshift).
 
-### DataPower + Analytics in DC2  
+### Install DataPower + Analytics in DC2  
 [Installing with subsystem CRs in different namespaces or environments](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-subsystem-crs-in-different-namespaces-environments) provides the overview. We will install DataPower and Analytics subsystems in DC2.    
 - OCP in DC2 needs preparations such as `pull-secret` and the IBM Operator Catalog source.
 - Install the IBM API Connect operator in `apigw2` namespace in DC2     
@@ -193,9 +193,9 @@ Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/a
 Deploy the Analytics subsystem in DC2 within the same namespace as the DataPower Gateway. The steps in [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) are similar to [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem).   
 
 - Common Issuers  
-  Nothing to do. Been there, done that in [Common Issuers & Gateway Secrets](#common-issuers--gateway-secrets). Skip over [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) section **Before you begin**.    
+  Nothing to do. Been there, done that in [Common Issuers & Gateway Secrets](#common-issuers--gateway-secrets). Skip over section **Before you begin** in [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem).    
 
-- Obtain YAML from [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) section **Procedure**  Step 1.   
+- Obtain YAML from section **Procedure**  Step 1 of [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem).   
 
 - Ensure `clientSubjectDN` in DC2 Analytics matches the  **Subject common name** of DC1 APIC CMC *Analytics ingestion keystore*.
   - In APIC 10.0.5.1, the *Analytics ingestion keystore* **Subject common name** is `a7s-ing-client`      
