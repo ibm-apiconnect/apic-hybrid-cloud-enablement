@@ -1,7 +1,7 @@
 # Port DataPower Services to OpenShift   
 ## IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan, Charlie Sumner    
->  &copy; IBM v1.33  2022-07-14      
+>  &copy; IBM v1.35  2023-04-03      
 
 ## Goals  
 - Demonstrate Proof of Technology (POT) to receive HTTP messages in DataPower and route them to the appropriate MQ queue.  
@@ -52,7 +52,7 @@ Place `MQFYRE.cfg` in `config` and `Route2qByURI.xsl` in `local` directories:
       └── Route2qByURI.xsl
   ```  
 
-### Place MQFYRE configurations in `configMap`  
+### Place domain configurations in `configMap`  
 
 #### `local`  
 The POT example is [Route2qByURI.xsl](./samples/dp-mq-flow/local/Route2qByURI.xsl).  
@@ -168,7 +168,7 @@ Examine the `configMap`. It should have the contents of [MQFYRE.cfg](./samples/d
     uid: 303fea14-e911-4b3c-b1ff-51dbbbc15dc8
   ```  
 
-### Inject MQFYRE into DataPower  
+### Inject domain into DataPower  
 
 
 - Define `additionalDomainConfig` in file [`pot-additionalDomainConfig.yaml`](./samples/dp-mq-flow/pot-additionalDomainConfig.yaml)  
@@ -284,7 +284,8 @@ Until now we have operated under the umbrella of the APIConnectCluster. We tweak
 
 - Verify the Service  
   ```
-  oc get service mqfyre-gw-datapower
+  oc get service mqfyre-gw-datapower  
+  
   NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
   mqfyre-gw-datapower   ClusterIP   172.30.66.221   <none>        8181/TCP   2m50s
   ```
@@ -296,7 +297,7 @@ Create the Route:
   `oc apply -f <path>/mqfyre-dp2-route.yaml`
 
 
-### Validate MQFYRE flow  
+### Validate MQ flow  
 [mq-payload.xml](samples/dp-mq-flow/mq-payload.xml) contains a sample payload.  
 
 `curl --data-binary @mq-payload.xml MQFYRE-Route-Name/queue/{queuename}`
