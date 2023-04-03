@@ -1,5 +1,5 @@
 # API Connect & Hybrid DataPower Gateways   
-## IBM API Connect: Hybrid Gateways  
+## IBM API Connect: Hybrid Integration  
 
 >  Ravi Ramnarayan, Toufiq Adnan   
 >  &copy; IBM v1.7  2023-03-27    
