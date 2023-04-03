@@ -93,7 +93,7 @@
     ```   
 1. The last step once you are done capturing however many sets of data you need; is to disable the tool:   
     - You again can do this by running the commands directly or creating   
-    ```   
+    ``` py    
     admin   
     password   
     top;diag;set-tracing off   

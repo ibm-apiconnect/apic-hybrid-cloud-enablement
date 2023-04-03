@@ -113,7 +113,7 @@ Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/a
     - Get the complete name of `ingress-ca`  
       ```    
       oc get secret | grep ingress-ca    
-      apis-minimum-ingress-ca                     kubernetes.io/tls                  3      16m    
+      apis-minimum-ingress-ca            kubernetes.io/tls         3      16m    
       ```    
     >***Note***: The secret name in your installation will be different.  
   
@@ -153,8 +153,8 @@ Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/a
     - Confirm the creation of *gateway secrets*   
     ```
     oc get secrets -n apigw2 | grep gateway    
-    gateway-peering                             kubernetes.io/tls                  3      24s  
-    gateway-service                             kubernetes.io/tls                  3      24s  
+    gateway-peering                    kubernetes.io/tls         3      24s  
+    gateway-service                    kubernetes.io/tls         3      24s  
     ```   
     >***Note***: "3" in the third column indicates three components in the TLS (good).  
 
@@ -176,10 +176,10 @@ Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/a
   
   See **Example Values** in [250-apigateway_cr.yaml](scripts/250-apigateway_cr.yaml).  
   
-    >***Note***:  Example values are NOT shell script substitutions. You should edit the file manually.  
-
+  >***Note***:  Example values are NOT shell script substitutions. You should edit the file manually.  
+  ```
   oc apply -f <your-apigateway_cr.yaml> -n apigw2`  
-
+  ```
   It takes about five minutes to create the GatewayCluster.     
 
 - Is the gateway running?    
