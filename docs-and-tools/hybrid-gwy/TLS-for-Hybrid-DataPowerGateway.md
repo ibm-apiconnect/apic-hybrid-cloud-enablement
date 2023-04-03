@@ -1,5 +1,6 @@
-# IBM API Connect  
-> ## TLS for IBM API Connect & Hybrid DataPower Gateways  
+# API Connect & Hybrid DataPower Gateways   
+## IBM API Connect: Hybrid Gateways  
+
 >  Ravi Ramnarayan, Toufiq Adnan   
 >  &copy; IBM v1.7  2023-03-27    
 

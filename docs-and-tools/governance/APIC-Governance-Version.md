@@ -1,5 +1,6 @@
-# IBM API Connect
-> ## Governance Models & Version Control for API Products
+# Governance & Version Control for API Products  
+## IBM API Connect: Governance Models    
+
 >  Ravi Ramnarayan  
 >  &copy; IBM v1.5  2021-04-20    
 

@@ -1,4 +1,4 @@
-site_name: My Docs
+site_name: IBM Hybrid Cloud Enablement
 theme:
   name: material
 docs_dir: docs-and-tools

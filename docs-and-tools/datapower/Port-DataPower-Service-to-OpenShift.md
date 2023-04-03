@@ -1,5 +1,5 @@
-# IBM DataPower  
-> ## Port DataPower Services from Legacy Platforms to OpenShift   
+# Port DataPower Services to OpenShift   
+## IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan, Charlie Sumner    
 >  &copy; IBM v1.33  2022-07-14      
 
@@ -33,7 +33,7 @@ MQFYRE domain contains the files we need to migrate the POT solution to OpenShif
 #### Diversion from the DataPower expert track
 > ***Only for DataPower newbies***: [DataPower newbie track](#datapower-newbie-track)  
 
-## Deploy MQFYRE domain objects for DataPower on OpenShift (OCP)  
+## Deploy domain objects to DataPower on OpenShift (OCP)  
 The approach relies on features of `additionalDomainConfig` detailed in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment):   
   - Modify configuration of an existing domain  
   - Create a new domain, if the domain does not exist  
