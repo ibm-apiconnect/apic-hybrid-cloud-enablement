@@ -1,18 +1,20 @@
 # DataPower Config without WebGUI   
 ## IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan  
->  &copy; IBM v2.62  2023-04-03   
+>  &copy; IBM v2.63  2023-04-04  
 
+<!-- 
 ## Table of Contents  
 - [DataPower Config](#datapower-config)  
 - [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain)  
 - [TLS Server Profile in `apiconnect` domain](#tls-server-profile-in-apiconnect-domain)  
 - [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain)  
-  - [API Connect on OCP](#api-connect-on-ocp)  
-  - [API Connect on CP4I](#api-connect-on-cp4i)  
+    - [API Connect on OCP](#api-connect-on-ocp)  
+    - [API Connect on CP4I](#api-connect-on-cp4i)  
 - [DataPower `config` changes to `default` and `apiconnect` domains](#datapower-config-changes-to-default-and-apiconnect-domains)
 - [Oops *!#^&](#oops-)
 - [Develop DataPower `config` on your desktop](#develop-datapower-config-on-your-desktop)
+ -->
 
 ## DataPower Config   
 The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), or Redhat Openshift (OCP) in conjunction with API Connect, we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s, OCP and CP4I installations.    
