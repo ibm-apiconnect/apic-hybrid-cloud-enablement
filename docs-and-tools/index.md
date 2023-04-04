@@ -1,18 +1,12 @@
 ## IBM Hybrid Cloud Integration
-# IBM API Connect / DataPower / CP4I
+# CP4I / IBM API Connect / DataPower  
 
-For full documentation visit [mkdocs.org](https://www.mkdocs.org).
+You can use IBM Integration products independently or in combination. This repository contains short documents which illustrate product features and solutions to real world use cases. 
 
-## Commands
+- [**IBM Cloud Pak for Integration (CP4I)**](https://www.ibm.com/docs/en/cloud-paks/cp-integration)  
+The CP4I family comprises IBM AppConnect, MQ, Event Streams, API Connect, DataPower and Aspera. The current set of document are mainly on IBM API Connect & DataPower.  
+- [**IBM API Connect (APIC)**](https://www.ibm.com/docs/en/api-connect)  
+- [**IBM DataPower Gateway**](https://www.ibm.com/docs/en/datapower-gateway)  
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs -h` - Print help message and exit.
 
-## Project layout
-
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+>  &copy; IBM
