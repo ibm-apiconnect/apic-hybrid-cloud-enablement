@@ -1,7 +1,7 @@
 # DataPower Config without WebGUI   
 #### IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan  
->  &copy; IBM v2.65  2023-04-05  
+>  &copy; IBM v2.66  2023-04-05  
 
 <!-- 
 ## Table of Contents  
@@ -626,7 +626,8 @@ There are a few settings which can be controlled from the CP4I Openshift console
 - You could still use `additionalDomainConfig` on CP4I to enable WebGUI as described above for OCP.  
 
 ## Changes to `default` and `apiconnect` domains  
-Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain) with [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain).
+Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain) with [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain).  
+
 - Define the Secrets & ConfigMaps needed for both use cases  
 - Create [411-default-apiconnect-combo-ocp-addlDomainCfg.yaml](./samples/dpg-cfg-no-webgui/411-default-apiconnect-combo-ocp-addlDomainCfg.yaml) with  
   ```
@@ -646,9 +647,9 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
           config:
           - "111-apiconnect-mycryptokey-cfg"
   ```  
-- Process the combined `additionalDomainConfig`
-  `oc patch apiconnectcluster apic-rr --type merge --patch-file='411-default-apiconnect-combo-ocp-addlDomainCfg.yaml'`  
 
+- Process the combined `additionalDomainConfig`  
+  `oc patch apiconnectcluster apic-rr --type merge --patch-file='411-default-apiconnect-combo-ocp-addlDomainCfg.yaml'`  
   FYI... The API Connect Cluster CR will reformat the stanza   
   ```
   additionalDomainConfig:
@@ -667,7 +668,8 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
 
 
 ### Oops *!#^&  
-`additionalDomainConfig` is a singleton within each DataPower domain. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate.
+`additionalDomainConfig` is a singleton within each DataPower domain. Every time you process an `additionalDomainConfig`, you will overwrite the previous. The moving finger having writ, cleans the slate.   
+
 - You have modified a Single Domain `apiconnect` with `additionalDomainConfig`    
   Create an empty `additionalDomainConfig` as in sample oops file: [362-oops-apiconnect-ocp-additionalDomainConfig.yaml](./samples/dpg-cfg-no-webgui/362-oops-apiconnect-ocp-additionalDomainConfig.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
   ```
@@ -675,7 +677,8 @@ Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-c
     gateway:                    <<---- for APIC on OCP
       additionalDomainConfig:
       - name: "apiconnect"    
-  ```
+  ```  
+
 - You have modified Two Domains `default` & `apiconnect` with `additionalDomainConfig`   
   Let's assume you wish to remove all settings for `apiconnect` and retain the `web-mgmt` setting for the `default` domain. Create file similar to [415-oops-default-apiconnect-ocp-addlDomainCfg.yaml](./samples/dpg-cfg-no-webgui/415-oops-default-apiconnect-ocp-addlDomainCfg.yaml). Process `oc patch` APIConnectCluster CR on OCP.  
   ```
