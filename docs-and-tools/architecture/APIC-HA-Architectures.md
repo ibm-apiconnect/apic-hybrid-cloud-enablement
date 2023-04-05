@@ -2,7 +2,7 @@
 #### IBM API Connect: Architecture  
 
 >  Ravi Ramnarayan   
->  &copy; IBM v1.65  2023-04-03   
+>  &copy; IBM v1.66  2023-04-05   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -67,7 +67,7 @@ We compare two APIC deployment architectures using the metrics *Recovery Time Ob
   Software license and operational costs might be lower than for 2DCDR. Please verify specifics for your installations.  
 
 #### Contra  
-- RPO for *Consumer Subscriptions* depends on the frequency of backups
+- RPO for *Consumer Subscriptions* depends on the frequency of backups  
   It is possible to capture backups frequently, but RPO will not be comparable to 2DCDR's *near zero* tolerance for Consumer Subscriptions.    
 - RTO depends on DR  
   The recovery time can be reduced with automation and DR drills. However, it is likely to take longer than the *RTO Failover* enabled by 2DCDR. APIC functions cannot be performed until DR restores normal service.   
