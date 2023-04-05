@@ -1,5 +1,5 @@
 # DataPower Log Target without WebGUI - Example    
-## IBM DataPower: Migrate to Cloud  
+#### IBM DataPower: Migrate to Cloud  
 > Ravi Ramnarayan  
 >  &copy; IBM v1.22  2022-04-03  
 

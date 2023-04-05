@@ -1,5 +1,5 @@
 # DataPower Config without WebGUI   
-## IBM DataPower: Migrate to Cloud  
+#### IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan  
 >  &copy; IBM v2.63  2023-04-04  
 
@@ -19,7 +19,7 @@
 ## DataPower Config   
 The DataPower WebGUI makes it easy to customize domain configurations. When DataPower runs on Kubernetes (k8s), or Redhat Openshift (OCP) in conjunction with API Connect, we can create and manage configurations through k8s or OCP commands. This document posits use cases and details implementation steps for DataPower running on k8s/OCP. While Crypto objects kick started this document, other DataPower configurations can be controlled with the same approach. The document highlights the differences in implementation steps for k8s, OCP and CP4I installations.    
 
-### Goals  
+## Goals  
 - Empower IBM API Connect clients to configure DataPower k8s/OCP as they would DataPower appliances, physical or virtual  
 - Provide the flow of operations and commands (CLI) to implement CI/CD  
 - Preserve the evidence with files in source control  

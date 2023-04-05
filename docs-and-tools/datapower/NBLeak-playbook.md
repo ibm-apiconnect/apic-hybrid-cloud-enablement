@@ -1,10 +1,10 @@
 # NB Leak playbook  
-## IBM DataPower: Migrate to Cloud  
+#### IBM DataPower: Migrate to Cloud  
 
 > Author: Derek Ross   
 
    
-### Guide for NBLeak in K8's:   
+## Guide for NBLeak in K8's:   
 
 - NBLeak is a monitoring tool that tracks allocations during the runtime and saves that information into a buffer.   
 - It only records that information after it has been enabled and that information requires a command to dump the information from that buffer into a file.   
@@ -16,7 +16,7 @@
 - Last thing I will add here is that you ABSOLUTELY want to make sure you grab those files off of the temporary filesystem before you reload or before the pod terminates itself (for safe data recovery).   
    
    
-### Recommendation:   
+## Recommendation:   
 
 - Take an initial Snapshot to give us a base capture.   
 - Take a snapshot every 10-20 % growth (depending on your growth that could be a few hours, day, e.t.c)   
@@ -25,7 +25,7 @@
 - When the data is all captures plan to reload the box when applicable so you don't top the memory out unexpectedly (causing an outage).   
 - Upload all of the files.   
    
-### How to:
+## How to:
 
 
 1. Attatch to the DataPower login:   

@@ -1,5 +1,5 @@
 # API Connect & Hybrid DataPower Gateways   
-## IBM API Connect: Hybrid Integration  
+#### IBM API Connect: Hybrid Integration  
 
 >  Ravi Ramnarayan, Toufiq Adnan   
 >  &copy; IBM v1.7  2023-03-27    
@@ -8,7 +8,7 @@ Enterprise IT spans platforms such as Redhat Openshift, IBM CloudPak, cloud vend
 
 This document draws from [Setting up certificates for a gateway](https://www.ibm.com/docs/en/api-connect/10_reserved_instance?topic=reserved-setting-up-certificates-gateway), other IBM publications and our experience.
 
-### Goal     
+## Goal     
 Highlight TLS settings in API Connect and DataPower to create API Gateways in hybrid deployments. [Registering a gateway service](https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=topology-registering-gateway-service) on DataPower VM (or physical) appliance from API Connect on CP4i is the task at hand.  
 
 ![APIC-HybridGwy-A10](./images/APIC-HybridGwy-A10.jpg)
@@ -20,9 +20,9 @@ The diagram portrays a split in traffic between DataPower on the cloud and DataP
 ### Target Audience    
 IT professionals with experience in Linux, OpenSSL, IBM API Connect and IBM DataPower.
 
-### Certificates, keys & TLS  
+## Certificates, keys & TLS  
 We walk through steps to generate certificates and keys to illustrate the role of TLS profiles.  
-#### Custom root CA   
+### Custom root CA   
 Create a custom root Certificate Authority (CA).  
   > You could use public, corporate CA or third-party certificate authorities (such as *Digicert* or *Let'sEncrypt*) as a central CA. Check with your corporate security team.   
 
@@ -40,7 +40,7 @@ openssl genrsa -out my-ca-privkey.pem 2048
   -subj "/C=US/ST=Flordia/L=Gainesville/O=MYCO/OU=APIC/CN=myco.com"
   ```
 
-#### Server key and certificate (for trust)  
+### Server key and certificate (for trust)  
 
 Generate the certificate which the server (DataPower) presents to the client (API Connect API Manager). The server key and certificate establish one-way trust, enabling API Manager to view DataPower as "trustworthy."
 
@@ -73,7 +73,7 @@ Generate the certificate which the server (DataPower) presents to the client (AP
   
 
 
-#### Client key and certificate (for authentication)  
+### Client key and certificate (for authentication)  
 
 Create the certificate which allows the API Manager to authenticate with the gateway server.
 
@@ -104,7 +104,7 @@ Create the certificate which allows the API Manager to authenticate with the gat
   > **Note**: The sequence is critical: Leaf certificate + intermediates (ordered by precedence) + CA.
 
 
-#### API Connect TLS
+### API Connect TLS
 - Create a new Keystore with `my-apic-privkey.pem` & `my-apic-cert-bundle.pem`  
 - Create a new Truststore with `my-ca-cert.pem`  
 - Create a new Client TLS with the new keystore & truststore
@@ -117,7 +117,7 @@ Create the certificate which allows the API Manager to authenticate with the gat
 #### DataPower Gateway TLS   
 Create *TLS Client Profile* and *TLS Server Profile* in the domain designated for the API Connect Gateway Service. Make sure you switch to the `apiconnect` domain (typical name used in IBM documents).  
 
-##### TLS Client Profile  
+#### TLS Client Profile  
 - Create *Crypto Key* `my-apic-key`  
   - *File*: `my-apic-privkey.pem`  
 - Create *Crypto Certificate* `my-apic-cert`  
@@ -139,7 +139,7 @@ Create *TLS Client Profile* and *TLS Server Profile* in the domain designated fo
 ![APIC-HybridGwy-TLS-B30](./images/APIC-HybridGwy-TLS-B30.jpg)
 
 
-##### TLS Server Profile  
+#### TLS Server Profile  
 
 - Create *Crypto Key* `dp-apigwy-key`  
   - *File*: `dp-apigwy-privkey.pem`  
@@ -166,7 +166,7 @@ Create *TLS Client Profile* and *TLS Server Profile* in the domain designated fo
 
 
 
-### DataPower API Connect Gateway Service  
+## DataPower API Connect Gateway Service  
 Create or modify the API Connect Gateway Service in the `apiconnect` domain.
 
 - *Local address*: `0.0.0.0` (or specific interface)  

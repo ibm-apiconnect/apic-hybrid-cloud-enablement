@@ -1,5 +1,5 @@
 # High Availability with Two Data Centers  
-## IBM API Connect: Architecture  
+#### IBM API Connect: Architecture  
 
 >  Ravi Ramnarayan   
 >  &copy; IBM v1.65  2023-04-03   
