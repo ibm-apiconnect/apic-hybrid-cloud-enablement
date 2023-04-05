@@ -1,7 +1,7 @@
 # DataPower Config without WebGUI   
 #### IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan  
->  &copy; IBM v2.63  2023-04-04  
+>  &copy; IBM v2.65  2023-04-05  
 
 <!-- 
 ## Table of Contents  
@@ -625,7 +625,7 @@ There are a few settings which can be controlled from the CP4I Openshift console
 
 - You could still use `additionalDomainConfig` on CP4I to enable WebGUI as described above for OCP.  
 
-## DataPower `config` changes to `default` and `apiconnect` domains  
+## Changes to `default` and `apiconnect` domains  
 Let's combine [JWT DataPower Crypto Key in `apiconnect` domain](#jwt-datapower-crypto-key-in-apiconnect-domain) with [Enable `web-mgmt` in `default` domain](#enable-web-mgmt-in-default-domain).
 - Define the Secrets & ConfigMaps needed for both use cases  
 - Create [411-default-apiconnect-combo-ocp-addlDomainCfg.yaml](./samples/dpg-cfg-no-webgui/411-default-apiconnect-combo-ocp-addlDomainCfg.yaml) with  

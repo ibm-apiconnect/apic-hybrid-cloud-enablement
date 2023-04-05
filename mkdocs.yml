@@ -19,7 +19,7 @@ markdown_extensions:
   - admonition
   - def_list
   - footnotes
-  - meta
+#   - meta
   - md_in_html
   - pymdownx.smartsymbols
   - pymdownx.superfences
@@ -31,8 +31,8 @@ markdown_extensions:
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.details
-  - pymdownx.snippets:
-      base_path: docs-mk/snippets
+#   - pymdownx.snippets:
+#       base_path: docs-mk/snippets
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
