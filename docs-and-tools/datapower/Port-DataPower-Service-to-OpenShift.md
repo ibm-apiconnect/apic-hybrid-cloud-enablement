@@ -1,7 +1,7 @@
-# IBM DataPower  
-> ## Port DataPower Services from Legacy Platforms to OpenShift   
+# Port DataPower Services to OpenShift   
+#### IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan, Charlie Sumner    
->  &copy; IBM v1.33  2022-07-14      
+>  &copy; IBM v1.35  2023-04-03      
 
 ## Goals  
 - Demonstrate Proof of Technology (POT) to receive HTTP messages in DataPower and route them to the appropriate MQ queue.  
@@ -33,7 +33,7 @@ MQFYRE domain contains the files we need to migrate the POT solution to OpenShif
 #### Diversion from the DataPower expert track
 > ***Only for DataPower newbies***: [DataPower newbie track](#datapower-newbie-track)  
 
-## Deploy MQFYRE domain objects for DataPower on OpenShift (OCP)  
+## Deploy domain objects to DataPower on OpenShift (OCP)  
 The approach relies on features of `additionalDomainConfig` detailed in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment):   
   - Modify configuration of an existing domain  
   - Create a new domain, if the domain does not exist  
@@ -52,7 +52,7 @@ Place `MQFYRE.cfg` in `config` and `Route2qByURI.xsl` in `local` directories:
       └── Route2qByURI.xsl
   ```  
 
-### Place MQFYRE configurations in `configMap`  
+### Place domain configurations in `configMap`  
 
 #### `local`  
 The POT example is [Route2qByURI.xsl](./samples/dp-mq-flow/local/Route2qByURI.xsl).  
@@ -168,7 +168,7 @@ Examine the `configMap`. It should have the contents of [MQFYRE.cfg](./samples/d
     uid: 303fea14-e911-4b3c-b1ff-51dbbbc15dc8
   ```  
 
-### Inject MQFYRE into DataPower  
+### Inject domain into DataPower  
 
 
 - Define `additionalDomainConfig` in file [`pot-additionalDomainConfig.yaml`](./samples/dp-mq-flow/pot-additionalDomainConfig.yaml)  
@@ -284,7 +284,8 @@ Until now we have operated under the umbrella of the APIConnectCluster. We tweak
 
 - Verify the Service  
   ```
-  oc get service mqfyre-gw-datapower
+  oc get service mqfyre-gw-datapower  
+  
   NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
   mqfyre-gw-datapower   ClusterIP   172.30.66.221   <none>        8181/TCP   2m50s
   ```
@@ -296,7 +297,7 @@ Create the Route:
   `oc apply -f <path>/mqfyre-dp2-route.yaml`
 
 
-### Validate MQFYRE flow  
+### Validate MQ flow  
 [mq-payload.xml](samples/dp-mq-flow/mq-payload.xml) contains a sample payload.  
 
 `curl --data-binary @mq-payload.xml MQFYRE-Route-Name/queue/{queuename}`

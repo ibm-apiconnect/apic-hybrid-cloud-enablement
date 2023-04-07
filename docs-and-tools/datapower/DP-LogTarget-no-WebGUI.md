@@ -1,7 +1,7 @@
-# IBM API Connect  
-> ## Example: DataPower Log Target without WebGUI    
+# DataPower Log Target without WebGUI - Example    
+#### IBM DataPower: Migrate to Cloud  
 > Ravi Ramnarayan  
->  &copy; IBM v1.2  2022-03-28  
+>  &copy; IBM v1.22  2022-04-03  
 
 ## Prolog
 - This document is a bare bones example. Please refer to [DataPower Config without WebGUI](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/datapower/DataPower-Config-without-WebGUI.md) for context and explanations.  
@@ -126,12 +126,12 @@
   rramnara:DP-LogTarget$ mkdir dp-dev-0
   rramnara:DP-LogTarget$ cd dp-dev-0/
   rramnara:dp-dev-0$ scp -r rramnara@192.168.122.60:/home/rramnara/dp-dev/* ./
-  webgui-privkey.pem                                                100% 1704   968.1KB/s   00:00
-  webgui-sscert.pem                                                 100% 1147     1.1MB/s   00:00
-  default.cfg                                                       100%   95   125.1KB/s   00:00
-  auto-startup.cfg                                                  100%   20KB  19.1MB/s   00:00
-  auto-user.cfg                                                     100%  293   158.1KB/s   00:00
-  Chrystoki.conf                                                    100% 1440     3.0MB/s   00:00
+  webgui-privkey.pem                                   100% 1704   968.1KB/s   00:00
+  webgui-sscert.pem                                    100% 1147     1.1MB/s   00:00
+  default.cfg                                          100%   95   125.1KB/s   00:00
+  auto-startup.cfg                                     100%   20KB  19.1MB/s   00:00
+  auto-user.cfg                                        100%  293   158.1KB/s   00:00
+  Chrystoki.conf                                       100% 1440     3.0MB/s   00:00
   rramnara:dp-dev-0$ ll
   total 12
   drwxrwxr-x. 2 rramnara rramnara 4096 Mar 15 16:44 certs
@@ -182,12 +182,12 @@
   rramnara:DP-LogTarget$ mkdir dp-dev-2
   rramnara:DP-LogTarget$ cd dp-dev-2/
   rramnara:dp-dev-2$ scp -r rramnara@192.168.122.60:/home/rramnara/dp-dev/* ./
-  webgui-privkey.pem                                                100% 1704     2.4MB/s   00:00
-  webgui-sscert.pem                                                 100% 1147     1.4MB/s   00:00
-  default.cfg                                                       100%   95   183.2KB/s   00:00
-  auto-startup.cfg                                                  100%   20KB  24.0MB/s   00:00
-  auto-user.cfg                                                     100%  293   517.4KB/s   00:00
-  Chrystoki.conf                                                    100% 1440     2.2MB/s   00:00
+  webgui-privkey.pem                                   100% 1704     2.4MB/s   00:00
+  webgui-sscert.pem                                    100% 1147     1.4MB/s   00:00
+  default.cfg                                          100%   95   183.2KB/s   00:00
+  auto-startup.cfg                                     100%   20KB  24.0MB/s   00:00
+  auto-user.cfg                                        100%  293   517.4KB/s   00:00
+  Chrystoki.conf                                       100% 1440     2.2MB/s   00:00
   rramnara:dp-dev-2$ ll
   total 12
   drwxrwxr-x. 3 rramnara rramnara 4096 Mar 16 10:06 certs

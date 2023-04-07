@@ -1,5 +1,6 @@
-# IBM API Connect  
-> ## DevOps for API Products & Consumer Subscriptions  
+# API Products & Consumer Subscriptions  
+#### IBM API Connect: DevOps at Scale   
+
 >  Ravi Ramnarayan  
 >  &copy; IBM v1.6  2021-12-20    
 
