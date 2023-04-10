@@ -3,7 +3,13 @@
 
 # CP4I / IBM API Connect / DataPower  
 
-
+```
+   ///////////////                                                  ///////////////
+ </////////                                                     /////////         
+<<<<<<<------     BLOG Index -- on the *** L E F T ***      <<<<<<<------
+ <\\\\\\\\                                                      \\\\\\\\ 
+   <\\\\\\\\\\\\\\\                                                 \\\\\\\\\\\\\\\
+```
 
 You can use IBM Integration products independently or in combination. This repository contains short documents which illustrate product features and solutions to real world use cases. 
 
