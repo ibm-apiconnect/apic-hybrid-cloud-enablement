@@ -1,7 +1,7 @@
 # DataPower Log Target without WebGUI - Example    
 #### IBM DataPower: Migrate to Cloud  
 > Ravi Ramnarayan  
->  &copy; IBM v1.22  2022-04-03  
+>  &copy; IBM v1.23  2022-05-04  
 
 ## Prolog
 - This document is a bare bones example. Please refer to [DataPower Config without WebGUI](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/datapower/DataPower-Config-without-WebGUI.md) for context and explanations.  
@@ -38,41 +38,40 @@
 - Start a container, mounting relevant directories (ex. config, local, certs)  
   >***Note***: `docker run` command contains `-p 9090:9090` which is **not** in [Re-imagining DataPower in the container world](https://techcon2021.ibm.com/agenda/session/578106) slide 9.
 
-  ```
-  docker run -it \
-  -e DATAPOWER_ACCEPT_LICENSE=true \
-  -e DATAPOWER_INTERACTIVE=true \
-  -p 9090:9090 \
-  -v $(pwd)/config:/opt/ibm/datapower/drouter/config \
-  -v $(pwd)/local:/opt/ibm/datapower/drouter/local \
-  -v $(pwd)/certs:/opt/ibm/datapower/root/secure/usrcerts \
-  --name dp-dev \
-  icr.io/integration/datapower/datapower-limited:10.0.3.0
-  ```
+    ```
+    docker run -it \
+    -e DATAPOWER_ACCEPT_LICENSE=true \
+    -e DATAPOWER_INTERACTIVE=true \
+    -p 9090:9090 \
+    -v $(pwd)/config:/opt/ibm/datapower/drouter/config \
+    -v $(pwd)/local:/opt/ibm/datapower/drouter/local \
+    -v $(pwd)/certs:/opt/ibm/datapower/root/secure/usrcerts \
+    --name dp-dev \
+    icr.io/integration/datapower/datapower-limited:10.0.3.0
+    ```
 
-  Produces about 30 lines of output. The last couple of lines should resemble:
+    Produces about 30 lines of output. The last couple of lines should resemble:
 
-  ```
-  20220315T203900.823Z [0x8100003b][mgmt][notice] domain(default): Domain configured successfully.
-  20220315T203901.071Z [0x00350014][mgmt][notice] quota-enforcement-server(QuotaEnforcementServer): tid(831): Operational state up
-  ```
+    ```
+    20220315T203900.823Z [0x8100003b][mgmt][notice] domain(default): Domain configured successfully.
+    20220315T203901.071Z [0x00350014][mgmt][notice] quota-enforcement-server(QuotaEnforcementServer): tid(831): Operational state up
+    ```
 
-  - Access the container’s CLI, login with ‘admin’ user (default pw: admin)  
+    - Access the container’s CLI, login with ‘admin’ user (default pw: admin)  
 
-  ```
-  login: admin
-  Password: *****
+    ```
+    login: admin
+    Password: *****
 
-  Welcome to IBM DataPower Gateway console configuration.
-  Copyright IBM Corporation 1999, 2021
+    Welcome to IBM DataPower Gateway console configuration.
+    Copyright IBM Corporation 1999, 2021
 
-  Version: IDG.10.0.3.0 build 333705 on Jun 16, 2021 9:06:57 PM
-  Delivery type: CD
-  Serial number: 0000001
-  ```
+    Version: IDG.10.0.3.0 build 333705 on Jun 16, 2021 9:06:57 PM
+    Delivery type: CD
+    Serial number: 0000001
+    ```
 
 - Enable WebGUI  
-
   ```
   idg# co
   Global mode
@@ -115,13 +114,11 @@
   Unauthorized access prohibited.
   login:
   ```  
-
   >***Note***: Enter **Ctrl-PQ** to disengage from DataPower without killing the process.  
 
 ### Linux workstation  
 
 - Download DataPower files to workstation  
-
   ```
   rramnara:DP-LogTarget$ mkdir dp-dev-0
   rramnara:DP-LogTarget$ cd dp-dev-0/
@@ -161,23 +158,22 @@
 
 - Define Log Target    
 
-  ![D1-LogTarget](./images/D1-LogTarget.jpg)
+    ![D1-LogTarget](./images/D1-LogTarget.jpg)
 
-  ![D2-LogTarget](./images/D2-LogTarget.jpg)
+    ![D2-LogTarget](./images/D2-LogTarget.jpg)
 
-  ![D3-LogTarget](./images/D3-LogTarget.jpg)
+    ![D3-LogTarget](./images/D3-LogTarget.jpg)
 
-  ![D4-LogTarget](./images/D4-LogTarget.jpg)
+    ![D4-LogTarget](./images/D4-LogTarget.jpg)
 
-  ![D5-LogTarget](./images/D5-LogTarget.jpg)
+    ![D5-LogTarget](./images/D5-LogTarget.jpg)
 
-  ![D6-LogTarget](./images/D6-LogTarget.jpg)
+    ![D6-LogTarget](./images/D6-LogTarget.jpg)
 
 ### Linux workstation  
 
 
 - Download DataPower files to workstation   
-
   ```
   rramnara:DP-LogTarget$ mkdir dp-dev-2
   rramnara:DP-LogTarget$ cd dp-dev-2/
@@ -218,7 +214,6 @@
 
 - Isolate `config` changes  
   Compare `auto-startup.cfg` files.
-
   ```
   rramnara:DP-LogTarget$ diff dp-dev-0/config/auto-startup.cfg dp-dev-2/config/auto-startup.cfg
   3c3
@@ -263,10 +258,10 @@
   > exit
   ```  
 
-  Capture the output in a file, remove the lines above `logging target` and strip the leading `> `.
-  ```
-  sed 's/^> //' log-target-config.txt > log-target-configmap.cfg
-  ```
+    Capture the output in a file, remove the lines above `logging target` and strip the leading `> `.
+    ```
+    sed 's/^> //' log-target-config.txt > log-target-configmap.cfg
+    ```
 
 ## Define k8s/OCP ConfigMap & Inject DataPower Log Target
 
@@ -275,14 +270,12 @@
 This installation is on **k8s**.
 
 - Create ConfigMap   
-
   ```
   kubectl create configmap datapower-logtarget-cfg \
   --from-file=./log-target-configmap.cfg -n dev  
   ```
 
 - Create `additionalDomainConfig` file for DataPower on **k8s**
-
   ```
   spec:
     additionalDomainConfig:
@@ -293,7 +286,6 @@ This installation is on **k8s**.
   ```
 
 - Patch DataPower **GatewayCluster** with additionalDomainConfig  
-
   ```
   kubectl patch gatewaycluster gwv6 --type merge \
   --patch-file='DP-LogTarget-k8s-additionalDomainConfig.yaml' -n dev

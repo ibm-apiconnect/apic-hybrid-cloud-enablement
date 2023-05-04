@@ -1,7 +1,7 @@
 # Port DataPower Services to OpenShift   
 #### IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan, Charlie Sumner    
->  &copy; IBM v1.35  2023-04-03      
+>  &copy; IBM v1.36  2023-05-04      
 
 ## Goals  
 - Demonstrate Proof of Technology (POT) to receive HTTP messages in DataPower and route them to the appropriate MQ queue.  
@@ -27,6 +27,7 @@ Paul Faulkner contributed the MQ server, defined queues and helped setup the too
 
 #### Legacy POT components    
 MQFYRE domain contains the files we need to migrate the POT solution to OpenShift  
+
 - MQ related configurations are in `config/MQFYRE.cfg`    
 - Route logic is in `local/Route2qByURI.xsl`  
 
@@ -35,6 +36,7 @@ MQFYRE domain contains the files we need to migrate the POT solution to OpenShif
 
 ## Deploy domain objects to DataPower on OpenShift (OCP)  
 The approach relies on features of `additionalDomainConfig` detailed in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment):   
+
   - Modify configuration of an existing domain  
   - Create a new domain, if the domain does not exist  
     [Domain Configuration](https://www.ibm.com/docs/en/datapower-operator/1.6?topic=guides-domain-configuration) defines the constructs to inject `config`, `certs`, and `local` into DataPower OCP. This POT solution does not use `certs`.  
@@ -68,37 +70,37 @@ The POT example is [Route2qByURI.xsl](./samples/dp-mq-flow/local/Route2qByURI.xs
   ./Route2qByURI.xsl
 
   ```
-In this POT we have only one file in `local`. If your solution calls for multiple files, place all files in `local` and create the tarball.  
+  In this POT we have only one file in `local`. If your solution calls for multiple files, place all files in `local` and create the tarball.  
 
 - Create the `configMap`    
-```  
-oc project <namespace>
-oc create configmap mqfyre-local --from-file=<path>/MQFYRE-local.tar.gz
-```
+  ```  
+  oc project <namespace>
+  oc create configmap mqfyre-local --from-file=<path>/MQFYRE-local.tar.gz
+  ```
 - Examine the `configMap`:  
-```
-oc get configmap mqfyre-local -o yaml  
-apiVersion: v1
-binaryData:
-  MQFYRE-local.tar.gz: H4sIAAAAAAAAA+2UW2vbMBTH85pCv4MQhaQwW3Gua6hTGKxQaAdNW+geVfskMdiyK8m57NPvyE6cpNeXljKmX0IsonP/y3JZ7dNpIYNBzzy9Qa+1+9xQ87rtXr/fH+C31vK8bqdfI73PL61Wy5XmkpCalDwRXPLX7N7b/0dx2TjNNbQff6zuxhfuUsUfn8MI3O93X9O/3fHapf7ddsvreKh/t9Pt1Ujr40t5zn+u/+nZMonJHKSKUuFTz21RAiJIw0hMfXp3e+58p2ejw4NTPBlDpVcxqBmA3vc4PKhjFKGGaOTTmdbZkLHFYuEuOm4qp8w7OTlh9zeX7FZyoSapTCgpHcJszz7kmmfpAqQbpAmDpQZhsqhthjALUjGJpm+4ZahSwkqzTZ6lil4qrI0nkd1fXd4EM0i4Ewk8DCKA3YbC9/02SdBZ71lrSLJc8sLlBjdhksdsG1ylPAMxr1xUEU25uGu2CjezYGgEcZpB4VtNxYEYEhDaySRMoiUon4YZqrcM4jwER4LK4/1NspkeRUXrhaT48me5JgnoWYqtYurn+pNIhJjHpyKlhKGr+ZTupsMYGyMJ18HMp4wW2/U6IaQwmHMZ8YcYiOAJ+DSX0cUvShSWHmhTUmXQbODKDAHkPAqA4W3UODbpCDERSclLMSNxnUMO26gqf1BaYgMOn2iQzaMi67cGezR2rAxbdrENGk2IBmW8S9cYxFTPmgIPK4+jP+CojAfQPFpnOz4mI9KiRXVFkHrx+2aheNFMQW/rRC0CrpuNMEsesfOr6/Pf45/sbAxYp9JFGr/xrcpYVr2Oj4vtkBNQik8B5R1mMkplpFc4W3jIUejCIEizlZNOqsxH61LY6JTtBBiRKrrRsE5OMaIC7Txp5IlUEg+RGVku4wYlcx5j3VUKo+C66s24WTnvqpmqqfWqNNgcrUKp9X/bC2i064TFHh589U1qsVgsFovFYrFYLBaLxWKxWCwWi8VisVgsFsvX8ReVqO8sACgAAA==
-kind: ConfigMap
-metadata:
-  creationTimestamp: "2022-07-12T12:29:45Z"
-  managedFields:
-  - apiVersion: v1
-    fieldsType: FieldsV1
-    fieldsV1:
-      f:binaryData:
-        .: {}
-        f:MQFYRE-local.tar.gz: {}
-    manager: kubectl-create
-    operation: Update
-    time: "2022-07-12T12:29:45Z"
-  name: mqfyre-local
-  namespace: cp4i
-  resourceVersion: "122640556"
-  uid: afd2d227-99ac-4b0a-a79f-47367a752755
-```  
+  ```
+  oc get configmap mqfyre-local -o yaml  
+  apiVersion: v1
+  binaryData:
+    MQFYRE-local.tar.gz: H4sIAAAAAAAAA+2UW2vbMBTH85pCv4MQhaQwW3Gua6hTGKxQaAdNW+geVfskMdiyK8m57NPvyE6cpNeXljKmX0IsonP/y3JZ7dNpIYNBzzy9Qa+1+9xQ87rtXr/fH+C31vK8bqdfI73PL61Wy5XmkpCalDwRXPLX7N7b/0dx2TjNNbQff6zuxhfuUsUfn8MI3O93X9O/3fHapf7ddsvreKh/t9Pt1Ujr40t5zn+u/+nZMonJHKSKUuFTz21RAiJIw0hMfXp3e+58p2ejw4NTPBlDpVcxqBmA3vc4PKhjFKGGaOTTmdbZkLHFYuEuOm4qp8w7OTlh9zeX7FZyoSapTCgpHcJszz7kmmfpAqQbpAmDpQZhsqhthjALUjGJpm+4ZahSwkqzTZ6lil4qrI0nkd1fXd4EM0i4Ewk8DCKA3YbC9/02SdBZ71lrSLJc8sLlBjdhksdsG1ylPAMxr1xUEU25uGu2CjezYGgEcZpB4VtNxYEYEhDaySRMoiUon4YZqrcM4jwER4LK4/1NspkeRUXrhaT48me5JgnoWYqtYurn+pNIhJjHpyKlhKGr+ZTupsMYGyMJ18HMp4wW2/U6IaQwmHMZ8YcYiOAJ+DSX0cUvShSWHmhTUmXQbODKDAHkPAqA4W3UODbpCDERSclLMSNxnUMO26gqf1BaYgMOn2iQzaMi67cGezR2rAxbdrENGk2IBmW8S9cYxFTPmgIPK4+jP+CojAfQPFpnOz4mI9KiRXVFkHrx+2aheNFMQW/rRC0CrpuNMEsesfOr6/Pf45/sbAxYp9JFGr/xrcpYVr2Oj4vtkBNQik8B5R1mMkplpFc4W3jIUejCIEizlZNOqsxH61LY6JTtBBiRKrrRsE5OMaIC7Txp5IlUEg+RGVku4wYlcx5j3VUKo+C66s24WTnvqpmqqfWqNNgcrUKp9X/bC2i064TFHh589U1qsVgsFovFYrFYLBaLxWKxWCwWi8VisVgsFsvX8ReVqO8sACgAAA==
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2022-07-12T12:29:45Z"
+    managedFields:
+    - apiVersion: v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:binaryData:
+          .: {}
+          f:MQFYRE-local.tar.gz: {}
+      manager: kubectl-create
+      operation: Update
+      time: "2022-07-12T12:29:45Z"
+    name: mqfyre-local
+    namespace: cp4i
+    resourceVersion: "122640556"
+    uid: afd2d227-99ac-4b0a-a79f-47367a752755
+  ```  
 
 #### `config`  
 The POT example is [MQFYRE.cfg](./samples/dp-mq-flow/config/MQFYRE.cfg).
@@ -173,7 +175,6 @@ Examine the `configMap`. It should have the contents of [MQFYRE.cfg](./samples/d
 
 - Define `additionalDomainConfig` in file [`pot-additionalDomainConfig.yaml`](./samples/dp-mq-flow/pot-additionalDomainConfig.yaml)  
   The contents should include **all previous entries** and new definitions for `MQFYRE` domain. In this example, the only previous entries were to expose the WebGUI.  
-
   ```
   spec:
     gateway:
@@ -189,7 +190,6 @@ Examine the `configMap`. It should have the contents of [MQFYRE.cfg](./samples/d
           local:
           - "mqfyre-local"
   ```
-
   > ***Note***: `spec.gateway.additionalDomainConfig` This POT was developed for an API Connect & Datapower deployment on OpenShift.   
 
 - Determine the name of the APIConnectCluster:
@@ -199,48 +199,47 @@ Examine the `configMap`. It should have the contents of [MQFYRE.cfg](./samples/d
     apis-minimum   7/7     Ready    10.0.4.0   10.0.4.0-ifix1-54    105d
     ```
 - Apply `additionalDomainConfig`  
-
   `oc patch apiconnectcluster apis-minimum --type merge --patch-file='<path>/pot-additionalDomainConfig.yaml'`  
 
 - Examine the DataPower configuration  
-  - Log into the DataPower pod with `admin/<secret>`:  
-  `oc attach -it po/apis-minimum-gw-0 -c datapower`  
+    - Log into the DataPower pod with `admin/<secret>`:  
+    `oc attach -it po/apis-minimum-gw-0 -c datapower`  
 
-  - Display the following via CLI or use the WebGUI  
-    Do you see the domains `default` and `MQFYRE`? The domain `apiconnect` will appear if, as in this POT, the DataPower hosts the API Connect Gateway Service. Drill down `local:///` and locate `Route2qByURI.xsl`.
-    ```
-    idg# show domains
+    - Display the following via CLI or use the WebGUI  
+      Do you see the domains `default` and `MQFYRE`? The domain `apiconnect` will appear if, as in this POT, the DataPower hosts the API Connect Gateway Service. Drill down `local:///` and locate `Route2qByURI.xsl`.
+      ```
+      idg# show domains
 
-     Domain     Needs save File capture Debug log Probe enabled Diagnostics Command Quiesce state Interface state Failsafe mode
-     ---------- ---------- ------------ --------- ------------- ----------- ------- ------------- --------------- -------------
-     MQFYRE     off        off          off       off           off                               ok              none          
-     apiconnect off        off          off       off           off                               ok              none          
-     default    off        off          off       off           off                               ok              none          
+      Domain     Needs save File capture Debug log Probe enabled Diagnostics Command Quiesce state Interface state Failsafe mode
+      ---------- ---------- ------------ --------- ------------- ----------- ------- ------------- --------------- -------------
+      MQFYRE     off        off          off       off           off                               ok              none          
+      apiconnect off        off          off       off           off                               ok              none          
+      default    off        off          off       off           off                               ok              none          
 
-    idg# co
-    Global mode
-    idg(config)# dir local:
-       File Name                    Last Modified                    Size
-       ---------                    -------------                    ----
-       MQFYRE/                      Jul 12, 2022 1:04:04 PM          30
-       luna_config/                 Jul 12, 2022 1:04:05 PM          58
-       apiconnect/                  Jul 12, 2022 1:07:03 PM          116
+      idg# co
+      Global mode
+      idg(config)# dir local:
+        File Name                    Last Modified                    Size
+        ---------                    -------------                    ----
+        MQFYRE/                      Jul 12, 2022 1:04:04 PM          30
+        luna_config/                 Jul 12, 2022 1:04:05 PM          58
+        apiconnect/                  Jul 12, 2022 1:07:03 PM          116
 
-       176673.9 MB available to local:
+        176673.9 MB available to local:
 
-    idg(config)# dir local:///MQFYRE
-       File Name                    Last Modified                    Size
-       ---------                    -------------                    ----
-       Route2qByURI.xsl             Jul 12, 2022 1:04:04 PM          1226
+      idg(config)# dir local:///MQFYRE
+        File Name                    Last Modified                    Size
+        ---------                    -------------                    ----
+        Route2qByURI.xsl             Jul 12, 2022 1:04:04 PM          1226
 
-       176673.2 MB available to local:///MQFYRE
+        176673.2 MB available to local:///MQFYRE
 
-    ```  
-  - Logoff
-    ```
-    idg(config)# exit;exit  
-    ```
-  - Detach with `CTRL-P-Q` so that the pod stays alive.     
+      ```  
+    - Logoff
+      ```
+      idg(config)# exit;exit  
+      ```
+    - Detach with `CTRL-P-Q` so that the pod stays alive.     
 
 
 
@@ -261,8 +260,7 @@ Until now we have operated under the umbrella of the APIConnectCluster. We tweak
     app.kubernetes.io/instance: cp4i-apis-minimum-gw
   ```
 - Define Service [mqfyre-gw-datapower.yaml](samples/dp-mq-flow/mqfyre-gw-datapower.yaml)  
-  Reference: *Service creation* in [Exposing DataPower Services](https://www.ibm.com/docs/en/datapower-operator/1.6?topic=guides-exposing-datapower-services).
-
+  Reference: *Service creation* in [Exposing DataPower Services](https://www.ibm.com/docs/en/datapower-operator/1.6?topic=guides-exposing-datapower-services).  
   ```
   apiVersion: v1
   kind: Service
@@ -277,7 +275,7 @@ Until now we have operated under the umbrella of the APIConnectCluster. We tweak
       port: 8181
       targetPort: 8181
       name: mqfyre
-    ```
+  ```
 
 - Create the OpenShift Service   
   `oc apply -f mqfyre-gw-datapower.yaml`  
@@ -300,8 +298,9 @@ Create the Route:
 ### Validate MQ flow  
 [mq-payload.xml](samples/dp-mq-flow/mq-payload.xml) contains a sample payload.  
 
-`curl --data-binary @mq-payload.xml MQFYRE-Route-Name/queue/{queuename}`
+`curl --data-binary @mq-payload.xml MQFYRE-Route-Name/queue/{queuename}`  
 where   
+
 - `{queuename}` is the name of the queue  
 - `@mq-payload.xml` contains the payload. `@` ensures that `curl` transmits the file as is  
 
@@ -347,6 +346,7 @@ As a DataPower newbie (like one of the authors), you could request the DataPower
   `<dp:set-variable name="'var://service/routing-url'" value="$target" />`  
 
   Payload is sent to DataPower Gateway using the `hostname:port/queue/{queuename}`. If URI is not specified, the payload will be sent to default queue (specified in MPGW service configuration).  If `{queuename}` is incorrect or invalid, the transaction will be canceled as MQ Open will fail.  
+
 - [DP-2-MQ-export.zip](./samples/dp-mq-flow/DP-2-MQ-export.zip) contains the POT configuration  
 
 #### DataPower Docker   
@@ -355,7 +355,6 @@ As a DataPower newbie (like one of the authors), you could request the DataPower
 - Import configurations in [DP-2-MQ-export.zip](./samples/dp-mq-flow/DP-2-MQ-export.zip)  
 - Examine the logic on WebGUI  
 - Capture DataPower configurations in `certs`, `config` & `local`.  
-
   ```
   $ tree dp-dev/
   dp-dev/
