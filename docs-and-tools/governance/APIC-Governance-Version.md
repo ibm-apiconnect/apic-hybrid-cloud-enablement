@@ -2,7 +2,7 @@
 #### IBM API Connect: Governance Models    
 
 >  Ravi Ramnarayan  
->  &copy; IBM v1.5  2021-04-20    
+>  &copy; IBM v1.51  2021-04-20    
 
 
 ## Goals  
@@ -50,7 +50,8 @@ If you do not enable **Production Mode** for a catalog, API developers might fin
 
 ## Versions for API Products & API definitions  
 ### Governance Model  
-The Governance Model recommends operations to effect changes and guidelines to assign versions.
+The Governance Model recommends operations to effect changes and guidelines to assign versions.  
+
 - The *Version* aspect applies to API Definitions and API Products  
   If you want to enforce versions you should enable **Production Mode** for the Catalogs in the Production or PreProd environments. You might want to disable **Production Mode** in lower environments to allow free rein to API developers.  
 - The *Operations* aspect applies to API Products  
