@@ -2,7 +2,7 @@
 #### IBM API Connect: Architecture  
 
 >  Ravi Ramnarayan   
->  &copy; IBM v1.66  2023-04-05   
+>  &copy; IBM v1.67  2023-05-04   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -79,9 +79,9 @@ We compare two APIC deployment architectures using the metrics *Recovery Time Ob
 > ***Note***: The steps below assume a *connected* OCP. Adjust as needed for *air-gapped* OCP.     
 
 - *Connected* OCP  
-Use [Installing operators](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=installation-installing-operators)   
+  Use [Installing operators](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=installation-installing-operators)   
 - *Air-gapped* OCP  
-Use the appropriate recipe in [Air-gapped installation](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-air-gapped-installation).  
+  Use the appropriate recipe in [Air-gapped installation](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-air-gapped-installation).  
 
 
 ### Install APIC in DC1   
@@ -89,6 +89,7 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
 
 ### Install DataPower + Analytics in DC2  
 [Installing with subsystem CRs in different namespaces or environments](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-subsystem-crs-in-different-namespaces-environments) provides the overview. We will install DataPower and Analytics subsystems in DC2.    
+
 - OCP in DC2 needs preparations such as `pull-secret` and the IBM Operator Catalog source.
 - Install the IBM API Connect operator in `apigw2` namespace in DC2     
   This is the same operator used to install APIC in DC1.  
