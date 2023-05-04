@@ -2,7 +2,7 @@
 #### IBM API Connect: DevOps at Scale   
 
 >  Ravi Ramnarayan  
->  &copy; IBM v1.6  2021-12-20    
+>  &copy; IBM v1.61  2021-12-20    
 
 ## Goals  
   - Ensure business continuity while publishing new versions of API Products  
@@ -26,16 +26,19 @@ The goal is to implement devops processes at scale.
 ### Commands in `apic toolkit`   
 
 When you publish a new version of a product, [Managing API Products](https://www.ibm.com/support/knowledgecenter/SSMNED_v10/com.ibm.apic.toolkit.doc/capim-toolkit-cli-manage-products.html) offers three commands which migrate all subscriptions from the source to the target product.  
+
 - `products:replace` *retires* the old product and transfers subscriptions to the new.   
 - `products:supersede`: *deprecates* the old product and transfers subscriptions to the new. You can *retire* the old product at a later date.      
 - `products:set-migration-target`: allows the Provider to guide Consumer App Developers to migrate subscriptions as specified in `PRODUCT_PLAN_MAPPING_FILE`.   
 - `products:execute-migration-target`: allows the Provider to migrate subscriptions which were processed by `products:set-migration-target`. Providers could preempt migration by App Developers or act on behalf of laggards.   
 
 Another command is available, though it is not shown in [Managing API Products](https://www.ibm.com/support/knowledgecenter/SSMNED_v10/com.ibm.apic.toolkit.doc/capim-toolkit-cli-manage-products.html) as of March 2021.  
+
 - `products:migrate-subscriptions`: allows the Provider to migrate subscriptions specified in `MIGRATE_SUBSCRIPTION_SUBSET_FILE`.
 
 ### Use Case: Migrate selected consumer organizations to the new product
-Possible drivers are:
+Possible drivers are:  
+
 - The first few customers might be *beta* testers.
 - For products with a large number of subscriptions, you could to reduce the impact of change on two fronts:  
   - Control the load on API Connect's publish operation   
@@ -44,11 +47,10 @@ Possible drivers are:
 ### Sample scripts  
 The following steps implement the [**Simple Scenario**](#simple-scenario) and migrate subscriptions using the command `products:migrate-subscriptions`. [Sample shell scripts](./scripts) illustrate the use of `apic toolkit` commands. You should modify and enhance them for use in your API Connect installations. For example, you could operate on more than one Consumer Organization in a single run or modify the commands to run within Catalog/Space.   
 
-- [`product-subscriptions-for-corg.sh`](./scripts/product-subscriptions-for-corg.sh) Provides a CSV file with
-> Consumer-Org,App-Name,Source-Product:Version,Plan-Name   
-
-  for a given Consumer Organization and Product:Version. You can assess the inventory of subscriptions and plan operations.  
-- [`products-migrate-subscriptions-1.sh`](./scripts/products-migrate-subscriptions-1.sh) Creates the `MIGRATE_SUBSCRIPTION_SUBSET_FILE` for a single Consumer Organization. Source & Target Products are assumed to have one for one, identically named plans. You could modify the file to alter the mapping. To effect the [Simple Scenario](#Simple-Scenario), you would modify the `MIGRATE_SUBSCRIPTION_SUBSET_FILE`:
+- [`product-subscriptions-for-corg.sh`](./scripts/product-subscriptions-for-corg.sh)  
+  Provides a CSV file with `Consumer-Org,App-Name,Source-Product:Version,Plan-Name` for a given Consumer Organization and Product:Version. You can assess the inventory of subscriptions and plan operations.  
+- [`products-migrate-subscriptions-1.sh`](./scripts/products-migrate-subscriptions-1.sh)  
+Creates the `MIGRATE_SUBSCRIPTION_SUBSET_FILE` for a single Consumer Organization. Source & Target Products are assumed to have one for one, identically named plans. You could modify the file to alter the mapping. To effect the [Simple Scenario](#Simple-Scenario), you would modify the `MIGRATE_SUBSCRIPTION_SUBSET_FILE`:
   - From: ***product:v1*** / ***plan-A*** ==> ***product:v2*** / ***plan-A***  
   - To: ***product:v1*** / ***plan-A*** ==> to ***product:v2*** / ***plan-B***  
 
@@ -69,5 +71,5 @@ The following steps implement the [**Simple Scenario**](#simple-scenario) and mi
 - `apic login` to the management service with role which can publish Products  
 - Scripts were developed and verified on IBM API Connect v10.0.1.x
 
-### Usage  
+### Usage   
 This document and the sample scripts show what is possible with Product Versions & Consumer Subscriptions. Does it fit into your overall process?
