@@ -1,7 +1,7 @@
 # DataPower Log Target without WebGUI - Example    
 #### IBM DataPower: Migrate to Cloud  
 > Ravi Ramnarayan  
->  &copy; IBM v1.23  2022-05-04  
+>  &copy; IBM v1.24  2022-05-04  
 
 ## Prolog
 - This document is a bare bones example. Please refer to [DataPower Config without WebGUI](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/datapower/DataPower-Config-without-WebGUI.md) for context and explanations.  
@@ -57,19 +57,18 @@
     20220315T203901.071Z [0x00350014][mgmt][notice] quota-enforcement-server(QuotaEnforcementServer): tid(831): Operational state up
     ```
 
-    - Access the container’s CLI, login with ‘admin’ user (default pw: admin)  
+- Access the container’s CLI, login with ‘admin’ user (default pw: admin)  
+  ```
+  login: admin
+  Password: *****
 
-    ```
-    login: admin
-    Password: *****
+  Welcome to IBM DataPower Gateway console configuration.
+  Copyright IBM Corporation 1999, 2021
 
-    Welcome to IBM DataPower Gateway console configuration.
-    Copyright IBM Corporation 1999, 2021
-
-    Version: IDG.10.0.3.0 build 333705 on Jun 16, 2021 9:06:57 PM
-    Delivery type: CD
-    Serial number: 0000001
-    ```
+  Version: IDG.10.0.3.0 build 333705 on Jun 16, 2021 9:06:57 PM
+  Delivery type: CD
+  Serial number: 0000001
+  ```
 
 - Enable WebGUI  
   ```
