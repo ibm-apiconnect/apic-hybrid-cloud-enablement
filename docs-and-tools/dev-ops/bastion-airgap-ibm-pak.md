@@ -1,6 +1,6 @@
 # Bastion for IBM Cloud Pak on Airgap OpenShift   
 > Ravi Ramnarayan  
->  &copy; IBM v3.8  2023-05-17     
+>  &copy; IBM v3.82  2023-05-17     
 
 
 ## Goals
@@ -116,7 +116,7 @@ podman run -d --name apic-registry -p 5000:5000 \
   docker.io/library/registry:2
 ```  
 
-> ### [*Call Out 1*: Create a *secure* container registry](#call-out-1-create-a-secure-container-registry-1)  
+> ### [*Call Out 1*: Create a *secure* container registry](#create-a-secure-container-registry)  
 > #### Return from Call Out 1  
 
 ## Mirror images to your private container registry  
@@ -316,7 +316,7 @@ Recommend defining insecure registries manually in OCP. Edit the `image.config.o
     -p '{"spec":{"registrySources":{"insecureRegistries":["'$TARGET_REGISTRY'"]}}}'  
   ```
 
-> #### [*Call Out 2* *Secure* Registry](#call-out-2-connect-your-registry-to-ocp)     
+> #### [*Call Out 2* *Secure* Registry](#connect-your-secure-registry-to-ocp)     
 > #### Return from Call Out 2
 
 
@@ -464,7 +464,7 @@ In case you need to **rebuild** the bastion repository, follow the steps below t
 ## Call Outs for Secure Registry  
 
 
-### Call Out 1: Create a *secure* container registry   
+### Create a *secure* container registry   
 
 If your enterprise requires secure communications, you should obtain TLS *.crt* & *.key* files appropriate for the bastion host. Self signed certificates do not result in *secure* registries unless you define trusts on the bastion server and on OCP. This document provides steps to create and use self signed TLS. For corporate TLS, you might not need to prime trust settings on the bastion server.    
 
@@ -591,7 +591,7 @@ If you really wish to use self signed certificates, see [Setting up additional t
 
 ****
 
-### Call Out 2: Connect your registry to OCP      
+### Connect your *secure* registry to OCP      
 
 #### *Secure* Registry  
 You need to provide OCP with TLS credentials to trust the bastion image registry. [Setting up additional trusted certificate authorities for builds](https://docs.openshift.com/container-platform/4.10/cicd/builds/setting-up-trusted-ca.html) provides the steps.  
