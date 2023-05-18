@@ -1,6 +1,6 @@
 # Bastion for IBM Cloud Pak on Airgap OpenShift   
 > Ravi Ramnarayan  
->  &copy; IBM v3.85  2023-05-18     
+>  &copy; IBM v3.86  2023-05-18     
 
 
 ## Goals
@@ -304,8 +304,7 @@ Recommend defining insecure registries manually in OCP. Edit the `image.config.o
   status:
     internalRegistryHostname: image-registry.openshift-image-registry.svc:5000  
   ```   
-
-    In this case, there is an insecure registry. Recommend editing the YAML manually on the OCP GUI, the interactive CLI `oc edit` or by downloading the YAML file. Alternatively, you could use `oc patch` with carefully composed JSON which specifies current and additonal registries. 
+  In this case, there is an insecure registry. Edit the YAML manually on the OCP GUI, the interactive CLI `oc edit` or by downloading the YAML file. Alternatively, you could use `oc patch` with carefully composed JSON which specifies current and additonal registries. 
 
 
 - The following command will result in a single insecure registry, even if there were others in the list.  
