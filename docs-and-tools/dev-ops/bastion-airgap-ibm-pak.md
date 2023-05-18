@@ -1,6 +1,6 @@
 # Bastion for IBM Cloud Pak on Airgap OpenShift   
 > Ravi Ramnarayan  
->  &copy; IBM v3.82  2023-05-17     
+>  &copy; IBM v3.85  2023-05-18     
 
 
 ## Goals
@@ -32,15 +32,14 @@ Our focus is [**Mirroring images with a bastion host**](https://www.ibm.com/docs
 
 - OpenShift `oc` command  
   Get it from your OCP installation.  
-
   ```
   mv oc /usr/local/bin/
   $ oc version
   Client Version: 4.8.36
-  ```
+  ```  
+
 - Install `ibm-pak`  
   Download the latest version from [IBM/ibm-pak/releases](https://github.com/IBM/ibm-pak/releases).
-
   ```
   tar -xf oc-ibm_pak-linux-amd64.tar.gz  
   mv oc-ibm_pak-linux-amd64 /usr/local/bin/oc-ibm_pak  
@@ -56,8 +55,6 @@ Our focus is [**Mirroring images with a bastion host**](https://www.ibm.com/docs
 
 - Environment variables   
   [Mirroring images with a bastion host](https://www.ibm.com/docs/en/cloud-paks/cp-integration/2022.4?topic=cluster-mirroring-images-bastion-host) section ***Set environment variables and download CASE files*** specifies `env` settings. [Operator, operand, and CASE versions](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=installation-operator-operand-case-versions) contains appropriate values for the desired APIC version.  
-
-  
   ```
   # For APIC  
   export CASE_NAME=ibm-apiconnect
@@ -81,7 +78,8 @@ Our focus is [**Mirroring images with a bastion host**](https://www.ibm.com/docs
 
 ## Private container registry  
   
-Your enterprise might have an existing private container registry. You could:
+Your enterprise might have an existing private container registry. You could:  
+
 - Use the existing corporate registry for IBM Cloud Pak images  
 - Create a new registry for IBM Cloud Pak images  
   You can make the private container registry *insecure* or *secure*, depending on your corporate standards. The *insecure* registry is the main flow of the document. Two tables contrast simple steps for *Insercure* & *Secure* registries. Complex *Secure* registry steps in **call out** segments.     
@@ -91,16 +89,17 @@ Your enterprise might have an existing private container registry. You could:
 
   ```
   mkdir -p /opt/registry/{auth,certs,data}
-  ```
+  ```  
+
 - Generate basic auth credentials  
   ```
   podman run --entrypoint htpasswd \
     docker.io/library/httpd:2 -Bbn <user> <paswd> > /opt/registry/auth/htpasswd
   ```
     <!-- docker.io/library/httpd:2 -Bbn mycoadmin mycoadmanure > /opt/registry/auth/htpasswd -->
-  - b provides the password via command  
-  - B stores the password using Bcrypt encryption  
-  - n display in standard output    
+    - b provides the password via command  
+    - B stores the password using Bcrypt encryption  
+    - n display in standard output    
 
 
 ### Create an *insecure* container registry  
@@ -138,12 +137,10 @@ podman run -d --name apic-registry -p 5000:5000 \
 
 
 - Generate mirror manifests  
-
   ```  
   oc ibm-pak generate mirror-manifests \
     $CASE_NAME $TARGET_REGISTRY --version $CASE_VERSION  
-  ```
-  
+  ```  
   The command creates files to configure OCP in `~/.ibm-pak/data/mirror/$CASE_NAME/$CASE_VERSION`:  
     `catalog-sources.yaml`  
     `catalog-sources-linux-<arch>.yaml` (arch specific catalog sources)  
@@ -155,37 +152,37 @@ podman run -d --name apic-registry -p 5000:5000 \
   >***Note***: Include this step in your dev-ops process.
 
 - Configure credentials for the IBM Entitled Registry on Bastion
-  - Define the file to hold credentials  
+    - Define the file to hold credentials  
 
-    ```
-    # File to hold cp.icr.io authentication for APIC
-    export REGISTRY_AUTH_FILE=/opt/registry/auth/cp-auth.json
-    ```
-  
-  - Populate `$REGISTRY_AUTH_FILE` with *IBM Entitlement Key* credentials for `cp.icr.io`  
-
-    ```
-    # podman login cp.icr.io
-    Username: cp
-    Password: <IBM Entitlement Key>
-    Login Succeeded!
-    ```  
-
-  - Populate `$REGISTRY_AUTH_FILE` with `apic-registry` credentials  
-
-    | Insecure Registry | Secure Registry |
-    | ----------------- | --------------- |
-    | `# podman login $TARGET_REGISTRY --tls-verify=false`  | `# podman login $TARGET_REGISTRY`  |
-    | `Username: <user>` |  `Username: <user>`  |
-    | `Password: <password>` |  `Password: <password>`  |
-    | `Login Succeeded!` | `Login Succeeded!` |
+      ```
+      # File to hold cp.icr.io authentication for APIC
+      export REGISTRY_AUTH_FILE=/opt/registry/auth/cp-auth.json
+      ```
     
+    - Populate `$REGISTRY_AUTH_FILE` with *IBM Entitlement Key* credentials for `cp.icr.io`  
+
+      ```
+      # podman login cp.icr.io
+      Username: cp
+      Password: <IBM Entitlement Key>
+      Login Succeeded!
+      ```  
+
+    - Populate `$REGISTRY_AUTH_FILE` with `apic-registry` credentials  
+
+      | Insecure Registry | Secure Registry |
+      | ----------------- | --------------- |
+      | `# podman login $TARGET_REGISTRY --tls-verify=false`  | `# podman login $TARGET_REGISTRY`  |
+      | `Username: <user>` |  `Username: <user>`  |
+      | `Password: <password>` |  `Password: <password>`  |
+      | `Login Succeeded!` | `Login Succeeded!` |
+      
 
 
-  - Confirm $REGISTRY_AUTH_FILE contains both credentials  
-    ```
-    cat $REGISTRY_AUTH_FILE
-    ```
+    - Confirm $REGISTRY_AUTH_FILE contains both credentials  
+      ```
+      cat $REGISTRY_AUTH_FILE
+      ```
 
 >***Note***: Backup specific files and folders from `~/.ibm-pak`, as detailed in [Rebuild bastion repository](#rebuild-bastion-repository).  
 
@@ -267,10 +264,12 @@ You may use the steps below or use OCP GUI.
 
 - Update the OCP `pull-secret`   
   >***Note***: The command will **replace** the *pull-secret* with the file's contents.  
-  ```
-  oc set data secret/pull-secret -n openshift-config \
-    --from-file=.dockerconfigjson=$PULL_SECRET_LOCATION
-  ```
+  
+    ```
+    oc set data secret/pull-secret -n openshift-config \
+      --from-file=.dockerconfigjson=$PULL_SECRET_LOCATION
+    ```  
+
 - Verify the OCP `pull-secret` using the OCP GUI  
 
 ### Create the OCP ImageContentSourcePolicy (ICSP)  
@@ -306,7 +305,7 @@ Recommend defining insecure registries manually in OCP. Edit the `image.config.o
     internalRegistryHostname: image-registry.openshift-image-registry.svc:5000  
   ```   
 
-  In this case, there is an insecure registry. Recommend editing the YAML manually on the OCP GUI, the interactive CLI `oc edit` or by downloading the YAML file. Alternatively, you could use `oc patch` with carefully composed JSON which specifies current and additonal registries. 
+    In this case, there is an insecure registry. Recommend editing the YAML manually on the OCP GUI, the interactive CLI `oc edit` or by downloading the YAML file. Alternatively, you could use `oc patch` with carefully composed JSON which specifies current and additonal registries. 
 
 
 - The following command will result in a single insecure registry, even if there were others in the list.  
@@ -402,29 +401,29 @@ When there is new release of APIC, you can update the existing registry. For exa
     ```
 
 - Install Catalog Sources  
-  > ***Note***:  
-  > Examine `~/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}` to determine if there any **\$ARCH** specific `catalog-sources` files.  
+  > ***Note***:  Examine `~/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}` to determine if there any **\$ARCH** specific `catalog-sources` files.  
 
-  - Apply catalog sources  
-    ```
-    oc apply -f ~/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}/catalog-sources.yaml
-    ```
+    - Apply catalog sources  
+      ```
+      oc apply -f ~/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}/catalog-sources.yaml
+      ```
 
-  - Apply **\$ARCH** specific catalog sources  
-    ```
-    oc apply -f \
-      ~/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}/catalog-sources-linux-${ARCH}.yaml
-    ```  
-  - List catalog sources defined in OCP:  
-    ```
-    oc get catalogsource -n openshift-marketplace
-    ```  
+    - Apply **\$ARCH** specific catalog sources  
+      ```
+      oc apply -f \
+        ~/.ibm-pak/data/mirror/${CASE_NAME}/${CASE_VERSION}/catalog-sources-linux-${ARCH}.yaml
+      ```  
+    - List catalog sources defined in OCP:  
+      ```
+      oc get catalogsource -n openshift-marketplace
+      ```  
+
 - Update APIC on OCP web console  
   Subscribe to APIC Operator Channel v3.2 and Operator Version 3.2.1, which corresponds to CASE_VERSION 4.0.3. Reference: [Operator, operand, and CASE versions](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=installation-operator-operand-case-versions).
 - Follow upgrade steps in the IBM API Connect document  
 
-****     
-****     
+*********    
+*********    
 ## Rebuild bastion repository  
 In case you need to **rebuild** the bastion repository, follow the steps below to build a replica of the images in the old registry.  
 
@@ -437,30 +436,30 @@ In case you need to **rebuild** the bastion repository, follow the steps below t
   ARCH  
 - Files from the old bastion  
   Assuming the old bastion was built with `ibm-pak`:  
-  - Config   
-    Transfer the file `.ibm-pak/config/config.yaml` to the same path in the new bastion.  
-  - CASE files  
-    Transfer files in `~/.ibm-pak/data/cases` to the new bastion using the same directory path.  
+    - Config   
+      Transfer the file `.ibm-pak/config/config.yaml` to the same path in the new bastion.  
+    - CASE files  
+      Transfer files in `~/.ibm-pak/data/cases` to the new bastion using the same directory path.  
 
->***Note***: Backup `~/.ibm-pak` as safety net.
+    >***Note***: Backup `~/.ibm-pak` as safety net.
 
 
 ### Build the new bastion  
 - Create the podman registry  
   Follow the recipe in [Create your private container registry](#create-your-private-container-registry).   
 - [Mirror images to your private container registry](#mirror-images-to-your-private-container-registry)   
-  - Section [Setup ibm-pak](#setup-ibm-pak)  
-    Start at **Generate mirror manifests** .   
-    >***Note***: The prior steps, especially `oc ibm-pak get $CASE_NAME --version $CASE_VERSION` will create a new manifest which is likely to lead to a different set of images, not a replica of the old bastion.  
-  - Section [Populate bastion with images](#populate-bastion-with-images)   
-    Run all steps.  
-  - Section [Configure the OCP cluster](#configure-the-ocp-cluster)  
-    Run all steps.  
+    - Section [Setup ibm-pak](#setup-ibm-pak)  
+      Start at **Generate mirror manifests** .   
+      >***Note***: The prior steps, especially `oc ibm-pak get $CASE_NAME --version $CASE_VERSION` will create a new manifest which is likely to lead to a different set of images, not a replica of the old bastion.  
+    - Section [Populate bastion with images](#populate-bastion-with-images)   
+      Run all steps.  
+    - Section [Configure the OCP cluster](#configure-the-ocp-cluster)  
+      Run all steps.  
 - Verify installation  
   IBM API Connect, DataPower & Common (Foundational) Services should be unaffected as the podman registry contains the same imagess as the old bastion.  
 
-****     
-****     
+*********    
+*********    
 ## Call Outs for Secure Registry  
 
 
@@ -581,6 +580,7 @@ If you really wish to use self signed certificates, see [Setting up additional t
   ```  
 #### Verify access to secure registry   
 >***Note***: Do not use the `-k` option to bypass TLS.  
+
   ```
   # curl --user <username:pswd> https://$TARGET_REGISTRY/v2/_catalog
   {"repositories":[]}
@@ -597,7 +597,6 @@ If you really wish to use self signed certificates, see [Setting up additional t
 You need to provide OCP with TLS credentials to trust the bastion image registry. [Setting up additional trusted certificate authorities for builds](https://docs.openshift.com/container-platform/4.10/cicd/builds/setting-up-trusted-ca.html) provides the steps.  
 
 - Create a ConfigMap in the `openshift-config` namespace containing the trusted certificates for the registries that use self-signed certificates. For each CA file, ensure the key in the ConfigMap is the hostname of the registry in the `hostname[..port]` format:  
-
   ```
   oc create configmap registry-cas -n openshift-config \
   --from-file=`hostname -f`..5000=/etc/pki/ca-trust/source/anchors/my-ca-cert.pem 
@@ -606,30 +605,28 @@ You need to provide OCP with TLS credentials to trust the bastion image registry
   If you have multiple registries, place them all in `registry-cas` with multiple `--from-file` entries.  
 
 - Modify in the cluster image configuration in `image.config.openshift.io/cluster`:    
-  Recommend editing the `image.config.openshift.io/cluster` manually through the OCP GUI or CLI:  
-  `oc edit image.config.openshift.io/cluster`  
-
-
-  ```
-  spec:
-    additionalTrustedCA:
-      name: registry-cas
-    allowedRegistriesForImport:
-      - domainName: '<$TARGET_REGISTRY>'
-        insecure: false
-  ```
+    Recommend editing the `image.config.openshift.io/cluster` manually through the OCP GUI or CLI:  
+    `oc edit image.config.openshift.io/cluster`  
+    ```
+    spec:
+      additionalTrustedCA:
+        name: registry-cas
+      allowedRegistriesForImport:
+        - domainName: '<$TARGET_REGISTRY>'
+          insecure: false
+    ```
+    Define additional `- domainName` entries for each *secure* registry.  
   
-  Define additional `- domainName` entries for each *secure* registry. 
-  
-  The image configuration entries in your installation might contain more entries. For an example, see **`image.config.openshift.io/cluster CR`** in **Procedure Item 1** of [9.2.4. Adding registries that allow image short names](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10/html/images/image-configuration#images-configuration-shortname_image-configuration)
+    The image configuration entries in your installation might contain more entries. For an example, see **`image.config.openshift.io/cluster CR`** in **Procedure Item 1** of [9.2.4. Adding registries that allow image short names](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.10/html/images/image-configuration#images-configuration-shortname_image-configuration)
 
 
 >[***Return to Call Out 2***](#return-from-call-out-2)
 
 
 
-****  
-****     
+*********    
+*********    
+
 ## References  
 
 #### Docker / Podman Registries  
