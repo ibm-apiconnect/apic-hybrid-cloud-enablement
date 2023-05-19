@@ -1,6 +1,6 @@
 # Bastion for IBM Cloud Pak on Airgap OpenShift   
 > Ravi Ramnarayan  
->  &copy; IBM v3.86  2023-05-18     
+>  &copy; IBM v3.88  2023-05-19     
 
 
 ## Goals
@@ -152,7 +152,7 @@ podman run -d --name apic-registry -p 5000:5000 \
   >***Note***: Include this step in your dev-ops process.
 
 - Configure credentials for the IBM Entitled Registry on Bastion
-    - Define the file to hold credentials  
+    - Define `$REGISTRY_AUTH_FILE` file to hold credentials  
 
       ```
       # File to hold cp.icr.io authentication for APIC
@@ -190,13 +190,7 @@ podman run -d --name apic-registry -p 5000:5000 \
 
 ### Populate bastion with images    
 
-The job could run for hours. Fork it to the background:  
-``` 
-# You are likely to encounter "too many requests" errors 
-# and run "oc image mirror" a few times. 
-# Define $REGISTRY_AUTH_FILE at the start of "oc image mirror"
-export REGISTRY_AUTH_FILE=/opt/registry/auth/cp-auth.json  
-```  
+Fork the job to the background, as it could run for hours.
 
 #### Redable version of `oc image mirror` command  
 
