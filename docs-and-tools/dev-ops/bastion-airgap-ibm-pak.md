@@ -1,6 +1,6 @@
 # Bastion for IBM Cloud Pak on Airgap OpenShift   
 > Ravi Ramnarayan  
->  &copy; IBM v3.88  2023-05-19     
+>  &copy; IBM v3.89  2023-05-22     
 
 
 ## Goals
@@ -82,7 +82,7 @@ Your enterprise might have an existing private container registry. You could:
 
 - Use the existing corporate registry for IBM Cloud Pak images  
 - Create a new registry for IBM Cloud Pak images  
-  You can make the private container registry *insecure* or *secure*, depending on your corporate standards. The *insecure* registry is the main flow of the document. Two tables contrast simple steps for *Insercure* & *Secure* registries. Complex *Secure* registry steps in **call out** segments.     
+  You can make the private container registry *insecure* or *secure*, depending on your corporate standards. The *insecure* registry is the main flow of the document. Two tables contrast simple steps for *Insecure* & *Secure* registries. Complex *Secure* registry steps are in **call out** segments.     
 
 ### Create local repositories for authentication, certificates & data  
 > ***Note***: instead of `/opt`, choose a base directory which is under your (non-root user) control.       
