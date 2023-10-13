@@ -1,7 +1,7 @@
 # DataPower Log Target without WebGUI - Example    
 #### IBM DataPower: Migrate to Cloud  
 > Ravi Ramnarayan  
->  &copy; IBM v1.25  2022-10-13  
+>  &copy; IBM v1.26  2022-10-13  
 
 ## Prolog
 - This document is a bare bones example. Please refer to [DataPower Config without WebGUI](./DataPower-Config-without-WebGUI.md) for context and explanations.  
@@ -11,7 +11,7 @@
 - [Setup DataPower on Docker](#setup-datapower-on-docker)  
 - [Create Log Target using WebGUI](#create-log-target-using-webgui)
 - [Isolate Log Target `config` statements](#isolate-log-target-config-statements)  
-- [Define k8s/OCP ConfigMap & Inject DataPower Log Target](#define-k8socp-configmap--inject-datapower-log-target)  
+- [Define k8s/OCP ConfigMap & Inject DataPower Log Target](#define-k8socp-configmap-inject-datapower-log-target)  
   Inject Log Target `config` into operator Custom Resource (CR) YAML.  
     - **k8s** GatewayCluster CR  
     - **OCP** APIConnectCluster CR  
