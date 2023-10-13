@@ -1,10 +1,10 @@
 # DataPower Log Target without WebGUI - Example    
 #### IBM DataPower: Migrate to Cloud  
 > Ravi Ramnarayan  
->  &copy; IBM v1.24  2022-05-04  
+>  &copy; IBM v1.25  2022-10-13  
 
 ## Prolog
-- This document is a bare bones example. Please refer to [DataPower Config without WebGUI](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/datapower/DataPower-Config-without-WebGUI.md) for context and explanations.  
+- This document is a bare bones example. Please refer to [DataPower Config without WebGUI](./DataPower-Config-without-WebGUI.md) for context and explanations.  
 - The IBM Techcon 2021 session [Re-imagining DataPower in the container world](https://techcon2021.ibm.com/agenda/session/578106) explains steps to develop DataPower assemblies and configurations on your workstation. *You might have to register to access the recording or download slides.*  
 
 ## Steps
@@ -291,7 +291,7 @@ This installation is on **k8s**.
   ```
 
 - Verify Log Target  
-  You can examine the new `filebeat` Log Target in WebGUI or by logging into the DataPower. See [DataPower Config without WebGUI](https://github.com/ibm-apiconnect/apic-hybrid-cloud-enablement/blob/master/docs-and-tools/datapower/DataPower-Config-without-WebGUI.md) for details.
+  You can examine the new `filebeat` Log Target in WebGUI or by logging into the DataPower. See [DataPower Config without WebGUI](./DataPower-Config-without-WebGUI.md) for details.
 
   - DataPower CLI  
     ```
