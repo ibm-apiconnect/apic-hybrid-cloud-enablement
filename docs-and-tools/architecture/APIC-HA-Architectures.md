@@ -2,7 +2,7 @@
 #### IBM API Connect: Architecture  
 
 >  Ravi Ramnarayan   
->  &copy; IBM v1.67  2023-05-04   
+>  &copy; IBM v1.68  2023-10-13   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -16,7 +16,7 @@ The data centers could be *on premises* or vendor sites. Ideally, the data cente
 > ***Tabled for a later discussion***  
 > Modern cloud vendors can provide a variation which might be less expensive. APIC subsystems comprise three pods in *Production* deployments. Within a single OCP cluster, each pod could run in different *regions* (vendor nomenclature vary). The subsystems will operate even if one region fails as two active pods provide adequate quorum.  
 
-## APIC Deployemnt Architecture  
+## APIC Deployment Architecture  
 We compare two APIC deployment architectures using the metrics *Recovery Time Objective (RTO)* and *Recovery Point Objective (RPO)*. Please see [Planning your deployment topology](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=deployment-planning-your-topology).   
 
 > **Recovery Point Objective (RPO)**  
