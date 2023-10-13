@@ -1,7 +1,7 @@
 # Port DataPower Services to OpenShift   
 #### IBM DataPower: Migrate to Cloud  
 >  Ravi Ramnarayan, Charlie Sumner    
->  &copy; IBM v1.36  2023-05-04      
+>  &copy; IBM v1.37  2023-10-13      
 
 ## Goals  
 - Demonstrate Proof of Technology (POT) to receive HTTP messages in DataPower and route them to the appropriate MQ queue.  
@@ -21,7 +21,7 @@ Paul Faulkner contributed the MQ server, defined queues and helped setup the too
   - Isolate configurations in `config`, `local` & `certs`  
     This POT does not use `certs`.   
 - Deploy configurations on DataPower on OpenShift (OCP)  
-  - Package configurations according to guidelines in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment) and [Domain Configuration](https://www.ibm.com/docs/en/datapower-operator/1.6?topic=guides-domain-configuration)     
+  - Package configurations according to guidelines in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=subsystem-customizing-datapower-deployment) and [Domain Configuration](https://www.ibm.com/docs/en/datapower-operator/1.8?topic=guides-domain-configuration)     
   - Inject configurations into DataPower through the APIConnectCluster CR  
   - Create an OCP Route to expose the DataPower MQ listener  
 
@@ -35,11 +35,11 @@ MQFYRE domain contains the files we need to migrate the POT solution to OpenShif
 > ***Only for DataPower newbies***: [DataPower newbie track](#datapower-newbie-track)  
 
 ## Deploy domain objects to DataPower on OpenShift (OCP)  
-The approach relies on features of `additionalDomainConfig` detailed in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.x?topic=subsystem-customizing-datapower-deployment):   
+The approach relies on features of `additionalDomainConfig` detailed in [Customizing a DataPower deployment](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=subsystem-customizing-datapower-deployment):   
 
   - Modify configuration of an existing domain  
   - Create a new domain, if the domain does not exist  
-    [Domain Configuration](https://www.ibm.com/docs/en/datapower-operator/1.6?topic=guides-domain-configuration) defines the constructs to inject `config`, `certs`, and `local` into DataPower OCP. This POT solution does not use `certs`.  
+    [Domain Configuration](https://www.ibm.com/docs/en/datapower-operator/1.8?topic=guides-domain-configuration) defines the constructs to inject `config`, `certs`, and `local` into DataPower OCP. This POT solution does not use `certs`.  
 
 ### Organize files in specific directories  
 Place `MQFYRE.cfg` in `config` and `Route2qByURI.xsl` in `local` directories:
