@@ -6,6 +6,8 @@
 *crt
 *csr
 *p12
+*bkp
+*tmp
 **/POC/**
 **/temp/**
 **/confidential/**
