@@ -2,7 +2,7 @@
 #### IBM API Connect: DevOps at Scale   
 
 >  Ravi Ramnarayan  
->  &copy; IBM v1.61  2021-12-20    
+>  &copy; IBM v1.62  2021-12-20    
 
 ## Goals  
   - Ensure business continuity while publishing new versions of API Products  
@@ -45,7 +45,7 @@ Possible drivers are:
   - Handle requests for assistance from a small group of consumers   
 
 ### Sample scripts  
-The following steps implement the [**Simple Scenario**](#simple-scenario) and migrate subscriptions using the command `products:migrate-subscriptions`. [Sample shell scripts](./scripts) illustrate the use of `apic toolkit` commands. You should modify and enhance them for use in your API Connect installations. For example, you could operate on more than one Consumer Organization in a single run or modify the commands to run within Catalog/Space.   
+The following steps implement the [**Simple Scenario**](#simple-scenario) and migrate subscriptions using the command `products:migrate-subscriptions`. Sample shell scripts illustrate the use of `apic toolkit` commands. You should modify and enhance them for use in your API Connect installations. For example, you could operate on more than one Consumer Organization in a single run or modify the commands to run within Catalog/Space.   
 
 - [`product-subscriptions-for-corg.sh`](./scripts/product-subscriptions-for-corg.sh)  
   Provides a CSV file with `Consumer-Org,App-Name,Source-Product:Version,Plan-Name` for a given Consumer Organization and Product:Version. You can assess the inventory of subscriptions and plan operations.  
