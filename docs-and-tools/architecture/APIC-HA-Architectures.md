@@ -2,7 +2,7 @@
 #### IBM API Connect: Architecture  
 
 >  Ravi Ramnarayan   
->  &copy; IBM v1.7  2023-10-18   
+>  &copy; IBM v1.8  2023-10-19   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -98,6 +98,7 @@ Start with [Installing API Connect](https://www.ibm.com/docs/en/api-connect/10.0
 - Make sure the DC2 cluster has the same certificates as APIC in DC1    
   See [Common Issuers & Gateway Secrets](#common-issuers--gateway-secrets).  
 
+> ***Note***: DataPower in DC2 could be on OCP or Kubernetes (K8s). This document details steps for DataPower on OCP. VMware and Linux are feasible platforms, but DataPower configuration and maintenance operations are more intense than OCP/K8s.
 
 #### Namespace & Operators    
 - Create a namespace, for example, `apigw2`   
