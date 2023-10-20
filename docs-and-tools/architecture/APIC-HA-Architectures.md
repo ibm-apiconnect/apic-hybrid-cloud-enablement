@@ -2,7 +2,7 @@
 #### IBM API Connect: Architecture  
 
 >  Ravi Ramnarayan   
->  &copy; IBM v1.8  2023-10-19   
+>  &copy; IBM v1.81  2023-10-19   
 
 ## Goals
 - Compare High Availability (HA) architectures for IBM API Connect **v10** (APIC) on OpenShift   
@@ -24,7 +24,7 @@ We compare two APIC deployment architectures using the metrics *Recovery Time Ob
 
 ### 1. Two Data Center Deployment (2DCDR) 
 
-![APIC-2DCDR](images/APIC-HA-Architecture-APIC-2DCDR-2.png)
+![APIC-2DCDR](images/APIC-HA-Architecture-APIC-2DCDR-2A.png)
 
 
 #### Pro  
@@ -51,7 +51,7 @@ We compare two APIC deployment architectures using the metrics *Recovery Time Ob
 
 ### 2. APIC with DataPower HA in DC2  
 
-![APIC-2DC-HA-Gwy](images/APIC-HA-Architecture-APIC-2DC-HA-Gwy-2.png)  
+![APIC-2DC-HA-Gwy](images/APIC-HA-Architecture-APIC-2DC-HA-Gwy-1A.png)  
 
 #### Pro  
 - High Availability (HA) for API traffic  
@@ -198,7 +198,7 @@ Follow steps in [Installing the Gateway subsystem](https://www.ibm.com/docs/en/a
   Obtain URL for endpoints from OCP Routes in project `apigw2`.
 
 #### Deploy Analytics in DC2   
-> ***Note***: Recommend skipping this section. You do not need Analytics in DC2, unless the API traffic is extremely high. You could install Analytics at a later date, as needed.  
+> ***Note***: *Optional*. Analytics is not needed in DC2, unless the API traffic is extremely high. You could install Analytics at a later date, if needed.  
 
 Deploy the Analytics subsystem in DC2 within the same namespace as the DataPower Gateway. The steps in [Installing the Analytics subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem) are similar to [Installing the Gateway subsystem](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem).   
 
