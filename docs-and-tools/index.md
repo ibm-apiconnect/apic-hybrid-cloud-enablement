@@ -13,4 +13,9 @@ The CP4I family comprises IBM AppConnect, MQ, Event Streams, API Connect, DataPo
 
 ---  
 
+**The code and artifacts in this repository are made available under the GNU Public License v2.**
+**This repository is provided 'AS-IS' with NO guarantee of official IBM support or fitness for purpose.**
+
+<!--
 >  &copy; IBM
+-->
