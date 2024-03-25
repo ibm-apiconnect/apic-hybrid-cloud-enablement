@@ -1,4 +1,6 @@
-# Create LDAP users in OIDC
+# Create LDAP users in OIDC   
+> Sila Kissuu  
+>  &copy; IBM v0.1  2024-03-25   
 
 
 1. Save LDAP/LUR registry users for each Provider Organization to a file:
