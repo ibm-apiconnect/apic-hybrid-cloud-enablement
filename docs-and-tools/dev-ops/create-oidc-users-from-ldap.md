@@ -29,7 +29,7 @@
     }
     ```
     
-3. Remove extra stuff (delete line 1,2 and last line; remove the string **“results”:**
+3. Remove extra stuff. Delete line 1,2 and the last line; remove the string '_**“results”:**_'
 4. Modified file
     
     ```json
