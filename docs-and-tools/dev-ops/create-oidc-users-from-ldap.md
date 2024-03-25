@@ -9,6 +9,8 @@
     apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
     ```
     
+    TIP: Use the `apic user-registries:list` command to get a list of registry names in your Provider Org
+
 2. File contents:
     
     ```json
@@ -133,3 +135,10 @@
     Error: The user with username user1@ibm.com already exists in the {yourOIDCRegistry} identity provider.
     Error: The user with username user2@ibm.com already exists in the {yourOIDCRegistry} identity provider.
     ```
+
+
+References:
+1. APIC Toolkit Reference - https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=information-toolkit-command-line-tool-reference
+
+
+    
