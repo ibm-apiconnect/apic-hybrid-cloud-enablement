@@ -91,8 +91,13 @@
 7. Verify file contents.
     
     ```json
-    cat output_files/user2@ibm.com.json
-    {"username": "user2@ibm.com", "email": "user2@ibm.com", "first_name": "User", "last_name": "Two"
+    ❯ cat output_files/user2@ibm.com.json
+    {
+        "username": "user2@ibm.com",
+        "email": "user2@ibm.com",
+        "first_name": "User",
+        "last_name": "Two"
+    }
     ```
     
 8. You can create each user in OIDC by passing their corresponding individual file to the **users:create** command.
