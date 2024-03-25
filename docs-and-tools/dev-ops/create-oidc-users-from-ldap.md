@@ -4,7 +4,7 @@
 1. Save LDAP/LUR registry users for each Provider Organization to a file:
     
     ```yaml
-    apic users:list -o ups -s apim.v10-cd-mgmt.rtp.raleigh.ibm.com --user-registry bluepages --fields username,email,first_name,last_name --format json > bluepages.json
+    apic users:list -o ups -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
     ```
     
 2. File contents:
@@ -14,16 +14,16 @@
       "total_results": 2,
       "results": [
         {
-          "username": "chris.veary@ibm.com",
-          "email": "Chris.Veary@ibm.com",
-          "first_name": "Chris",
-          "last_name": "Veary"
+          "username": "user1@ibm.com",
+          "email": "user1@ibm.com",
+          "first_name": "User",
+          "last_name": "One"
         },
         {
-          "username": "sila.kissuu@us.ibm.com",
-          "email": "sila.kissuu@us.ibm.com",
-          "first_name": "SILA",
-          "last_name": "KISSUU"
+          "username": "user2@ibm.com",
+          "email": "user2@ibm.com",
+          "first_name": "User",
+          "last_name": "Two"
         }
       ]
     }
@@ -35,16 +35,16 @@
     ```json
     [
       {
-        "username": "chris.veary@ibm.com",
-        "email": "Chris.Veary@ibm.com",
-        "first_name": "Chris",
-        "last_name": "Veary"
+        "username": "user1@ibm.com",
+        "email": "user1@ibm.com",
+        "first_name": "User",
+        "last_name": "One"
       },
       {
-        "username": "sila.kissuu@us.ibm.com",
-        "email": "sila.kissuu@us.ibm.com",
-        "first_name": "SILA",
-        "last_name": "KISSUU"
+        "username": "user2@ibm.com",
+        "email": "user2@ibm.com",
+        "first_name": "User",
+        "last_name": "Two"
       }
     ]
     ```
@@ -61,18 +61,18 @@
     import json
     import os
     
-    with open('/Users/sila/dev/apic/rest/bluepages.json', 'r') as file:
+    with open('/{pathTo}/ldap-users.json', 'r') as file:
         users = json.load(file)
     
-    output_dir = '/Users/sila/dev/apic/rest/output_files'    
+    output_dir = '/{pathTo}/output_files'    
     os.makedirs(output_dir, exist_ok=True)
     
     # Iterate over the array and process each object individually
     for obj in users:
-        # Extract name for the filename
+        # Extract email for the filename
         filename = obj["email"].lower() + ".json"
         
-        # Write each object to a separate file
+        # Write each user to a separate file
         with open(os.path.join(output_dir, filename), 'w') as file:
             json.dump(obj, file)
     ```
@@ -82,22 +82,22 @@
     ```json
     ❯ tree output_files
     output_files
-    ├── chris.veary@ibm.com.json
-    └── sila.kissuu@us.ibm.com.json
+    ├── user1@ibm.com.json
+    └── user2@ibm.com.json
     ```
     
 7. Verify file contents.
     
     ```json
-    cat output_files/sila.kissuu@us.ibm.com.json
-    {"username": "sila.kissuu@us.ibm.com", "email": "sila.kissuu@us.ibm.com", "first_name": "SILA", "last_name": "KISSUU"
+    cat output_files/user2@ibm.com.json
+    {"username": "user2@ibm.com", "email": "user2@ibm.com", "first_name": "User", "last_name": "Two"
     ```
     
 8. You can create each user in OIDC by passing their corresponding individual file to the **users:create** command.
     
     ```json
-    ❯ apic users:create -o ups -s apim.v10-cd-mgmt.rtp.raleigh.ibm.com --user-registry azure-ad-id-secret output_files/sila.kissuu@us.ibm.com.json
-    sila.kissuu-us.ibm.com    [state: enabled]   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/91e3a911-e687-4ae6-8867-0b31cbb85d04
+    ❯ apic users:create -o ups -s {yourMgmtServer} --user-registry {yourOIDCRegistry} output_files/user2@uibm.com.json
+    user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/91e3a911-e687-4ae6-8867-0b31cbb85d04
     ```
     
 9. You can loop through the files in the output directory to create all users in one command.
