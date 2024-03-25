@@ -137,8 +137,6 @@
     ```
 
 
-References:
-1. APIC Toolkit Reference - https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=information-toolkit-command-line-tool-reference
-
-
-    
+### References:
+- [APIC Toolkit Reference](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=information-toolkit-command-line-tool-reference)
+- [Migrate users from LUR to OIDC - APIC v10](https://community.ibm.com/community/user/integration/discussion/migrate-users-from-lur-to-oidc-apic-v10) 
