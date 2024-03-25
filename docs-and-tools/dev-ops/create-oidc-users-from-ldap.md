@@ -9,7 +9,8 @@
     apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
     ```
     
-    TIP: Use the `apic user-registries:list` command to get a list of registry names in your Provider Org
+    **TIP:**   
+    Use the `apic user-registries:list` command to get a list of registry names in your Provider Org
 
 2. File contents:
     
