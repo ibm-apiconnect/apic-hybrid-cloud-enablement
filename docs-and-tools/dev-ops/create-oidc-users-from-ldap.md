@@ -4,7 +4,7 @@
 1. Save LDAP/LUR registry users for each Provider Organization to a file:
     
     ```yaml
-    apic users:list -o ups -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
+    apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
     ```
     
 2. File contents:
@@ -96,7 +96,7 @@
 8. You can create each user in OIDC by passing their corresponding individual file to the **users:create** command.
     
     ```json
-    ❯ apic users:create -o ups -s {yourMgmtServer} --user-registry {yourOIDCRegistry} output_files/user2@ibm.com.json
+    ❯ apic users:create -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry} output_files/user2@ibm.com.json
     user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/91e3a911-e687-4ae6-8867-0b31cbb85d04
     ```
     
