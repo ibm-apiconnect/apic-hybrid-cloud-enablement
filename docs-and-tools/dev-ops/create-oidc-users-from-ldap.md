@@ -10,32 +10,38 @@
     ```
     
     **TIP:**   
-    Use the `apic user-registries:list` command to get a list of registry names in your Provider Org
+    Use the `apic user-registries:list` command to get a list of registry names in your Provider Org.
 
-2. File contents:
+2. File contents from Step 1:
     
     ```json
-    {
-      "total_results": 2,
-      "results": [
-        {
-          "username": "user1@ibm.com",
-          "email": "user1@ibm.com",
-          "first_name": "User",
-          "last_name": "One"
-        },
-        {
-          "username": "user2@ibm.com",
-          "email": "user2@ibm.com",
-          "first_name": "User",
-          "last_name": "Two"
-        }
-      ]
-    }
+      1 {
+      2     "total_results": 2,
+      3     "results": [
+      4         {
+      5             "username": "user1@ibm.com",
+      6             "email": "user1@ibm.com",
+      7             "first_name": "User",
+      8             "last_name": "One"
+      9         },
+     10         {
+     11             "username": "user2@ibm.com",
+     12             "email": "user2@ibm.com",
+     13             "first_name": "User",
+     14             "last_name": "Two"
+     15         }
+     16     ]
+     17 }
     ```
     
-3. Remove extra stuff. Delete line 1, 2 and the last line. Remove the string '_**“results”:**_'
-4. Modified file:
+3. Remove 4 extra elements so that you are left with an array of users. 
+- Delete line 1 
+- Delete line 2 
+- Remove the string '_**“results”:**_' from line 3
+- Delete the last line - line 17 in this example.   
+
+
+4. The updated file will look like this:
     
     ```json
     [
