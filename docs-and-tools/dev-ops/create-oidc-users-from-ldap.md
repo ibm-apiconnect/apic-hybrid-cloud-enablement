@@ -34,7 +34,7 @@
      17 }
     ```
     
-    Remove 4 extra elements so that you are left with an array of users. 
+3. Remove 4 extra elements so that you are left with an array of users. 
     * Delete line 1 
     * Delete line 2 
     * Remove the string '_**“results”:**_' from line 3
