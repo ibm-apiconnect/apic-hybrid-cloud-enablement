@@ -35,10 +35,10 @@
     ```
     
 3. Remove 4 extra elements so that you are left with an array of users. 
-   - Delete line 1 
-   - Delete line 2 
-   - Remove the string '_**“results”:**_' from line 3
-   - Delete the last line - line 17 in this example.   
+    * Delete line 1 
+    * Delete line 2 
+    * Remove the string '_**“results”:**_' from line 3
+    * Delete the last line - line 17 in this example.   
 
 
 4. The updated file will look like this:
