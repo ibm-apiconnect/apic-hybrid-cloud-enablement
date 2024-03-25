@@ -67,14 +67,14 @@
     output_dir = '/{pathTo}/output_files'    
     os.makedirs(output_dir, exist_ok=True)
     
-    # Iterate over the array and process each object individually
-    for obj in users:
+    # Iterate over the array and process each user individually
+    for user in users:
         # Extract email for the filename
-        filename = obj["email"].lower() + ".json"
+        filename = user["email"].lower() + ".json"
         
         # Write each user to a separate file
         with open(os.path.join(output_dir, filename), 'w') as file:
-            json.dump(obj, file)
+            json.dump(user, file, indent=4)
     ```
     
 6. Verify files were written. Number of files should equal number of users in the file obtained in Step 2 - see the value of the element "total_results" which in this case is 2.
@@ -96,7 +96,7 @@
 8. You can create each user in OIDC by passing their corresponding individual file to the **users:create** command.
     
     ```json
-    ❯ apic users:create -o ups -s {yourMgmtServer} --user-registry {yourOIDCRegistry} output_files/user2@uibm.com.json
+    ❯ apic users:create -o ups -s {yourMgmtServer} --user-registry {yourOIDCRegistry} output_files/user2@ibm.com.json
     user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/91e3a911-e687-4ae6-8867-0b31cbb85d04
     ```
     
