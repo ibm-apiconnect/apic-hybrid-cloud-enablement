@@ -119,9 +119,17 @@
     ❯ for file in *; do echo "creating user " $file; apic users:create -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry}$file; done 2>/tmp/error.log
     
     creating user  user1@ibm.com.json
-    user1-ibm.com    [state: enabled]   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/00942444-66cd-463d-9a49-44c3223f426e
+    user1-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/00942444-66cd-463d-9a49-44c3223f426e
     creating user  user2@ibm.com.json
-    user2-ibm.com    [state: enabled]   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/a0cb650a-d5b3-4929-8971-77606f9f90e3
+    user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/a0cb650a-d5b3-4929-8971-77606f9f90e3
     ```
 
     Note: errors encountered during user creation will be written to /tmp/error.log
+
+    For example, attempting to create a user that already exists will result in the following:
+    
+    ❯ cat /tmp/error.log
+    ```json
+    Error: The user with username user1@ibm.com already exists in the {yourOIDCRegistry} identity provider.
+    Error: The user with username user2@ibm.com already exists in the {yourOIDCRegistry} identity provider.
+    ```
