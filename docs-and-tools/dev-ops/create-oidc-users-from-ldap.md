@@ -100,4 +100,11 @@
     user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/91e3a911-e687-4ae6-8867-0b31cbb85d04
     ```
     
-9. You can loop through the files in the output directory to create all users in one command.
+9. Verify user exists:
+    ```json
+    ❯ apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry} | cut -d' ' -f1 | sed 's/-/@/'
+    user1@ibm.com
+    user2@ibm.com
+    ```
+
+10. You can loop through the files in the output directory to create all users in one **users:create** command.
