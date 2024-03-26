@@ -33,7 +33,7 @@
      16     ]
      17 }
     ```
-    Note down the value of "total_results". We will need it for verification purposes in Step 6.**
+    **Note down the value of "total_results". We will need it for verification purposes in Step 6.**  
 3. Remove 4 extra elements so that you are left with an array of users. 
     * Delete line 1 
     * Delete line 2 
