@@ -10,8 +10,9 @@
     ```
     
     **TIP:**  
-    + adjust path to "ldap-users.json:" as needed 
-    + Use the `apic user-registries:list` command to get a list of registry names in your Provider Org.
+    > Adjust path to "ldap-users.json:" as needed  
+
+    > Use the `apic user-registries:list` command to get a list of registry names in your Provider Org.
 
 2. File contents from Step 1:
     
