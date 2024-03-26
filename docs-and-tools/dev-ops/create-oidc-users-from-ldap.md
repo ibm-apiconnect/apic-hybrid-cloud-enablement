@@ -33,7 +33,7 @@
      16     ]
      17 }
     ```
-    
+    Note down the value of "total_results". We will need it for verification purposes in Step 6.**
 3. Remove 4 extra elements so that you are left with an array of users. 
     * Delete line 1 
     * Delete line 2 
@@ -91,10 +91,12 @@
 6. Verify files were written. Number of files should equal number of users in the file obtained in Step 2 - see the value of the element "total_results" which in this case is 2.
     
     ```json
-    ❯ tree output_files
+    ❯ tree -f output_files
     output_files
-    ├── user1@ibm.com.json
-    └── user2@ibm.com.json
+    ├── output_files/user1@ibm.com.json
+    └── output_files/user2@ibm.com.json
+
+    1 directory, 2 files
     ```
     
 7. Verify file contents.
