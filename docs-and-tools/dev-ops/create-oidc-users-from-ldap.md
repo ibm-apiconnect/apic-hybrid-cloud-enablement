@@ -9,8 +9,9 @@
     apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
     ```
     
-    **TIP:**   
-    Use the `apic user-registries:list` command to get a list of registry names in your Provider Org.
+    **TIP:**  
+      - adjust path to "ldap-users.json:" as needed 
+      - Use the `apic user-registries:list` command to get a list of registry names in your Provider Org.
 
 2. File contents from Step 1:
     
@@ -34,7 +35,7 @@
      17 }
     ```
     **Note down the value of "total_results". We will need it for verification purposes in Step 6.**  
-    
+
 3. Remove 4 extra elements so that you are left with an array of users. 
     * Delete line 1 
     * Delete line 2 
@@ -136,9 +137,9 @@
     user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/a0cb650a-d5b3-4929-8971-77606f9f90e3
     ```
 
-    Note: errors encountered during user creation will be written to /tmp/error.log
+    **Note:** errors encountered during user creation will be written to /tmp/error.log (adjust file path as needed).
 
-    For example, attempting to create a user that already exists will result in the following:
+    For example, attempts to create a user that already exists will result in the following:
     
     ❯ cat /tmp/error.log
     ```json
