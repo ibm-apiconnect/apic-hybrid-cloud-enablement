@@ -5,8 +5,10 @@
 
 1. Save LDAP/LUR registry users for each Provider Organization to a file:
     
-    ```yaml
-    apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourRegistry} --fields username,email,first_name,last_name --format json > ldap-users.json
+    ```
+    apic users:list -o {yourProviderOrg} -s {yourMgmtServer}   
+    --user-registry {yourRegistry} --fields username,email,first_name,last_name   
+    --format json > ldap-users.json
     ```
     
     **TIP:**  
@@ -91,10 +93,10 @@
             json.dump(user, file, indent=4)
     ```
     
-6. Verify files were written. Number of files should equal number of users in the file obtained in Step 2 - see the value of the element "total_results" which in this case is 2.
-    
+6. Verify files were written. Number of files should equal number of users in the file obtained in Step 2 - see the value of the element "total_results" which in this case is 2.  
+
+    `tree -f output_files`
     ```json
-    ❯ tree -f output_files
     output_files
     ├── output_files/user1@ibm.com.json
     └── output_files/user2@ibm.com.json
@@ -102,10 +104,10 @@
     1 directory, 2 files
     ```
     
-7. Verify file contents.
+7. Verify file contents.  
+    `cat output_files/user2@ibm.com.json`
     
     ```json
-    ❯ cat output_files/user2@ibm.com.json
     {
         "username": "user2@ibm.com",
         "email": "user2@ibm.com",
@@ -114,24 +116,28 @@
     }
     ```
     
-8. You can create each user in OIDC by passing their corresponding individual file to the **users:create** command.
-    
+8. You can create each user in OIDC by passing their corresponding individual file to the **users:create** command.  
+    ```
+    apic users:create -o {yourProviderOrg} -s {yourMgmtServer}  
+     --user-registry {yourOIDCRegistry} output_files/user2@ibm.com.json
+    ```  
+     
     ```json
-    ❯ apic users:create -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry} output_files/user2@ibm.com.json
     user2-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/91e3a911-e687-4ae6-8867-0b31cbb85d04
     ```
     
-9. Verify user exists:
+9. Verify user exists:  
+    `apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry} | cut -d' ' -f1 | sed 's/-/@/'`  
+    
+     
     ```json
-    ❯ apic users:list -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry} | cut -d' ' -f1 | sed 's/-/@/'
     user1@ibm.com
     user2@ibm.com
     ```
 
-10. You can loop through the files in the output directory to create all users in one **users:create** command.
+10. You can loop through the files in the output directory to create all users in one **users:create** command.  
+    `for file in *; do echo "creating user " $file; apic users:create -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry}$file; done 2>/tmp/error.log`
     ```json
-    ❯ for file in *; do echo "creating user " $file; apic users:create -o {yourProviderOrg} -s {yourMgmtServer} --user-registry {yourOIDCRegistry}$file; done 2>/tmp/error.log
-    
     creating user  user1@ibm.com.json
     user1-ibm.com    [state: enabled]   https://{yourMgmtServer}/api/user-registries/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7311fdd9-8cee-4a34-8fdc-398ae61f9426/users/00942444-66cd-463d-9a49-44c3223f426e
     creating user  user2@ibm.com.json
@@ -142,7 +148,7 @@
 
     For example, attempts to create a user that already exists will result in the following:
     
-    ❯ cat /tmp/error.log
+    `cat /tmp/error.log`
     ```json
     Error: The user with username user1@ibm.com already exists in the {yourOIDCRegistry} identity provider.
     Error: The user with username user2@ibm.com already exists in the {yourOIDCRegistry} identity provider.
