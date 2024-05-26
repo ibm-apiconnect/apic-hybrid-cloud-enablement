@@ -53,13 +53,10 @@ Response:
 mask-ip-error-policy:2.0.0   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/catalogs/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7335a813-3082-4c98-998b-a40ebea70abb/configured-gateway-services/9acd7b0a-bc2f-4ace-b3b7-9223e7f91db4/global-policies/7a392a17-a84a-4858-9409-4738c774cfe6
 ```
 ---
-**_NOTE:_**
+> **_NOTE:_**
 If your yaml is not structured correctly - for example, you used tabs for indentation instead of spaces - you might encounter an error such as this one:
 
-`apic global-policies:create --catalog sandbox --configured-gateway-service apic --org yourOrg --server yourAPIMserver --scope catalog global_error_policy.yaml`
-
-Response:
-```
+```yaml
 Error: The 'global_policy' property must include an 'info' object.
 ```
 
