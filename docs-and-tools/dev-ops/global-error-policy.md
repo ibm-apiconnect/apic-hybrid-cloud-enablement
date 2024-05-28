@@ -55,7 +55,7 @@ We demonstrate how to create and designate a global error policy. In this policy
 
 3. Upload the global error policy to a gateway service.
 
-    `apic global-policies:create --catalog sandbox --configured-gateway-service apic --org yourOrg --server platformEndpointUrl --scope catalog global_error_policy.yaml`
+    `apic global-policies:create --catalog sandbox --configured-gateway-service yourGwyService --org yourOrg --server platformEndpointUrl --scope catalog global_error_policy.yaml`
 
     **Response:**
     ```wrap
@@ -72,7 +72,7 @@ We demonstrate how to create and designate a global error policy. In this policy
 ## VERIFICATION
 
 1. Verify that the global policy has been successfully uploaded to the gateway service.  
-    `apic global-policies:list-all --catalog sandbox --configured-gateway-service apic --org yourOrg --server platformEndpointUrl --scope catalog`
+    `apic global-policies:list-all --catalog sandbox --configured-gateway-service yourGwyService --org yourOrg --server platformEndpointUrl --scope catalog`
 
     **Response:** 
     ```
@@ -82,8 +82,8 @@ We demonstrate how to create and designate a global error policy. In this policy
 
 2. Designate the global error policy for the gateway service.  
 
-   - Retrieve the URL of the policy  
-   `apic global-policies:get --catalog sandbox --configured-gateway-service apic --org yourOrg --server platformEndpointUrl --scope catalog mask-ip-error-policy:2.0.0 --fields url`  
+    - Retrieve the URL of the policy.  
+   `apic global-policies:get --catalog sandbox --configured-gateway-service yourGwyService --org yourOrg --server platformEndpointUrl --scope catalog mask-ip-error-policy:2.0.0 --fields url`  
    
       **Response:**  
         ```
@@ -91,7 +91,7 @@ We demonstrate how to create and designate a global error policy. In this policy
         ```  
 
         The retrieved URL is witten to a file named `GlobalPolicy.yaml` in the current working directory.  
-        
+
     - Edit the file and replace the word "url" with "global_policy_url". The contents of our edited `GlobalPolicy.yaml` are shown below.  
 
       ```yaml
@@ -100,7 +100,7 @@ We demonstrate how to create and designate a global error policy. In this policy
 
     - Designate this policy as the global error policy as shown:
 
-      `apic global-policy-errors:create --catalog sandbox --configured-gateway-service apic --org yourOrg --server yourAPIMserver --scope catalog GlobalPolicy.yaml`  
+      `apic global-policy-errors:create --catalog sandbox --configured-gateway-service yourGwyService --org yourOrg --server yourAPIMserver --scope catalog GlobalPolicy.yaml`  
 
       **Response:**  
 
@@ -109,7 +109,7 @@ We demonstrate how to create and designate a global error policy. In this policy
       ```  
     If you need to make changes to your policy (for example, due to gatewayscript compilation errors), simply edit you policy file and run the following command to update the gateway service:
 
-    `apic global-policies:update --catalog sandbox --configured-gateway-service apic --org yourOrg --server yourAPIMserver --scope catalog mask-ip-error-policy:2.0.0 global_error_policy.yaml`  
+    `apic global-policies:update --catalog sandbox --configured-gateway-service yourGwyService --org yourOrg --server yourAPIMserver --scope catalog mask-ip-error-policy:2.0.0 global_error_policy.yaml`  
 
     **Response:**  
     ```
