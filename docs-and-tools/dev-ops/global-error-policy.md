@@ -84,11 +84,9 @@ We demonstrate how to create and designate a global error policy. In this policy
 2. Designate the global error policy for the gateway service.  
 
    a) Retrieve the URL of the policy  
-
-    `apic global-policies:get --catalog sandbox --configured-gateway-service apic --org yourOrg --server platformEndpointUrl --scope catalog mask-ip-error-policy:2.0.0 --fields url`  
-
-    Response:  
-
+   `apic global-policies:get --catalog sandbox --configured-gateway-service apic --org yourOrg --server platformEndpointUrl --scope catalog mask-ip-error-policy:2.0.0 --fields url`  
+   
+   Response:  
     ```
     GlobalPolicy   GlobalPolicy.yaml   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/catalogs/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7335a813-3082-4c98-998b-a40ebea70abb/configured-gateway-services/9acd7b0a-bc2f-4ace-b3b7-9223e7f91db4/global-policies/7a392a17-a84a-4858-9409-4738c774cfe6
     ```  
