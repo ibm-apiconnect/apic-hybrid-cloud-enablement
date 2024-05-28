@@ -125,7 +125,7 @@ mask-ip-error-policy:2.0.0   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/ap
 
 You do not need to re-designate (Step 5c) the policy.
 
-6. Test the policy
+## Test the global error policy
 
     Happy Path (HTTP 200)
 
