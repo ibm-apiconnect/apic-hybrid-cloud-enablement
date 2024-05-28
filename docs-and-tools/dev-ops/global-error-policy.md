@@ -72,7 +72,7 @@ We demonstrate how to create and designate a global error policy. In this policy
 ## VERIFICATION
 
 1. Verify that the global policy has been successfully uploaded to the gateway service.  
-    `apic global-policies:list-all --catalog sandbox --configured-gateway-service apic --org ups --server apim.v10-cd-mgmt.rtp.raleigh.ibm.com --scope catalog`
+    `apic global-policies:list-all --catalog sandbox --configured-gateway-service apic --org yourOrg --server platformEndpointUrl --scope catalog`
 
     **Response:** 
     ```
@@ -89,17 +89,9 @@ We demonstrate how to create and designate a global error policy. In this policy
         ```
         GlobalPolicy   GlobalPolicy.yaml   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/catalogs/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7335a813-3082-4c98-998b-a40ebea70abb/configured-gateway-services/9acd7b0a-bc2f-4ace-b3b7-9223e7f91db4/global-policies/7a392a17-a84a-4858-9409-4738c774cfe6
         ```  
+
+        The retrieved URL is witten to a file named `GlobalPolicy.yaml` in the current working directory.  
         
-        The retrieved URL is witten to a file named `GlobalPolicy.yaml` in the current working directory. For example, the contents of our working directory are shown below:  
-
-        ```
-        .
-        ├── GlobalPolicy.yaml
-        └── global_error_policy.yaml
-
-        1 directory, 2 files
-        ```  
-
     - Edit the file and replace the word "url" with "global_policy_url". The contents of our edited `GlobalPolicy.yaml` are shown below.  
 
       ```yaml
