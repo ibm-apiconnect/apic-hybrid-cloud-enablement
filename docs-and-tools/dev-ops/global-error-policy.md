@@ -4,6 +4,8 @@
 
 We demonstrate how to create and designate a global error policy. In this policy we mask the IP address returned in the X-Client-Ip response header.
 
+## PROCEDURE
+
 1. Create a global policy yaml file.
 
     Contents of the global_error_policy.yaml used in this document:
@@ -66,9 +68,11 @@ We demonstrate how to create and designate a global error policy. In this policy
   ```yaml
   Error: The 'global_policy' property must include an 'info' object.
   ```
-
 ---
-4. Verify that the global policy has been successfully uploaded to the gateway service.
+
+## VERIFICATION
+
+1. Verify that the global policy has been successfully uploaded to the gateway service.
 ` apic global-policies:list-all --catalog sandbox --configured-gateway-service apic --org ups --server apim.v10-cd-mgmt.rtp.raleigh.ibm.com --scope catalog`
 
     Response: 
@@ -77,7 +81,7 @@ We demonstrate how to create and designate a global error policy. In this policy
     ```
 
 
-5. Designate the global error policy for the gateway service.
+2. Designate the global error policy for the gateway service.
   
    a) Retrieve the URL of the policy
 
