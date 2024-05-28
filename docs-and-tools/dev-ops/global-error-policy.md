@@ -115,7 +115,8 @@ We demonstrate how to create and designate a global error policy. In this policy
       ```
       global-policy-error   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/catalogs/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7335a813-3082-4c98-998b-a40ebea70abb/configured-gateway-services/9acd7b0a-bc2f-4ace-b3b7-9223e7f91db4/global-policy-error
       ```  
-    If you need to make changes to your policy (for example, due to gatewayscript compilation errors), simply edit you policy file and run the following command to update the gateway service:  
+    If you need to make changes to your policy (for example, due to gatewayscript compilation errors), simply edit you policy file and run the following command to update the gateway service:
+
     `apic global-policies:update --catalog sandbox --configured-gateway-service apic --org yourOrg --server yourAPIMserver --scope catalog mask-ip-error-policy:2.0.0 global_error_policy.yaml`  
 
     **Response:**  
@@ -123,7 +124,7 @@ We demonstrate how to create and designate a global error policy. In this policy
     mask-ip-error-policy:2.0.0   https://platform.v10-cd-mgmt.rtp.raleigh.ibm.com/api/catalogs/86441fe3-dfed-4fe6-99ef-6153b0d14afe/7335a813-3082-4c98-998b-a40ebea70abb/configured-gateway-services/9acd7b0a-bc2f-4ace-b3b7-9223e7f91db4/global-policies/7a392a17-a84a-4858-9409-4738c774cfe6
     ```
 
-You do not need to re-designate (Step 5c) the policy when doing updates.
+You do not need to re-designate the policy when making updates to an already designated policy.
 
 ## Test the global error policy
 
@@ -136,5 +137,5 @@ Error Path (HTTP 404)
 
 Notice the X-Client-IP header is masked in both success and error scenarios.  
 
-### References
+### Reference
 - APIC v10.0.5.x LTS Documentation: [Working with Global Policies](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=applications-working-global-policies)
