@@ -1,0 +1,5 @@
+# Oops -- remove additionalDomainConfig from default domain
+spec:
+  gateway:
+    additionalDomainConfig:
+    - name: "default"

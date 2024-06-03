@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mqfyre-gw-datapower
+spec:
+  selector:
+    app.kubernetes.io/component: datapower
+    app.kubernetes.io/instance: cp4i-apis-minimum-gw
+  ports:
+  - protocol: TCP
+    port: 8181
+    targetPort: 8181
+    name: mqfyre

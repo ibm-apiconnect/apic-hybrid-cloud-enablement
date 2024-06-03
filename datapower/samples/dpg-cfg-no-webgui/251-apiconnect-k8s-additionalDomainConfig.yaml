@@ -1,0 +1,10 @@
+# Add mycryptokey to apiconnect domain
+spec:
+  additionalDomainConfig:
+  - name: "apiconnect"
+    certs:
+    - certType: "usrcerts"
+      secret: "mycryptokey"
+    dpApp:
+      config:
+      - "111-apiconnect-mycryptokey-cfg"
