@@ -129,5 +129,5 @@ Error Path (HTTP 404)
 
 Notice the X-Client-IP header is masked in both success and error scenarios.  
 
-### Reference
+## Reference
 - APIC v10.0.5.x LTS Documentation: [Working with Global Policies](https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=applications-working-global-policies)
