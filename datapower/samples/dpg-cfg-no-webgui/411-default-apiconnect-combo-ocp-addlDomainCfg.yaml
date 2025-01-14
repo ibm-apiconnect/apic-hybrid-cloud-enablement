@@ -1,0 +1,15 @@
+# Combo default & apiconnect: web-mgmt & mycryptokey
+spec:
+  gateway:
+    additionalDomainConfig:
+    - name: "default"
+      dpApp:
+        config:
+        - "311-default-web-mgmt-cfg"
+    - name: "apiconnect"
+      certs:
+      - certType: "usrcerts"
+        secret: "mycryptokey"
+      dpApp:
+        config:
+        - "111-apiconnect-mycryptokey-cfg"
