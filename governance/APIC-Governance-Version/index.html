@@ -1,0 +1,2135 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../dev-ops/global-error-policy/">
+      
+      
+        <link rel="next" href="../APIC-Governance-in-APIM/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+    
+    
+      
+        <title>Governance & Version Control for API Products - IBM Hybrid Cloud Enablement</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.d7758b05.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#governance-version-control-for-api-products" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="IBM Hybrid Cloud Enablement" class="md-header__button md-logo" aria-label="IBM Hybrid Cloud Enablement" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Hybrid Cloud Enablement
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Governance &amp; Version Control for API Products
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IBM Hybrid Cloud Enablement" class="md-nav__button md-logo" aria-label="IBM Hybrid Cloud Enablement" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    IBM Hybrid Cloud Enablement
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    IBM Concert
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IBM Concert
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/AI/watsonx-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Watsonx integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    App 360 View
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            App 360 View
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/App%20360%20View/app-360-view/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App 360 view
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            OCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/OCP/Deployment-with-CPFS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment with CPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/OCP/Deployment-without-CPFS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment without CPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            REST
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/REST/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest api
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SBOM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            SBOM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/application-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/environment-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/generate-sbom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generate sbom
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/pipelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    User Management
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            User Management
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/User%20Management/idp-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Idp integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    VM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            VM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/VM/Deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ingestion
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Ingestion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/External-system-ingest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External system ingest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/api-upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Api upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/toolkit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Toolkit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/ui-upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ui upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/workflows/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/APIC-HA-Architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    High Availability with Two Data Centers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Datapower
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Datapower
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/DP-LogTarget-no-WebGUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataPower Log Target without WebGUI - Example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/DataPower-Config-without-WebGUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataPower Config without WebGUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/NBLeak-playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NB Leak playbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/Port-DataPower-Service-to-OpenShift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Port DataPower Services to OpenShift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dev ops
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dev ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/Publish-APIVersion-to-COrg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Products &amp; Consumer Subscriptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/api-key-for-sso/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generate API Key for SSO Login in 7 Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/bastion-airgap-ibm-pak/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bastion for IBM Cloud Pak on Airgap OpenShift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/create-oidc-users-from-ldap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create LDAP users in OIDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/global-error-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Error Policy: Mask Sensitive Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Governance &amp; Version Control for API Products
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Governance &amp; Version Control for API Products
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#collateral-effects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collateral effects
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-product-lifecycle" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Product Lifecycle
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-connect-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Connect options
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versions-for-api-products-api-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versions for API Products &amp; API definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Versions for API Products & API definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#governance-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      Governance Model
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api-api-products-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      API, API Products &amp; Versions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-mechanics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lifecycle mechanics
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lifecycle mechanics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scenario-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario A
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario B
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scenario-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scenario C
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Summary
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Summary">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#next-step-devops" class="md-nav__link">
+    <span class="md-ellipsis">
+      Next Step -- DevOps
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../APIC-Governance-in-APIM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIC Governance in APIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="governance-version-control-for-api-products">Governance &amp; Version Control for API Products<a class="headerlink" href="#governance-version-control-for-api-products" title="Permanent link">&para;</a></h1>
+<h4 id="ibm-api-connect-governance-models">IBM API Connect: Governance Models<a class="headerlink" href="#ibm-api-connect-governance-models" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>Ravi Ramnarayan<br />
+ &copy; IBM v1.51  2021-04-20    </p>
+</blockquote>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Ensure business continuity while publishing new versions of API Products  </li>
+<li>Control consumer subscriptions to API Products  </li>
+<li>Allow API provider teams to develop and test API quickly  </li>
+</ul>
+<h3 id="collateral-effects">Collateral effects<a class="headerlink" href="#collateral-effects" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Deprecate and Retire API Products gracefully  </li>
+</ul>
+<h2 id="api-product-lifecycle">API Product Lifecycle<a class="headerlink" href="#api-product-lifecycle" title="Permanent link">&para;</a></h2>
+<p>The diagram below is advertisement to lead you to the core of API management <a href="https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=products-product-lifecycle">The Product lifecycle</a>.  </p>
+<p><img alt="API Product Lifecycle" src="../images/A-04-ProductLifecycle.jpg" /></p>
+<p>You are familiar with publishing API Products. You may not have looked at Deprecate and Retire while racing towards implementation. In addition to explicit Deprecation, you can do the same implicitly by <a href="https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=product-superseding-another">Superseding a Product with another Product</a>. Similarly, <a href="https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=product-replacing-another">Replacing a Product with another Product</a> will Retire the existing API Product.</p>
+<blockquote>
+<p><strong>Note</strong>: <em><a href="https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=product-replacing-another">Replacing a Product with another Product</a></em> could be a new version of the same Product or a completely different Product.  </p>
+</blockquote>
+<h2 id="api-connect-options">API Connect options<a class="headerlink" href="#api-connect-options" title="Permanent link">&para;</a></h2>
+<p>You can configure API Connect (APIC) to suit your needs.  </p>
+<h4 id="do-you-want-strict-version-control-for-api-products">Do you want strict version control for API Products?<a class="headerlink" href="#do-you-want-strict-version-control-for-api-products" title="Permanent link">&para;</a></h4>
+<p><a href="https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=catalogs-creating-configuring">Creating and configuring Catalogs</a> contains steps to enable <em>Production Mode</em>. Once enabled, you must publish new versions of API Products. You will not be able to publish API Products with the same version number as existing products.  </p>
+<p><img alt="API Prod Catalog Flow" src="../images/A-10-Prod-Catalog.jpg" /></p>
+<blockquote>
+<p><strong>Note</strong>: You can enable <strong>Production Mode</strong> for catalogs even in non production environments, if you want to enforce versions for API Products.  </p>
+</blockquote>
+<h4 id="do-you-want-api-providers-to-develop-and-test-api-quickly">Do you want API providers to develop and test API quickly?<a class="headerlink" href="#do-you-want-api-providers-to-develop-and-test-api-quickly" title="Permanent link">&para;</a></h4>
+<p>If you do not enable <strong>Production Mode</strong> for a catalog, API developers might find it easier to publish new iterations.  </p>
+<p><img alt="API Dev Catalog Flow" src="../images/A-12-Dev-Catalog.jpg" />  </p>
+<blockquote>
+<p><strong>Note</strong>: You can disable <strong>Production Mode</strong> for catalogs even in production installations, if you do not want to enforce versions for API Products.</p>
+</blockquote>
+<h4 id="do-you-want-to-control-consumer-access-to-corporate-resources">Do you want to control consumer access to corporate resources?<a class="headerlink" href="#do-you-want-to-control-consumer-access-to-corporate-resources" title="Permanent link">&para;</a></h4>
+<p><a href="https://www.ibm.com/docs/en/api-connect/5.0.x?topic=apis-managing-application-lifecycle">Managing the application lifecycle</a> is available in APIC v5. If you have used this feature in APIC v5, you can continue to use it with API Connect <em>v5 compatible</em> (v5c) gateway services.</p>
+<p><img alt="API Prod AppLifecyle Flow" src="../images/A-14-Prod-AppLifecyle.jpg" /></p>
+<p><strong>Orange</strong> API calls from consumer application with approved subscriptions reach the corporate resource. <strong>Blue</strong> API calls from subscriptions without approvals receive response from a dummy endpoint. You will have to encode logic in the gateway script to test the context variable <em>client.app.lifecycle-state</em> and direct the request to the appropriate endpoint.</p>
+<blockquote>
+<p><strong>Note</strong>: Though Application Lifecycle is not fully documented for the new <em>API Gateway</em> service, the context variable <code>client.app.lifecycle-state</code> carries <code>PRODUCTION</code> or <code>DEVELOPMENT</code> when <em>Application Lifecyle</em> is enabled for the Catalog.   </p>
+</blockquote>
+<h2 id="versions-for-api-products-api-definitions">Versions for API Products &amp; API definitions<a class="headerlink" href="#versions-for-api-products-api-definitions" title="Permanent link">&para;</a></h2>
+<h3 id="governance-model">Governance Model<a class="headerlink" href="#governance-model" title="Permanent link">&para;</a></h3>
+<p>The Governance Model recommends operations to effect changes and guidelines to assign versions.  </p>
+<ul>
+<li>The <em>Version</em> aspect applies to API Definitions and API Products<br />
+  If you want to enforce versions you should enable <strong>Production Mode</strong> for the Catalogs in the Production or PreProd environments. You might want to disable <strong>Production Mode</strong> in lower environments to allow free rein to API developers.  </li>
+<li>The <em>Operations</em> aspect applies to API Products<br />
+  The Operation comprises the publish verb and associated options. You should compose and validate the command line before automating it in a pipeline. The Governance Model does not show an operation for <em>Bug Fix</em> in <em>Non Prod</em>. You might wish to use the operation <em>Replace last deployed</em> similar to <em>Major/Minor Release</em>.  </li>
+</ul>
+<p><img alt="Governance Model" src="../images/A-20-GovernanceModel.jpg" /></p>
+<blockquote>
+<p><strong>Note</strong>: The Governance matrix is an approach which you should modify to suit your needs.  </p>
+</blockquote>
+<ul>
+<li><strong>Major Release</strong>: Increment the major segment of the version for <em>API breaking</em> changes such as changes to API endpoints, invocation parameters or payload syntax. For example, change the version from 1.1.4 -&gt; 2.0.0. The new version of the API could be be published to the UAT and PROD catalogs with subscriptions migrated later. Once all the subscriptions are migrated, the older version of the API should be retired. The sequence of operations could be:<ul>
+<li>Publish v2.0.0  </li>
+<li>Deprecate v1.1.4  <blockquote>
+<p><em>Note</em>: Publish <strong>supersede</strong> combines <em>publish</em> and <em>deprecate</em> in one operation.</p>
+</blockquote>
+</li>
+<li>Migrate subscriptions from v1.1.4 to v2.0.0  </li>
+<li>Retire v1.1.4  </li>
+</ul>
+</li>
+</ul>
+<p>You can send email notices to consumers to keep them informed.  </p>
+<ul>
+<li><strong>Minor Release</strong>: Increment the minor segment of the version for <em>non-breaking</em> changes such as an optional calling parameter. For example, change the version from 1.0.0 -&gt; 1.1.0. You can replace the old version with the new, migrate subscriptions and retire the old version in single operation.  </li>
+<li><strong>Bug Fix</strong>: For bug fixes and/or patches to the API implementation which do not affect the API interface, you may increment the last segment in the version.  </li>
+</ul>
+<h3 id="api-api-products-versions">API, API Products &amp; Versions<a class="headerlink" href="#api-api-products-versions" title="Permanent link">&para;</a></h3>
+<p>API and API Products have different life cycles. The table below illustrates an approach. You can assign the version numbers according to your organizations practices.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th style="text-align: center;">API Product 1.0.0</th>
+<th style="text-align: center;">API Product 1.1.0</th>
+<th style="text-align: center;">API Product 2.0.0</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API-a</td>
+<td style="text-align: center;">1.0.0</td>
+<td style="text-align: center;">1.0.0</td>
+<td style="text-align: center;">1.0.1</td>
+<td>One bug fix change to API-a</td>
+</tr>
+<tr>
+<td>API-b</td>
+<td style="text-align: center;">1.0.0</td>
+<td style="text-align: center;">1.1.0</td>
+<td style="text-align: center;">1.1.0</td>
+<td>One minor change to API-b</td>
+</tr>
+<tr>
+<td>API-c</td>
+<td style="text-align: center;">1.1.0</td>
+<td style="text-align: center;">1.2.0</td>
+<td style="text-align: center;">2.0.0</td>
+<td>Minor &amp; major changes to API-c</td>
+</tr>
+<tr>
+<td>API-d</td>
+<td style="text-align: center;">n/a</td>
+<td style="text-align: center;">n/a</td>
+<td style="text-align: center;">3.1.0</td>
+<td>API-d is new to Product</td>
+</tr>
+</tbody>
+</table>
+<p><strong>API Version</strong><br />
+API Definitions exist within a Provider Organization. See <a href="https://www.ibm.com/docs/en/api-connect/10.0.1.x?topic=overview-api-connect-concepts">API Connect concepts</a>. API Connect allows you to have multiple versions of the same API which is typical during transitions. During steady states, you should try to have only one version of an API within a Provider Organization.  </p>
+<blockquote>
+<p><strong>Note</strong>: API and API Definition are synonymous. API belong to a Provider Organization and could be used in zero or many API Products.  </p>
+</blockquote>
+<h4 id="should-the-api-uri-contain-the-version-number">Should the API URI contain the version number?<a class="headerlink" href="#should-the-api-uri-contain-the-version-number" title="Permanent link">&para;</a></h4>
+<p>API Connect allows you to implement API URI according to your corporate standards. There are several articles on this topic: Some <em>Yes</em>, some <em>No-No</em> and a few fence straddlers. A small sample of articles:</p>
+<ul>
+<li><a href="https://medium.com/better-programming/best-practices-for-versioning-an-api-for-rest-apis-530a9398f311">Best Practices for Versioning REST APIs - Better Programming - Medium</a>  </li>
+<li><a href="https://docs.microsoft.com/en-us/azure/devops/integrate/concepts/rest-api-versioning?view=azure-devops">REST API versioning for Azure DevOps Services (and TFS) - Azure DevOps | Microsoft Docs</a>  </li>
+<li><a href="https://dzone.com/articles/rest-api-versioning-is-there-a-right-answer">REST API Versioning - Is There a Right Answer? - DZone Integration</a>  </li>
+<li><a href="https://stackoverflow.com/questions/389169/best-practices-for-api-versioning#398564">rest - Best practices for API versioning? - Stack Overflow</a>  </li>
+</ul>
+<h4 id="i-do-not-like-version-numbers-in-the-api-uri-because-my-consumers-will-be-forced-to-make-changes-when-i-bump-the-version-number-what-can-api-connect-do-for-me">I do not like version numbers in the API URI because my consumers will be forced to make changes when I bump the version number. What can API Connect do for me?<a class="headerlink" href="#i-do-not-like-version-numbers-in-the-api-uri-because-my-consumers-will-be-forced-to-make-changes-when-i-bump-the-version-number-what-can-api-connect-do-for-me" title="Permanent link">&para;</a></h4>
+<p>API Connect helps you provide a smooth experience for your consumers. You can implement API URI without version numbers and publish new versions as long as you <em>require consumers to subscribe to plans</em>. API Connect will direct the consumer invocations based on the Subscription ClientId. Consider the following scenario:  </p>
+<ul>
+<li><strong><em>api:v1</em></strong> &amp; <strong><em>api:v2</em></strong> share the same API name and URI (base path) which does not contain the version number  </li>
+<li><strong><em>api:v1</em></strong> is in product <strong><em>product:v1</em></strong>, <strong><em>api:v2</em></strong> is in product <strong><em>product:v2</em></strong>  </li>
+<li>both products are in the same Provider Organization &amp; Catalog  </li>
+<li>both products are active and require subscriptions to plans  </li>
+<li>both <strong><em>api:v1</em></strong> &amp; <strong><em>api:v2</em></strong> require <em>ClientId</em> in the HTTP header  </li>
+<li><strong><em>consumer-app-1</em></strong> subscribes to <strong><em>product:v1-plan</em></strong>, <strong><em>consumer-app-2</em></strong> subscribes to <strong><em>product:v2-plan</em></strong>  </li>
+</ul>
+<blockquote>
+<p><strong><em>Q</em></strong>: Will calls from <strong><em>consumer-1</em></strong> reach <strong><em>api:v1</em></strong> &amp; calls from <strong><em>consumer-2</em></strong> reach <strong><em>api:v2</em></strong> ?  <br />
+<strong><em>A</em></strong>: Yes &amp; Yes.<br />
+<strong><em>Q</em></strong>: Really, even though the plan names are the same?<br />
+<strong><em>A</em></strong>: Yes. <strong><em>api:v1</em></strong> &amp; <strong><em>api:v2</em></strong> have different Client ID's which are tied to different subscriptions.  </p>
+</blockquote>
+<p>Yes, this is hard to believe. I had to prove it to myself. Should you?
+- Clone <strong><em>api:v1</em></strong> to <strong><em>api:v2</em></strong><br />
+  Invoke a back end service which delivers a different result
+- Clone <strong><em>product:v1</em></strong> to <strong><em>product:v2</em></strong> <br />
+  Relate <strong><em>product:v2</em></strong> to <strong><em>api:v2</em></strong><br />
+- Publish both products to the same Gateway Service    </p>
+<blockquote>
+<p><strong>Note</strong>: Both products offer the same Paths and Operations  </p>
+</blockquote>
+<ul>
+<li>Subscribe <strong><em>consumer-app-1</em></strong> to <strong><em>product:v1-plan</em></strong>  </li>
+<li>Subscribe <strong><em>consumer-app-2</em></strong> to <strong><em>product:v2-plan</em></strong>    </li>
+<li>Invoke the each API with the appropriate app Client ID<br />
+  Do you see results from two different back end services?  <blockquote>
+<p><strong>Note</strong>: If you clone (copy) <strong><em>api:v1</em></strong> to <strong><em>api:v2</em></strong> and use the API Designer Test feature, calls will go to <strong><em>api:v1</em></strong> as the Client ID is still the same. To avoid this problem, publish <strong><em>api:v2</em></strong>, create a new consumer application and use an external tool such as Postman with the new consumer app Client ID.  </p>
+</blockquote>
+</li>
+</ul>
+<h2 id="lifecycle-mechanics">Lifecycle mechanics<a class="headerlink" href="#lifecycle-mechanics" title="Permanent link">&para;</a></h2>
+<p>Let's walk through a few scenarios and illustrate commands which can be used for DevOps in Production. The scenarios below traverse Production and Staging environments. You are likely to have different settings in each environment. For example, credentials and back end services are likely to be different in Production and lower installations. You should ensure the promotion processes accommodate the differences.  </p>
+<h3 id="scenario-a">Scenario A<a class="headerlink" href="#scenario-a" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Env</th>
+<th style="text-align: center;">Catalogs</th>
+<th style="text-align: center;">API Products</th>
+<th style="text-align: center;">API Definitions</th>
+<th style="text-align: center;">Subscriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Production</td>
+<td style="text-align: center;">ProdMode-Enabled</td>
+<td style="text-align: center;">Version Reqd</td>
+<td style="text-align: center;">Version Reqd</td>
+<td style="text-align: center;">Required</td>
+</tr>
+<tr>
+<td style="text-align: center;">Staging</td>
+<td style="text-align: center;">ProdMode-Enabled</td>
+<td style="text-align: center;">Version Reqd</td>
+<td style="text-align: center;">Version Reqd</td>
+<td style="text-align: center;">Required</td>
+</tr>
+<tr>
+<td style="text-align: center;">Development</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Optional</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pro">Pro<a class="headerlink" href="#pro" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enforces version control for API Products &amp; Definitions in Production  </li>
+<li>Enables rate limits based on Subscription ClientId in Production   </li>
+<li>Allows API developers freedom to create, publish and test API quickly  </li>
+</ul>
+<h4 id="contra">Contra<a class="headerlink" href="#contra" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Version control for API Definitions and API Products is confusing <br />
+  API Products &amp; Definitions travel on separate tracks which can intersect. For example, you might create a new version of an API Definition. When you include the new API version in an existing Product, you should assign a new version to the API Product.  </li>
+<li>Assigning version numbers is tricky<br />
+  API developer teams have to reach consensus on the practice of assigning version numbers.  </li>
+</ul>
+<h3 id="scenario-b">Scenario B<a class="headerlink" href="#scenario-b" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Env</th>
+<th style="text-align: center;">Catalogs</th>
+<th style="text-align: center;">API Products</th>
+<th style="text-align: center;">API Definitions</th>
+<th style="text-align: center;">Subscriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Production</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Required</td>
+</tr>
+<tr>
+<td style="text-align: center;">Staging</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Required</td>
+</tr>
+<tr>
+<td style="text-align: center;">Development</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Optional</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pro_1">Pro<a class="headerlink" href="#pro_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Enables rate limits based on Subscription ClientId in Production   </li>
+<li>Allows API developers freedom to create, publish and test API quickly in all environments including Production  </li>
+</ul>
+<h4 id="contra_1">Contra<a class="headerlink" href="#contra_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Does not enforce version control for API Products &amp; Definitions in Production<br />
+  Lack of version control can lead to problems. The situation can become complex if some API developer teams decide to use versions.  </li>
+</ul>
+<h3 id="scenario-c">Scenario C<a class="headerlink" href="#scenario-c" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Env</th>
+<th style="text-align: center;">Catalogs</th>
+<th style="text-align: center;">API Products</th>
+<th style="text-align: center;">API Definitions</th>
+<th style="text-align: center;">Subscriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">Production</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Optional</td>
+</tr>
+<tr>
+<td style="text-align: center;">Staging</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Optional</td>
+</tr>
+<tr>
+<td style="text-align: center;">Development</td>
+<td style="text-align: center;">ProdMode-Disabled</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Version Opt.</td>
+<td style="text-align: center;">Optional</td>
+</tr>
+</tbody>
+</table>
+<h4 id="pro_2">Pro<a class="headerlink" href="#pro_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Allows API developers freedom to create, publish and test API quickly in all environments including Production  </li>
+</ul>
+<h4 id="contra_2">Contra<a class="headerlink" href="#contra_2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Does not enforce version control for API Products &amp; Definitions in Production<br />
+  Lack of version control can lead to problems. The situation can become complex if some API developer teams decide to use versions.  </li>
+<li>Cannot apply rate limits based on Subscription ClientId in Production <br />
+  You could enforce rate limits through other features of DataPower.  </li>
+</ul>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li>IBM API Connect supports the API Product Lifecyle and helps you tailor different Governance Models for Production &amp; non production installations.  </li>
+<li>IBM API Connect gives you the option to design your API without embedding the <em>version number</em> in the URI. You could include the <em>version number</em> in the URI if it suits your business practice.  </li>
+</ul>
+<h3 id="next-step-devops">Next Step -- DevOps<a class="headerlink" href="#next-step-devops" title="Permanent link">&para;</a></h3>
+<p>In a future article, we will present how you could manage API Products, Plans and Consumer Subscriptions at scale using DevOps.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tooltips", "navigation.instant", "navigation.indexes", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

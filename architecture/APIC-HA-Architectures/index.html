@@ -1,0 +1,2069 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../IBM%20Concert/workflows/overview/">
+      
+      
+        <link rel="next" href="../../datapower/DP-LogTarget-no-WebGUI/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+    
+    
+      
+        <title>High Availability with Two Data Centers - IBM Hybrid Cloud Enablement</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.d7758b05.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#high-availability-with-two-data-centers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="IBM Hybrid Cloud Enablement" class="md-header__button md-logo" aria-label="IBM Hybrid Cloud Enablement" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Hybrid Cloud Enablement
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              High Availability with Two Data Centers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IBM Hybrid Cloud Enablement" class="md-nav__button md-logo" aria-label="IBM Hybrid Cloud Enablement" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    IBM Hybrid Cloud Enablement
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    IBM Concert
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IBM Concert
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/AI/watsonx-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Watsonx integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    App 360 View
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            App 360 View
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/App%20360%20View/app-360-view/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App 360 view
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            OCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/OCP/Deployment-with-CPFS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment with CPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/OCP/Deployment-without-CPFS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment without CPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            REST
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/REST/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest api
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SBOM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            SBOM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/application-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/environment-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/generate-sbom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generate sbom
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/pipelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    User Management
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            User Management
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/User%20Management/idp-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Idp integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    VM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            VM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/VM/Deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ingestion
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Ingestion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/External-system-ingest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External system ingest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/api-upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Api upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/toolkit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Toolkit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/ui-upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ui upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/workflows/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    High Availability with Two Data Centers
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    High Availability with Two Data Centers
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prologue" class="md-nav__link">
+    <span class="md-ellipsis">
+      Prologue
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#apic-deployment-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIC Deployment Architecture
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="APIC Deployment Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-two-data-center-deployment-2dcdr" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Two Data Center Deployment (2DCDR)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-apic-with-datapower-ha-in-dc2" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. APIC with DataPower HA in DC2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-apic-with-datapower-ha-in-dc2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy APIC with DataPower HA in DC2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy APIC with DataPower HA in DC2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-apic-in-dc1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install APIC in DC1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-datapower-in-dc2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Install DataPower in DC2
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      References
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Datapower
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Datapower
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/DP-LogTarget-no-WebGUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataPower Log Target without WebGUI - Example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/DataPower-Config-without-WebGUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataPower Config without WebGUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/NBLeak-playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NB Leak playbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../datapower/Port-DataPower-Service-to-OpenShift/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Port DataPower Services to OpenShift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dev ops
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dev ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/Publish-APIVersion-to-COrg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Products &amp; Consumer Subscriptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/api-key-for-sso/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generate API Key for SSO Login in 7 Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/bastion-airgap-ibm-pak/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bastion for IBM Cloud Pak on Airgap OpenShift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/create-oidc-users-from-ldap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create LDAP users in OIDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/global-error-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Error Policy: Mask Sensitive Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../governance/APIC-Governance-Version/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Governance &amp; Version Control for API Products
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../governance/APIC-Governance-in-APIM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIC Governance in APIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="high-availability-with-two-data-centers">High Availability with Two Data Centers<a class="headerlink" href="#high-availability-with-two-data-centers" title="Permanent link">&para;</a></h1>
+<h4 id="ibm-api-connect-architecture">IBM API Connect: Architecture<a class="headerlink" href="#ibm-api-connect-architecture" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>Ravi Ramnarayan <br />
+ &copy; IBM v1.81  2023-10-19   </p>
+</blockquote>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Compare High Availability (HA) architectures for IBM API Connect <strong>v10</strong> (APIC) on OpenShift   <ul>
+<li><a href="#1-two-data-center-deployment-2dcdr">Two Data Center Deployment (2DCDR)</a>  </li>
+<li><a href="#2-apic-with-datapower-ha-in-dc2">APIC with DataPower HA in DC2</a></li>
+</ul>
+</li>
+<li>Outline steps to deploy <a href="#deploy-apic-with-datapower-ha-in-dc2">APIC with DataPower HA in DC2</a>    </li>
+</ul>
+<h2 id="prologue">Prologue<a class="headerlink" href="#prologue" title="Permanent link">&para;</a></h2>
+<p>The data centers could be <em>on premises</em> or vendor sites. Ideally, the data centers should be in different locations with separate lines for power and communication.   </p>
+<blockquote>
+<p><strong><em>Tabled for a later discussion</em></strong><br />
+Modern cloud vendors can provide a variation which might be less expensive. APIC subsystems comprise three pods in <em>Production</em> deployments. Within a single OCP cluster, each subsystem pod could run in different <em>regions</em> (vendor nomenclature vary), providing a quorum of two active pods even if a region failed.  </p>
+</blockquote>
+<h2 id="apic-deployment-architecture">APIC Deployment Architecture<a class="headerlink" href="#apic-deployment-architecture" title="Permanent link">&para;</a></h2>
+<p>We compare two APIC deployment architectures using the metrics <em>Recovery Time Objective (RTO)</em> and <em>Recovery Point Objective (RPO)</em>. Please see <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=deployment-planning-your-topology">Planning your deployment topology</a>.   </p>
+<blockquote>
+<p><strong>Recovery Point Objective (RPO)</strong><br />
+ The RPO measures how far back in time the recovery point is, and therefore how much new data is lost. An <strong>RPO of zero</strong> would assert that no data is lost, but such a solution is often a <strong>compromise against the cost and performance</strong> of the system.</p>
+</blockquote>
+<h3 id="1-two-data-center-deployment-2dcdr">1. Two Data Center Deployment (2DCDR)<a class="headerlink" href="#1-two-data-center-deployment-2dcdr" title="Permanent link">&para;</a></h3>
+<p><img alt="APIC-2DCDR" src="../images/APIC-HA-Architecture-APIC-2DCDR-2A.png" /></p>
+<h4 id="pro">Pro<a class="headerlink" href="#pro" title="Permanent link">&para;</a></h4>
+<ul>
+<li>High Availability (HA) for API traffic<br />
+  With adequate capacity, the DataPower cluster in a single DC could hand the full load if the other DC fails.  </li>
+<li>RPO for API Products<br />
+  Near zero RPO for published API Products.  </li>
+<li>RPO for Consumer Subscriptions<br />
+  Near zero RPO for Consumer Subscriptions. If the business requires near zero RPO, the <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=deployment-two-data-center-strategy-kubernetes-openshift">Two data center deployment strategy on Kubernetes and OpenShift</a> is the appropriate choice.  </li>
+<li><em>RTO Failover</em> <br />
+  If the <em>active</em> APIC cluster fails, it is possible to activate APIC on the other cluster in a short period. APIC functions cannot be performed until the completion of <em>RTO Failover</em>.   <ul>
+<li>Consumer Organizations cannot initiate new Subscriptions   </li>
+<li>Provider Organizations cannot publish or update API Products   </li>
+</ul>
+</li>
+</ul>
+<h4 id="contra">Contra<a class="headerlink" href="#contra" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Maintenance<br />
+  Typically, APIC upgrades occur two to four times a year. Each upgrade bears the burden of increased time and effort.       <ul>
+<li><a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=connect-maintaining-two-data-center-deployment">Maintaining a two data center deployment</a> is complex  </li>
+<li><a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=connect-upgrading-two-data-center-deployment-kubernetes-openshift">Upgrading a two data center deployment</a> specifies operations on <strong>both</strong> OCP clusters within the <strong>same</strong> change window    </li>
+</ul>
+</li>
+<li><em>RTO to restore 2DCDR</em> requires Disaster Recovery (DR)   <br />
+  The goal of DR is to restore 2DCDR, which is different from <em>RTO Failover</em>. DR processes need to be aware of the <em>active</em> APIC site, adding complexity.       </li>
+<li>Costs<br />
+  Software license and operational costs might be higher than the other architectures. Please verify specifics for your installations.  </li>
+</ul>
+<h3 id="2-apic-with-datapower-ha-in-dc2">2. APIC with DataPower HA in DC2<a class="headerlink" href="#2-apic-with-datapower-ha-in-dc2" title="Permanent link">&para;</a></h3>
+<p><img alt="APIC-2DC-HA-Gwy" src="../images/APIC-HA-Architecture-APIC-2DC-HA-Gwy-1A.png" />  </p>
+<h4 id="pro_1">Pro<a class="headerlink" href="#pro_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>High Availability (HA) for API traffic<br />
+  Same HA level as the 2DCDR architecture.  </li>
+<li>RPO for API Products<br />
+  It is possible to achieve <em>near zero</em> RPO tolerance with a backup soon after publishing products.  </li>
+<li>Maintenance   <ul>
+<li>Upgrade of APIC &amp; DataPower in DC1 using the <em>top level</em> APIConnectCluster Custom Resource (CR) requires less effort than upgrading APIC subsystems of the 2DCDR deployment</li>
+<li>DataPower subsystem in DC2 can be upgraded in a <strong>separate change window</strong><br />
+  Starting with APIC v10.0.5.x, all fixpacks (fourth position) of APIC will be compatible with DataPower v10.5.0.x. The flexibility allows a relaxed schedule to upgrade DC2.     </li>
+</ul>
+</li>
+<li>Disaster Recovery (DR) <br />
+  The process is less complex than DR for 2DCDR and should to be quicker to complete.   </li>
+<li>Costs<br />
+  Software license and operational costs might be lower than for 2DCDR. Please verify specifics for your installations.  </li>
+</ul>
+<h4 id="contra_1">Contra<a class="headerlink" href="#contra_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>RPO for <em>Consumer Subscriptions</em> depends on the frequency of backups<br />
+  It is possible to capture backups frequently, but RPO will not be comparable to 2DCDR's <em>near zero</em> tolerance for Consumer Subscriptions.    </li>
+<li>RTO depends on DR<br />
+  The recovery time can be reduced with automation and DR drills. However, it is likely to take longer than the <em>RTO Failover</em> enabled by 2DCDR. APIC functions cannot be performed until DR restores normal service.   <ul>
+<li>Consumer Organizations cannot initiate new Subscriptions   </li>
+<li>Provider Organizations cannot publish or update API Products  </li>
+</ul>
+</li>
+</ul>
+<h2 id="deploy-apic-with-datapower-ha-in-dc2">Deploy APIC with DataPower HA in DC2<a class="headerlink" href="#deploy-apic-with-datapower-ha-in-dc2" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong><em>Note</em></strong>: The steps below assume a <em>connected</em> OCP. Adjust as needed for <em>air-gapped</em> OCP.     </p>
+</blockquote>
+<ul>
+<li><em>Connected</em> OCP<br />
+  Use <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=installation-installing-operators">Installing operators</a>   </li>
+<li><em>Air-gapped</em> OCP<br />
+  Use the appropriate recipe in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-air-gapped-installation">Air-gapped installation</a>.  </li>
+</ul>
+<h3 id="install-apic-in-dc1">Install APIC in DC1<a class="headerlink" href="#install-apic-in-dc1" title="Permanent link">&para;</a></h3>
+<p>Start with <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-api-connect">Installing API Connect</a> and follow the trail to <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-top-level-cr-openshift">Installing with the top-level CR on OpenShift</a>.</p>
+<h3 id="install-datapower-in-dc2">Install DataPower in DC2<a class="headerlink" href="#install-datapower-in-dc2" title="Permanent link">&para;</a></h3>
+<p><a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=integration-installing-subsystem-crs-in-different-namespaces-environments">Installing with subsystem CRs in different namespaces or environments</a> provides the overview. We will install the DataPower subsystem in DC2.    </p>
+<ul>
+<li>OCP in DC2 needs preparations such as <code>pull-secret</code> and the IBM Operator Catalog source.</li>
+<li>Install the IBM API Connect operator in <code>apigw2</code> namespace in DC2   <br />
+  This is the same operator used to install APIC in DC1.  </li>
+<li>The versions of the operators in DC1 &amp; DC2 must be the same      </li>
+<li>Make sure the DC2 cluster has the same certificates as APIC in DC1  <br />
+  See <a href="#common-issuers--gateway-secrets">Common Issuers &amp; Gateway Secrets</a>.  </li>
+</ul>
+<blockquote>
+<p><strong><em>Note</em></strong>: DataPower in DC2 could be on OCP or Kubernetes (K8s). This document details steps for DataPower on OCP. VMware and Linux are feasible platforms, but DataPower configuration and maintenance operations are more intense than OCP/K8s.</p>
+</blockquote>
+<h4 id="namespace-operators">Namespace &amp; Operators<a class="headerlink" href="#namespace-operators" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Create a namespace, for example, <code>apigw2</code>   <blockquote>
+<p><strong><em>Note</em></strong>: Follow your naming conventions. <code>apigw2</code> is just an example.  </p>
+</blockquote>
+</li>
+<li>Install the <em>IBM API Connect</em> operator in <code>apigw2</code>     <ul>
+<li>Subscribe to the same channel as the parent APIC in DC1    </li>
+</ul>
+</li>
+</ul>
+<h4 id="common-issuers-gateway-secrets">Common Issuers &amp; Gateway Secrets<a class="headerlink" href="#common-issuers-gateway-secrets" title="Permanent link">&para;</a></h4>
+<p>Follow steps in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem">Installing the Gateway subsystem</a> section <strong>Before you begin</strong>.    </p>
+<ul>
+<li>
+<p>Clone <code>ingress-ca</code> from the primary OCP in DC1    <br />
+<a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem">Installing the Gateway subsystem</a> section <strong>Before you begin</strong> Step 1. Detailed instructions are in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-extracting-management-ingress-ca-certificates">Extracting the Management ingress-ca certificates</a>.  </p>
+<ul>
+<li>Apply the extracted <code>ingress-ca</code> to the DC2 Project <code>apigw2</code><br />
+<code>oc apply -f &lt;your ingress-ca extract.yaml&gt; -n apigw2</code>  </li>
+<li>Get the complete name of <code>ingress-ca</code><br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>oc get secret | grep ingress-ca    
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>apis-minimum-ingress-ca            kubernetes.io/tls         3      16m    
+</code></pre></div><blockquote>
+<p><strong><em>Note</em></strong>: The secret name in your installation will be different.  </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>Define Common issuers and Gateway secrets <br />
+  Obtain YAML from <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem">Installing the Gateway subsystem</a> section <strong>Before you begin</strong> Step 2.</p>
+<ul>
+<li>
+<p>Edit the YAML and set the Issuer <code>spec.ca.secretName</code> to value above<br />
+See example <a href="../scripts/230-common-issuer-and-gateway-certs.yaml">230-common-issuer-and-gateway-certs.yaml</a> which sets <code>spec.ca.secretName</code> to <code>apis-minimum-ingress-ca</code>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>apiVersion: cert-manager.io/v1
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kind: Issuer
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>metadata:
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  name: ingress-issuer
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>  labels: {
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    app.kubernetes.io/instance: &quot;management&quot;,
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    app.kubernetes.io/managed-by: &quot;ibm-apiconnect&quot;,
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    app.kubernetes.io/name: &quot;ingress-issuer&quot;
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>  }
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>spec:
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>  ca:
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    secretName: apis-minimum-ingress-ca
+</code></pre></div></p>
+</li>
+<li>
+<p>Apply your YAML to Project <code>apigw2</code> in DC2  <br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>oc apply -f &lt;your-common-issuer-and-gateway-certs.yaml&gt; -n apigw2  
+</code></pre></div></p>
+</li>
+<li>
+<p>Confirm <em>issuers</em> were created and ready for use<br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>oc get issuers -n apigw2    
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>NAME                 READY   AGE    
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>ingress-issuer       True    13m    
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>selfsigning-issuer   True    13m    
+</code></pre></div></p>
+</li>
+<li>
+<p>Confirm the creation of <em>gateway secrets</em> <br />
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>oc get secrets -n apigw2 | grep gateway    
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>gateway-peering                    kubernetes.io/tls         3      24s  
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>gateway-service                    kubernetes.io/tls         3      24s  
+</code></pre></div></p>
+<blockquote>
+<p><strong><em>Note</em></strong>: "3" in the third column indicates three components in the TLS (good).  </p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="deploy-datapower-gateway-in-dc2">Deploy DataPower Gateway in DC2<a class="headerlink" href="#deploy-datapower-gateway-in-dc2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Create Gateway <em>admin secret</em> <br />
+  You could use the same password as in the DC1 OCP or assign a different value. Create the secret in DC2 namespace <code>apigw2</code>:<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>oc -n apigw2 create secret generic &lt;gw_admin_secret_name&gt; \
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>  --from-literal=password=&lt;gw_admin_pswd&gt;  
+</code></pre></div></p>
+</li>
+<li>
+<p>Define the APIGW Gateway  <br />
+  Copy the YAML from <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem">Installing the Gateway subsystem</a> section <strong>Procedure</strong> Step 2. Use values appropriate to your installation. Recommend following naming conventions in DC1.    </p>
+<ul>
+<li><strong>$</strong> fields  </li>
+<li><code>metadata.name</code> (optional, default value is okay)  </li>
+<li><code>metadata.labels.app.kubernetes.io/name</code> (optional, default value is okay) </li>
+<li><code>spec.adminUser.secretName</code> should be <code>&lt;gw_admin_secret_name&gt;</code>, which you created in the previous step    </li>
+</ul>
+</li>
+</ul>
+<p>See <strong>Example Values</strong> in <a href="../scripts/250-apigateway_cr.yaml">250-apigateway_cr.yaml</a>.  </p>
+<blockquote>
+<p><strong><em>Note</em></strong>:  Example values are NOT shell script substitutions. You should edit the file manually.<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>oc apply -f &lt;your-apigateway_cr.yaml&gt; -n apigw2`  
+</code></pre></div>
+  It takes about five minutes to create the GatewayCluster.     </p>
+</blockquote>
+<ul>
+<li>
+<p>Is the gateway running?  <br />
+<code>oc get GatewayCluster -n apigw2</code>  </p>
+</li>
+<li>
+<p>Is the Gateway Management endpoint active?<br />
+<code>curl -k https://&lt;spec.gatewayManagerEndpoint.hosts.name&gt;/health</code><br />
+  should return:<br />
+<code>{"status":"ok"}</code>  </p>
+</li>
+<li>
+<p>Register DC2 Gateway Service in the parent DC1 APIC<br />
+  Obtain URL for endpoints from OCP Routes in project <code>apigw2</code>.</p>
+</li>
+</ul>
+<h4 id="deploy-analytics-in-dc2">Deploy Analytics in DC2<a class="headerlink" href="#deploy-analytics-in-dc2" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong><em>Note</em></strong>: <em>Optional</em>. Analytics is not needed in DC2, unless the API traffic is extremely high. You could install Analytics at a later date, if needed.  </p>
+</blockquote>
+<p>Deploy the Analytics subsystem in DC2 within the same namespace as the DataPower Gateway. The steps in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem">Installing the Analytics subsystem</a> are similar to <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=environments-installing-gateway-subsystem">Installing the Gateway subsystem</a>.   </p>
+<ul>
+<li>
+<p>Common Issuers<br />
+  Nothing to do. Been there, done that in <a href="#common-issuers--gateway-secrets">Common Issuers &amp; Gateway Secrets</a>. Skip over section <strong>Before you begin</strong> in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem">Installing the Analytics subsystem</a>.    </p>
+</li>
+<li>
+<p>Obtain YAML from section <strong>Procedure</strong>  Step 1 of <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=openshift-installing-analytics-subsystem">Installing the Analytics subsystem</a>.   </p>
+</li>
+<li>
+<p>Ensure <code>clientSubjectDN</code> in DC2 Analytics matches the  <strong>Subject common name</strong> of DC1 APIC CMC <em>Analytics ingestion keystore</em>.</p>
+<ul>
+<li>In APIC 10.0.5.1, the <em>Analytics ingestion keystore</em> <strong>Subject common name</strong> is <code>a7s-ing-client</code>      </li>
+<li>Modify <code>spec.ingestion.clientSubjectDN</code> to match<br />
+The sample file <a href="../scripts/280-analytics_cr.yaml">280-analytics_cr.yaml</a>  contains the correction.  </li>
+</ul>
+</li>
+<li>
+<p>Create the Analytics subsystem in DC2<br />
+<code>oc apply -f &lt;your-analytics_cr.yaml&gt; -n apigw2</code>  </p>
+</li>
+<li>
+<p>Is the Analytics subsystem running?  <br />
+<code>oc get AnalyticsCluster -n apigw2</code>  </p>
+</li>
+<li>
+<p>Register DC2 Analytics in the parent DC1 APIC   </p>
+</li>
+<li>Associate DC2 Analtyics with the DC2 DataPower Service    </li>
+</ul>
+<h4 id="troubleshoot">Troubleshoot<a class="headerlink" href="#troubleshoot" title="Permanent link">&para;</a></h4>
+<p>If you encounter a <code>403 Forbidden</code> error while registering the Analytics Service, the cause is likely to be a mismatch of <code>clientSubjectDN</code>.  </p>
+<ul>
+<li>
+<p>Find the pod named <code>mtls-gw</code><br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>$ oc get pod -n apigw2 | grep mtls
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>analytics-mtls-gw-6bbc4cbfcc-gchhc                       1/1     Running     0             17m
+</code></pre></div></p>
+</li>
+<li>
+<p>Do the logs show mismatched <code>clientSubjectDN</code>? <br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>  $ oc logs analytics-mtls-gw-6bbc4cbfcc-gchhc | grep 403 -A2 -B1  
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>  10.254.20.1 - - [05/Dec/2022:23:08:36 +0000] &quot;GET /_healthz HTTP/1.1&quot; 200 2 &quot;-&quot; &quot;kube-probe/1.23&quot;  
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>  2022/12/05 23:08:36 [warn] 12#12: *2106 [lua] access_by_lua(nginx.conf:56):7: rejected request because certificate subject &#39;CN=a7s-ing-client&#39; did not match expected &#39;CN=a7s-ing-client,O=cert-manager&#39;, client: 10.254.12.1, server: ai.apps.fainted.myco.com, request: &quot;POST /analytics-service-registration-create?admin=true&amp;management=true HTTP/1.1&quot;, host: &quot;ai.apps.fainted.myco.com&quot;  
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  10.254.12.1 - - [05/Dec/2022:23:08:36 +0000] &quot;POST /analytics-service-registration-create?admin=true&amp;management=true HTTP/1.1&quot; 403 159 &quot;-&quot; &quot;axios/0.26.1&quot;  
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  10.254.20.1 - - [05/Dec/2022:23:08:46 +0000] &quot;GET /_healthz HTTP/1.1&quot; 200 2 &quot;-&quot; &quot;kube-probe/1.23&quot;  
+</code></pre></div>
+</li>
+<li>
+<p>Fix the problem  <br />
+  Modify the <code>clientSubjectDN</code> in the DC2 AnalyticsCluster YAML.   </p>
+</li>
+</ul>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li><a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=certificates-certificate-lists-cloud-pak-integration">Certificate lists for Cloud Pak for Integration</a>  </li>
+<li><a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=certificates-list-issuers-ca-secrets">List of Issuers, CA certificates, and secrets</a>  </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tooltips", "navigation.instant", "navigation.indexes", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

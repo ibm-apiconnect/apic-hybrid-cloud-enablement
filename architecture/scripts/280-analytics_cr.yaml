@@ -1,0 +1,59 @@
+#
+# $APP_PRODUCT_VERSION="10.0.5.1"
+# $PROFILE="n1xc2.m16"
+# $STACK_HOST="apps.apic.cp.myco.com"
+# $LICENSE_ACCEPTANCE="true"
+# $LICENSE_USE="nonproduction"
+# $LICENSE_ID="L-RJON-CEBLEH"   -- same as APIC
+# $STORAGE_CLASS="rook-ceph-block"
+# $DATA_VOLUME_SIZE=50Gi
+
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+apiVersion: analytics.apiconnect.ibm.com/v1beta1
+kind: AnalyticsCluster
+metadata:
+  name: analytics
+  labels: {
+    app.kubernetes.io/instance: "analytics",
+    app.kubernetes.io/managed-by: "ibm-apiconnect",
+    app.kubernetes.io/name: "analytics"
+  }
+spec:
+  version: $APP_PRODUCT_VERSION
+  license:
+    accept: $LICENSE_ACCEPTANCE
+    use: $LICENSE_USE
+    license: '$LICENSE_ID'
+  profile: $PROFILE
+  microServiceSecurity: certManager
+  certManagerIssuer:
+    name: selfsigning-issuer
+    kind: Issuer
+  ingestion:
+    endpoint:
+      annotations:
+        cert-manager.io/issuer: ingress-issuer
+      hosts:
+      - name: ai.$STACK_HOST
+        secretName: analytics-ai-endpoint
+    # clientSubjectDN: CN=analytics-ingestion-client,O=cert-manager
+    clientSubjectDN: CN=a7s-ing-client
+  storage:
+    type: shared
+    shared:
+      volumeClaimTemplate:
+        storageClassName: $STORAGE_CLASS
+        volumeSize: $DATA_VOLUME_SIZE

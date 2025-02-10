@@ -1,0 +1,2189 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../NBLeak-playbook/">
+      
+      
+        <link rel="next" href="../../dev-ops/Publish-APIVersion-to-COrg/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.3">
+    
+    
+      
+        <title>Port DataPower Services to OpenShift - IBM Hybrid Cloud Enablement</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.d7758b05.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#port-datapower-services-to-openshift" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="IBM Hybrid Cloud Enablement" class="md-header__button md-logo" aria-label="IBM Hybrid Cloud Enablement" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            IBM Hybrid Cloud Enablement
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Port DataPower Services to OpenShift
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91s2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="IBM Hybrid Cloud Enablement" class="md-nav__button md-logo" aria-label="IBM Hybrid Cloud Enablement" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    IBM Hybrid Cloud Enablement
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    IBM Concert
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            IBM Concert
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    AI
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            AI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/AI/watsonx-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Watsonx integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    App 360 View
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            App 360 View
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/App%20360%20View/app-360-view/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    App 360 view
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    OCP
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            OCP
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/OCP/Deployment-with-CPFS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment with CPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/OCP/Deployment-without-CPFS/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment without CPFS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            REST
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/REST/rest-api/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest api
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    SBOM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            SBOM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/application-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Application definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/environment-definition/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment definition
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/generate-sbom/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generate sbom
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/SBOM/pipelines/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Pipelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_7" id="__nav_2_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    User Management
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_7">
+            <span class="md-nav__icon md-icon"></span>
+            User Management
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/User%20Management/idp-integration/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Idp integration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_8" id="__nav_2_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    VM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_8">
+            <span class="md-nav__icon md-icon"></span>
+            VM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/VM/Deployment/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deployment
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_9" id="__nav_2_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Ingestion
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_9">
+            <span class="md-nav__icon md-icon"></span>
+            Ingestion
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/External-system-ingest/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    External system ingest
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/api-upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Api upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/toolkit/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Toolkit
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/ingestion/ui-upload/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ui upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_10" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_10" id="__nav_2_10_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_10">
+            <span class="md-nav__icon md-icon"></span>
+            Workflows
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IBM%20Concert/workflows/overview/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/APIC-HA-Architectures/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    High Availability with Two Data Centers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Datapower
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Datapower
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DP-LogTarget-no-WebGUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataPower Log Target without WebGUI - Example
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../DataPower-Config-without-WebGUI/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DataPower Config without WebGUI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../NBLeak-playbook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NB Leak playbook
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Port DataPower Services to OpenShift
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Port DataPower Services to OpenShift
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#goals" class="md-nav__link">
+    <span class="md-ellipsis">
+      Goals
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Goals">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#audience" class="md-nav__link">
+    <span class="md-ellipsis">
+      Audience
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acknowledgments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Acknowledgments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approach
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deploy-domain-objects-to-datapower-on-openshift-ocp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deploy domain objects to DataPower on OpenShift (OCP)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Deploy domain objects to DataPower on OpenShift (OCP)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#organize-files-in-specific-directories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organize files in specific directories
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#place-domain-configurations-in-configmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      Place domain configurations in configMap
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inject-domain-into-datapower" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inject domain into DataPower
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expose-the-datapower-mq-listening-port" class="md-nav__link">
+    <span class="md-ellipsis">
+      Expose the DataPower MQ listening port
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#validate-mq-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validate MQ flow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#develop-datapower-config-on-your-desktop" class="md-nav__link">
+    <span class="md-ellipsis">
+      Develop DataPower config on your desktop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Develop DataPower config on your desktop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datapower-newbie-track" class="md-nav__link">
+    <span class="md-ellipsis">
+      DataPower newbie track
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Dev ops
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Dev ops
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/Publish-APIVersion-to-COrg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    API Products &amp; Consumer Subscriptions
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/api-key-for-sso/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Generate API Key for SSO Login in 7 Steps
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/bastion-airgap-ibm-pak/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bastion for IBM Cloud Pak on Airgap OpenShift
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/create-oidc-users-from-ldap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create LDAP users in OIDC
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dev-ops/global-error-policy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Global Error Policy: Mask Sensitive Data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Governance
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Governance
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../governance/APIC-Governance-Version/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Governance &amp; Version Control for API Products
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../governance/APIC-Governance-in-APIM/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    APIC Governance in APIM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="port-datapower-services-to-openshift">Port DataPower Services to OpenShift<a class="headerlink" href="#port-datapower-services-to-openshift" title="Permanent link">&para;</a></h1>
+<h4 id="ibm-datapower-migrate-to-cloud">IBM DataPower: Migrate to Cloud<a class="headerlink" href="#ibm-datapower-migrate-to-cloud" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p>Ravi Ramnarayan, Charlie Sumner  <br />
+ &copy; IBM v1.37  2023-10-13      </p>
+</blockquote>
+<h2 id="goals">Goals<a class="headerlink" href="#goals" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Demonstrate Proof of Technology (POT) to receive HTTP messages in DataPower and route them to the appropriate MQ queue.  </li>
+<li>Illustrate process to port DataPower configurations from legacy platforms to DataPower on OpenShift.</li>
+</ul>
+<h3 id="audience">Audience<a class="headerlink" href="#audience" title="Permanent link">&para;</a></h3>
+<p>Experienced IT professionals who are experts in DataPower and OpenShift.   </p>
+<h3 id="acknowledgments">Acknowledgments<a class="headerlink" href="#acknowledgments" title="Permanent link">&para;</a></h3>
+<p>Paul Faulkner contributed the MQ server, defined queues and helped setup the tool to verify message receipt.  </p>
+<h2 id="approach">Approach<a class="headerlink" href="#approach" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Legacy solution  </li>
+<li>An existing solution on DataPower (DPG) physical appliance, VMware or Linux<br />
+    For this POT, the solution comprises MQ objects and an XSL file to route incoming messages to the appropriate queue. All configurations are in the domain <strong>MQFYRE</strong>.    </li>
+<li>Validate the solution with messages and MQ queues    </li>
+<li>Isolate configurations in <code>config</code>, <code>local</code> &amp; <code>certs</code><br />
+    This POT does not use <code>certs</code>.   </li>
+<li>Deploy configurations on DataPower on OpenShift (OCP)  </li>
+<li>Package configurations according to guidelines in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=subsystem-customizing-datapower-deployment">Customizing a DataPower deployment</a> and <a href="https://www.ibm.com/docs/en/datapower-operator/1.8?topic=guides-domain-configuration">Domain Configuration</a>     </li>
+<li>Inject configurations into DataPower through the APIConnectCluster CR  </li>
+<li>Create an OCP Route to expose the DataPower MQ listener  </li>
+</ul>
+<h4 id="legacy-pot-components">Legacy POT components<a class="headerlink" href="#legacy-pot-components" title="Permanent link">&para;</a></h4>
+<p>MQFYRE domain contains the files we need to migrate the POT solution to OpenShift  </p>
+<ul>
+<li>MQ related configurations are in <code>config/MQFYRE.cfg</code>    </li>
+<li>Route logic is in <code>local/Route2qByURI.xsl</code>  </li>
+</ul>
+<h4 id="diversion-from-the-datapower-expert-track">Diversion from the DataPower expert track<a class="headerlink" href="#diversion-from-the-datapower-expert-track" title="Permanent link">&para;</a></h4>
+<blockquote>
+<p><strong><em>Only for DataPower newbies</em></strong>: <a href="#datapower-newbie-track">DataPower newbie track</a>  </p>
+</blockquote>
+<h2 id="deploy-domain-objects-to-datapower-on-openshift-ocp">Deploy domain objects to DataPower on OpenShift (OCP)<a class="headerlink" href="#deploy-domain-objects-to-datapower-on-openshift-ocp" title="Permanent link">&para;</a></h2>
+<p>The approach relies on features of <code>additionalDomainConfig</code> detailed in <a href="https://www.ibm.com/docs/en/api-connect/10.0.5.x_lts?topic=subsystem-customizing-datapower-deployment">Customizing a DataPower deployment</a>:   </p>
+<ul>
+<li>Modify configuration of an existing domain  </li>
+<li>Create a new domain, if the domain does not exist<br />
+<a href="https://www.ibm.com/docs/en/datapower-operator/1.8?topic=guides-domain-configuration">Domain Configuration</a> defines the constructs to inject <code>config</code>, <code>certs</code>, and <code>local</code> into DataPower OCP. This POT solution does not use <code>certs</code>.  </li>
+</ul>
+<h3 id="organize-files-in-specific-directories">Organize files in specific directories<a class="headerlink" href="#organize-files-in-specific-directories" title="Permanent link">&para;</a></h3>
+<p>Place <code>MQFYRE.cfg</code> in <code>config</code> and <code>Route2qByURI.xsl</code> in <code>local</code> directories:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cd &lt;path&gt;  
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$ tree
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>.
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── config
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>│   └── MQFYRE.cfg
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>└── local
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    └── Route2qByURI.xsl
+</code></pre></div>
+<h3 id="place-domain-configurations-in-configmap">Place domain configurations in <code>configMap</code><a class="headerlink" href="#place-domain-configurations-in-configmap" title="Permanent link">&para;</a></h3>
+<h4 id="local"><code>local</code><a class="headerlink" href="#local" title="Permanent link">&para;</a></h4>
+<p>The POT example is <a href="../samples/dp-mq-flow/local/Route2qByURI.xsl">Route2qByURI.xsl</a>.  </p>
+<ul>
+<li>
+<p>Create tarball for files in <code>&lt;path&gt;/local</code>. The DataPower operator will deploy the files to DPG <code>local:///</code> within the MQFYRE domain.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>tar --directory=&lt;path&gt;/local -czf MQFYRE-local.tar.gz .
+</code></pre></div>
+  Ensure the tarball is correct:
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>$ tar -tzf MQFYRE-local.tar.gz
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>./
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>./Route2qByURI.xsl
+</code></pre></div>
+  In this POT we have only one file in <code>local</code>. If your solution calls for multiple files, place all files in <code>local</code> and create the tarball.  </p>
+</li>
+<li>
+<p>Create the <code>configMap</code>  <br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>oc project &lt;namespace&gt;
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>oc create configmap mqfyre-local --from-file=&lt;path&gt;/MQFYRE-local.tar.gz
+</code></pre></div></p>
+</li>
+<li>Examine the <code>configMap</code>:<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>oc get configmap mqfyre-local -o yaml  
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>apiVersion: v1
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>binaryData:
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  MQFYRE-local.tar.gz: H4sIAAAAAAAAA+2UW2vbMBTH85pCv4MQhaQwW3Gua6hTGKxQaAdNW+geVfskMdiyK8m57NPvyE6cpNeXljKmX0IsonP/y3JZ7dNpIYNBzzy9Qa+1+9xQ87rtXr/fH+C31vK8bqdfI73PL61Wy5XmkpCalDwRXPLX7N7b/0dx2TjNNbQff6zuxhfuUsUfn8MI3O93X9O/3fHapf7ddsvreKh/t9Pt1Ujr40t5zn+u/+nZMonJHKSKUuFTz21RAiJIw0hMfXp3e+58p2ejw4NTPBlDpVcxqBmA3vc4PKhjFKGGaOTTmdbZkLHFYuEuOm4qp8w7OTlh9zeX7FZyoSapTCgpHcJszz7kmmfpAqQbpAmDpQZhsqhthjALUjGJpm+4ZahSwkqzTZ6lil4qrI0nkd1fXd4EM0i4Ewk8DCKA3YbC9/02SdBZ71lrSLJc8sLlBjdhksdsG1ylPAMxr1xUEU25uGu2CjezYGgEcZpB4VtNxYEYEhDaySRMoiUon4YZqrcM4jwER4LK4/1NspkeRUXrhaT48me5JgnoWYqtYurn+pNIhJjHpyKlhKGr+ZTupsMYGyMJ18HMp4wW2/U6IaQwmHMZ8YcYiOAJ+DSX0cUvShSWHmhTUmXQbODKDAHkPAqA4W3UODbpCDERSclLMSNxnUMO26gqf1BaYgMOn2iQzaMi67cGezR2rAxbdrENGk2IBmW8S9cYxFTPmgIPK4+jP+CojAfQPFpnOz4mI9KiRXVFkHrx+2aheNFMQW/rRC0CrpuNMEsesfOr6/Pf45/sbAxYp9JFGr/xrcpYVr2Oj4vtkBNQik8B5R1mMkplpFc4W3jIUejCIEizlZNOqsxH61LY6JTtBBiRKrrRsE5OMaIC7Txp5IlUEg+RGVku4wYlcx5j3VUKo+C66s24WTnvqpmqqfWqNNgcrUKp9X/bC2i064TFHh589U1qsVgsFovFYrFYLBaLxWKxWCwWi8VisVgsFsvX8ReVqO8sACgAAA==
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kind: ConfigMap
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>metadata:
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>  creationTimestamp: &quot;2022-07-12T12:29:45Z&quot;
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>  managedFields:
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>  - apiVersion: v1
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    fieldsType: FieldsV1
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    fieldsV1:
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>      f:binaryData:
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        .: {}
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>        f:MQFYRE-local.tar.gz: {}
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    manager: kubectl-create
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>    operation: Update
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    time: &quot;2022-07-12T12:29:45Z&quot;
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>  name: mqfyre-local
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>  namespace: cp4i
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>  resourceVersion: &quot;122640556&quot;
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>  uid: afd2d227-99ac-4b0a-a79f-47367a752755
+</code></pre></div></li>
+</ul>
+<h4 id="config"><code>config</code><a class="headerlink" href="#config" title="Permanent link">&para;</a></h4>
+<p>The POT example is <a href="../samples/dp-mq-flow/config/MQFYRE.cfg">MQFYRE.cfg</a>.</p>
+<blockquote>
+<p><strong><em>Note</em></strong>:
+- The comment line (starts with "#") has been removed from MQFYRE.cfg. Otherwise it will scramble the <code>configMap</code>.<br />
+- You should replace the following lines in <code>mq-qm</code> object with an appropriate server &amp; queue manager.<br />
+<code>hostname RAVIQM1.CHARLIE.XYZ.COM(1419)</code><br />
+<code>queue-manager "RAVIQM"</code>  </p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>oc create configmap mqfyre-config --from-file=&lt;path&gt;/config/MQFYRE.cfg
+</code></pre></div>
+<p>Examine the <code>configMap</code>. It should have the contents of <a href="../samples/dp-mq-flow/config/MQFYRE.cfg">MQFYRE.cfg</a> in plain text. If it looks scrambled, remove the comment line and try again.<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>oc get configmap mqfyre-config -o yaml  
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>apiVersion: v1
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>data:
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  MQFYRE.cfg: |
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    top; configure terminal;
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    %if% available &quot;domain-settings&quot;
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    domain-settings
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>      admin-state enabled
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>      password-treatment masked
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>      config-dir config:///
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    exit
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    %endif%
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>  ...
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>  ...
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>  ...
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>    %if% available &quot;wsm-agent&quot;
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>    wsm-agent
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>      admin-state disabled
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>      max-records 3000
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>      max-memory 64000
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>      capture-mode faults
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>      buffer-mode discard
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>      no mediation-enforcement-metrics
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>      max-payload-size 0
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>      push-interval 100
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>      push-priority normal
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>    exit
+<a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a>
+<a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a>    %endif%
+<a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a>kind: ConfigMap
+<a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a>metadata:
+<a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a>  creationTimestamp: &quot;2022-07-12T12:39:58Z&quot;
+<a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a>  managedFields:
+<a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a>  - apiVersion: v1
+<a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a>    fieldsType: FieldsV1
+<a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>    fieldsV1:
+<a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a>      f:data:
+<a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a>        .: {}
+<a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a>        f:MQFYRE.cfg: {}
+<a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a>    manager: kubectl-create
+<a id="__codelineno-6-45" name="__codelineno-6-45" href="#__codelineno-6-45"></a>    operation: Update
+<a id="__codelineno-6-46" name="__codelineno-6-46" href="#__codelineno-6-46"></a>    time: &quot;2022-07-12T12:39:58Z&quot;
+<a id="__codelineno-6-47" name="__codelineno-6-47" href="#__codelineno-6-47"></a>  name: mqfyre-config
+<a id="__codelineno-6-48" name="__codelineno-6-48" href="#__codelineno-6-48"></a>  namespace: cp4i
+<a id="__codelineno-6-49" name="__codelineno-6-49" href="#__codelineno-6-49"></a>  resourceVersion: &quot;122648530&quot;
+<a id="__codelineno-6-50" name="__codelineno-6-50" href="#__codelineno-6-50"></a>  uid: 303fea14-e911-4b3c-b1ff-51dbbbc15dc8
+</code></pre></div></p>
+<h3 id="inject-domain-into-datapower">Inject domain into DataPower<a class="headerlink" href="#inject-domain-into-datapower" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Define <code>additionalDomainConfig</code> in file <a href="../samples/dp-mq-flow/pot-additionalDomainConfig.yaml"><code>pot-additionalDomainConfig.yaml</code></a><br />
+  The contents should include <strong>all previous entries</strong> and new definitions for <code>MQFYRE</code> domain. In this example, the only previous entries were to expose the WebGUI.<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>spec:
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>  gateway:
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    additionalDomainConfig:
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    - name: &quot;default&quot;
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>      dpApp:
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        config:
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        - &quot;311-default-web-mgmt-cfg&quot;
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    - name: &quot;MQFYRE&quot;
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>      dpApp:
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        config:
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        - &quot;mqfyre-config&quot;
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        local:
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        - &quot;mqfyre-local&quot;
+</code></pre></div></p>
+<blockquote>
+<p><strong><em>Note</em></strong>: <code>spec.gateway.additionalDomainConfig</code> This POT was developed for an API Connect &amp; Datapower deployment on OpenShift.   </p>
+</blockquote>
+</li>
+<li>
+<p>Determine the name of the APIConnectCluster:
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>oc get apiconnectcluster  
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>NAME           READY   STATUS   VERSION    RECONCILED VERSION   AGE
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>apis-minimum   7/7     Ready    10.0.4.0   10.0.4.0-ifix1-54    105d
+</code></pre></div></p>
+</li>
+<li>
+<p>Apply <code>additionalDomainConfig</code><br />
+<code>oc patch apiconnectcluster apis-minimum --type merge --patch-file='&lt;path&gt;/pot-additionalDomainConfig.yaml'</code>  </p>
+</li>
+<li>
+<p>Examine the DataPower configuration  </p>
+<ul>
+<li>
+<p>Log into the DataPower pod with <code>admin/&lt;secret&gt;</code>:<br />
+<code>oc attach -it po/apis-minimum-gw-0 -c datapower</code>  </p>
+</li>
+<li>
+<p>Display the following via CLI or use the WebGUI<br />
+  Do you see the domains <code>default</code> and <code>MQFYRE</code>? The domain <code>apiconnect</code> will appear if, as in this POT, the DataPower hosts the API Connect Gateway Service. Drill down <code>local:///</code> and locate <code>Route2qByURI.xsl</code>.
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>idg# show domains
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Domain     Needs save File capture Debug log Probe enabled Diagnostics Command Quiesce state Interface state Failsafe mode
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>---------- ---------- ------------ --------- ------------- ----------- ------- ------------- --------------- -------------
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>MQFYRE     off        off          off       off           off                               ok              none          
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>apiconnect off        off          off       off           off                               ok              none          
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>default    off        off          off       off           off                               ok              none          
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>idg# co
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>Global mode
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>idg(config)# dir local:
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>  File Name                    Last Modified                    Size
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>  ---------                    -------------                    ----
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>  MQFYRE/                      Jul 12, 2022 1:04:04 PM          30
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>  luna_config/                 Jul 12, 2022 1:04:05 PM          58
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>  apiconnect/                  Jul 12, 2022 1:07:03 PM          116
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>  176673.9 MB available to local:
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>idg(config)# dir local:///MQFYRE
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>  File Name                    Last Modified                    Size
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>  ---------                    -------------                    ----
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>  Route2qByURI.xsl             Jul 12, 2022 1:04:04 PM          1226
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>  176673.2 MB available to local:///MQFYRE
+</code></pre></div></p>
+</li>
+<li>Logoff
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>idg(config)# exit;exit  
+</code></pre></div></li>
+<li>Detach with <code>CTRL-P-Q</code> so that the pod stays alive.     </li>
+</ul>
+</li>
+</ul>
+<h3 id="expose-the-datapower-mq-listening-port">Expose the DataPower MQ listening port<a class="headerlink" href="#expose-the-datapower-mq-listening-port" title="Permanent link">&para;</a></h3>
+<p>Until now we have operated under the umbrella of the APIConnectCluster. We tweaked <code>spec.gateway</code> in the APIConnectCluster which rippled the changes to the GatewayCluster and the corresponding StatefulSet. The DataPower Service instance exposes ports such as <code>webgui-port: 9090</code>, <code>apic-gw-mgmt: 3000</code> and several others, but it is not under the control of the APIConnectCluster.</p>
+<blockquote>
+<p><strong><em>Note</em></strong>: Do NOT modify the DataPower Service created during API Connect installation.  </p>
+</blockquote>
+<h4 id="define-a-new-service-for-the-mq-listening-port">Define a new Service for the MQ listening port<a class="headerlink" href="#define-a-new-service-for-the-mq-listening-port" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get DataPower <code>app.kubernetes.io/instance</code><br />
+  We need the value for the target GatewayCluster. In this case, the APIConnectCluster created the GatewayCluster instance as evidenced by the presence of the domain <code>apiconnect</code>. In other cases, the DataPower GatewayCluster might be independent from APIConnectCluster. <br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>oc get pod | grep gw
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>apis-minim-c20517ff-mtls-gw-7bd79cf7ff-h5hbl                      1/1     Running     0          11d
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>apis-minimum-gw-0                                                 1/1     Running     0          3h
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>oc get pod apis-minimum-gw-0 -o yaml | grep app.kubernetes.io/instance
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>  app.kubernetes.io/instance: cp4i-apis-minimum-gw
+</code></pre></div></li>
+<li>
+<p>Define Service <a href="../samples/dp-mq-flow/mqfyre-gw-datapower.yaml">mqfyre-gw-datapower.yaml</a><br />
+  Reference: <em>Service creation</em> in <a href="https://www.ibm.com/docs/en/datapower-operator/1.6?topic=guides-exposing-datapower-services">Exposing DataPower Services</a>.<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>apiVersion: v1
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>kind: Service
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>metadata:
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>  name: mqfyre-gw-datapower
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>spec:
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>  selector:
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    app.kubernetes.io/component: datapower
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    app.kubernetes.io/instance: cp4i-apis-minimum-gw    
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>  ports:
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>  - protocol: TCP
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    port: 8181
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    targetPort: 8181
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    name: mqfyre
+</code></pre></div></p>
+</li>
+<li>
+<p>Create the OpenShift Service <br />
+<code>oc apply -f mqfyre-gw-datapower.yaml</code>  </p>
+</li>
+<li>
+<p>Verify the Service<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>oc get service mqfyre-gw-datapower  
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>NAME                  TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>mqfyre-gw-datapower   ClusterIP   172.30.66.221   &lt;none&gt;        8181/TCP   2m50s
+</code></pre></div></p>
+</li>
+</ul>
+<h4 id="create-an-openshift-route-to-the-mq-port-8181">Create an OpenShift Route to the MQ port 8181<a class="headerlink" href="#create-an-openshift-route-to-the-mq-port-8181" title="Permanent link">&para;</a></h4>
+<p>DataPower port 8181 is an HTTP port. Hence, <a href="../samples/dp-mq-flow/mqfyre-dp2-route.yaml">mqfyre-dp2-route.yaml</a> defines a Route without TLS. For an HTTPS port, you would modify the YAML to suit.  </p>
+<p>Create the Route:<br />
+<code>oc apply -f &lt;path&gt;/mqfyre-dp2-route.yaml</code></p>
+<h3 id="validate-mq-flow">Validate MQ flow<a class="headerlink" href="#validate-mq-flow" title="Permanent link">&para;</a></h3>
+<p><a href="../samples/dp-mq-flow/mq-payload.xml">mq-payload.xml</a> contains a sample payload.  </p>
+<p><code>curl --data-binary @mq-payload.xml MQFYRE-Route-Name/queue/{queuename}</code><br />
+where   </p>
+<ul>
+<li><code>{queuename}</code> is the name of the queue  </li>
+<li><code>@mq-payload.xml</code> contains the payload. <code>@</code> ensures that <code>curl</code> transmits the file as is  </li>
+</ul>
+<p>Send a message to MQ.INPUT1:<br />
+<code>curl --data-binary @mq-payload.xml http://mqfyre-dp2-cp4i.ravi.charlie.rrcs.xyz.com/queue/MQ.INPUT1</code>  </p>
+<p>And to MQ.INPUT2:<br />
+<code>curl --data-binary @mq-payload.xml http://mqfyre-dp2-cp4i.ravi.charlie.rrcs.xyz.com/queue/MQ.INPUT2</code>  </p>
+<h2 id="develop-datapower-config-on-your-desktop">Develop DataPower <code>config</code> on your desktop<a class="headerlink" href="#develop-datapower-config-on-your-desktop" title="Permanent link">&para;</a></h2>
+<p>The IBM Techcon 2022 session <a href="https://bzb.tools.ibm.com/TechCon2022/agenda/session/814332">Gateways in a container world - best practices</a> explains steps to develop DataPower assemblies and configurations on your workstation.  </p>
+<blockquote>
+<p><strong><em>Note</em></strong>: You might have to register to access the recording or download slides.  </p>
+</blockquote>
+<p>Correction to slide #14<br />
+<code>docker run -it -e DATAPOWER_ACCEPT_LICENSE=true \</code><br />
+<code>-e DATAPOWER_INTERACTIVE=true \</code><br />
+<code>-v $(pwd)/config:/opt/ibm/datapower/drouter/config \</code><br />
+<code>-v $(pwd)/local:/opt/ibm/datapower/drouter/local \</code><br />
+<code>-v $(pwd)/certs:/opt/ibm/datapower/root/secure/usrcerts \</code><br />
+<code>-p 9090:9090 \                    &lt;--- Add this line to expose WebGUI</code><br />
+<code>--name dp-dev \</code><br />
+<code>icr.io/integration/datapower/datapower-limited:10.0.4.0</code>  </p>
+<p>Enable WebGUI in <code>web-mgmt</code> of the <code>default</code> domain and restart the DataPower container. Develop complex configurations for this POT using the WebGUI and extract them from from the underlying file system. You could develop the POT solution on DataPower Docker using WebGUI, just as you would on other platforms.   </p>
+<h3 id="datapower-newbie-track">DataPower newbie track<a class="headerlink" href="#datapower-newbie-track" title="Permanent link">&para;</a></h3>
+<p>As a DataPower newbie (like one of the authors), you could request the DataPower guru to export configurations of DataPower objects:</p>
+<blockquote>
+<p><strong><em>Note</em></strong>: The following DataPower objects are specific to this POT  </p>
+</blockquote>
+<ul>
+<li>MQ Queue Manager object - Connection to Queue Manager  - Specifies the MQ Manager Host name, Port, Queue Manager and Channel Name</li>
+<li>Multi-Protocol Gateway Service - Service object that accepts a transaction via HTTP, determines the backend endpoint by extracting the URI, and then performs a put to the backend queue</li>
+<li>HTTP Front Side Protocol Handler - Listens for HTTP traffic on Port 8181</li>
+<li>Custom XSL Stylesheet - Retrieves the specifed URI (/queue/{queue name}), extracts queue name with a string function<br />
+<code>&lt;xsl:variable name="uriIN" select="dp:variable('var://service/URI')" /&gt;</code><br />
+<code>&lt;xsl:variable name="inQueue" select="substring-after($uriIN,'/queue/')" /&gt;</code><br />
+  and concatenates the protocol and MQ Queue Manageer name (created above) and sets the target service variable to the completed URL<br />
+<code>&lt;xsl:variable name="target" select="concat('dpmq://MQFYRE/?RequestQueue=',$inQueue)" /&gt;</code><br />
+<code>&lt;dp:set-variable name="'var://service/routing-url'" value="$target" /&gt;</code>  </li>
+</ul>
+<p>Payload is sent to DataPower Gateway using the <code>hostname:port/queue/{queuename}</code>. If URI is not specified, the payload will be sent to default queue (specified in MPGW service configuration).  If <code>{queuename}</code> is incorrect or invalid, the transaction will be canceled as MQ Open will fail.  </p>
+<ul>
+<li><a href="../samples/dp-mq-flow/DP-2-MQ-export.zip">DP-2-MQ-export.zip</a> contains the POT configuration  </li>
+</ul>
+<h4 id="datapower-docker">DataPower Docker<a class="headerlink" href="#datapower-docker" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Create the domain MQFYRE (defaults for all settings)  </li>
+<li>Import configurations in <a href="../samples/dp-mq-flow/DP-2-MQ-export.zip">DP-2-MQ-export.zip</a>  </li>
+<li>Examine the logic on WebGUI  </li>
+<li>
+<p>Capture DataPower configurations in <code>certs</code>, <code>config</code> &amp; <code>local</code>.<br />
+  <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>$ tree dp-dev/
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>dp-dev/
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>├── certs
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>│   ├── luna_cert
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>│   ├── MQFYRE
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>│   ├── webgui-privkey.pem
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>│   └── webgui-sscert.pem
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>├── config
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>│   ├── auto-startup.cfg
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>│   ├── auto-user.cfg
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>│   ├── default.cfg
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>│   └── MQFYRE
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>│       └── MQFYRE.cfg
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>└── local
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    ├── luna_config
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    │   ├── Chrystoki.conf
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>    │   ├── configData
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    │   │   └── token
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>    │   │       └── 001
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>    │   └── data
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>    │       ├── client_identities
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    │       ├── partition_identities
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>    │       └── partition_policy_templates
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>    └── MQFYRE
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>        └── Route2qByURI.xsl
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>15 directories, 8 files
+</code></pre></div></p>
+</li>
+<li>
+<p>MQ related configurations are in <code>config/MQFYRE/MQFYRE.cfg</code>  </p>
+</li>
+<li>Route logic is in <code>local/MQFYRE/Route2qByURI.xsl</code>  </li>
+</ul>
+<p>Return to <a href="#diversion-from-the-datapower-expert-track"><strong>Diversion from the DataPower expert track</strong></a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.tooltips", "navigation.instant", "navigation.indexes", "navigation.tracking", "search.highlight", "search.share", "search.suggest", "toc.follow", "toc.integrate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.f1b6f286.min.js"></script>
+      
+    
+  </body>
+</html>

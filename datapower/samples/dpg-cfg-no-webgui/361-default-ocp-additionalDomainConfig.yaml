@@ -1,0 +1,8 @@
+# Modify web-mgmt in default domain
+spec:
+  gateway:
+    additionalDomainConfig:
+    - name: "default"
+      dpApp:
+        config:
+        - "311-default-web-mgmt-cfg"

@@ -1,0 +1,16 @@
+# Add the TLS Server Profile to apiconnect domain
+spec:
+  gateway:
+    additionalDomainConfig:
+    - name: "apiconnect"
+      certs:
+      - certType: "usrcerts"
+        secret: "dp-apigwy-tls"
+      - certType: "usrcerts"
+        secret: "my-apic-cert"
+      dpApp:
+        config:
+        - "210-apiconnect-client-valcred-cfg"
+        - "221-apiconnect-server-tls-cfg"
+        - "222-apiconnect-server-tls-cfg"
+        - "223-apiconnect-server-tls-cfg"
